@@ -59,7 +59,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary"><i
                                             class="bi bi-envelope text-white"></i></span>
-                                    <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="${email}" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary"><i

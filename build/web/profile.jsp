@@ -50,12 +50,15 @@
             <div class="row">
                 <div class="col-3 bg-primary mx-2 rounded" style="height: 36rem;">
                     <div class="py-5 d-flex justify-content-center align-items-center">
-                        <div class="border border-5 rounded-circle" style="width: 10rem; height: 10rem;">
-                            <a class="bg-dark" href="#">
-
-                            </a> 
+                        <div class="border border-5 rounded-circle overflow-hidden" style="width: 10rem; height: 10rem;">
+                            <c:if test="${not empty user.avatar}">
+                                <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+                                <c:set var="fullAvatarPath" value="${contextPath}/${user.avatar}" />
+                                <img src="${fullAvatarPath}" class="img-fluid rounded-circle" alt="Avatar" style="max-width: 100%; height: auto;">
+                            </c:if>
                         </div>
                     </div>
+
                     <h3 class="text-center text-light text-capitalize">${sessionScope.user.fullName}</h3>
                     <p class="text-center text-light">${sessionScope.user.email}</p>
                     <ul class="m-0 p-0">
@@ -72,13 +75,13 @@
                             </a>
                         </li>
                         <li class="py-2 bg-white">
-                            <a class="ps-3 text-decoration-none link-primary" href="changepassword.jsp">
+                            <a class="ps-3 text-decoration-none link-primary" href="checkpassword.jsp">
                                 <i class="fa-solid fa-calendar-days"></i>
                                 <span class="ps-2">Change Password</span>
                             </a>
                         </li>
                         <li class="py-2 bg-white">
-                            <a class="ps-3 text-decoration-none link-primary" href="#"> 
+                            <a class="ps-3 text-decoration-none link-primary" href="editprofile.jsp"> 
                                 <i class="fa fa-edit"></i> 
                                 <span class="ps-2">Edit profile</span>
                             </a>

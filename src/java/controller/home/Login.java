@@ -16,23 +16,25 @@ import model.Users;
  * @author OS
  */
 public class Login extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        String email = request.getParameter("email");
+        String username = request.getParameter("userName");
         String password = request.getParameter("password");
         String remember = request.getParameter("remember");
-        PrintWriter out = response.getWriter();
-
         UserDAO userDAO = new UserDAO();
-        Users user = userDAO.checkUser(email, password);
-        
+        Users user = userDAO.checkUser(username, password);
+
         if (user == null) {
-            request.setAttribute("error", "Account does not exist!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            String alertMessage = "Username or password is invalid. Please try again.";
+            String redirectUrl = "login.jsp";
+            String script = "<script>alert('" + alertMessage + "');";
+            script += "window.location.href='" + redirectUrl + "';</script>";
+            response.getWriter().println(script);
         } else {
-            Cookie cookieE = new Cookie("email", email);
+            Cookie cookieE = new Cookie("username", username);
             Cookie cookieP = new Cookie("password", password);
             Cookie cookieR = new Cookie("remember", remember);
 

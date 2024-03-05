@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/library_java/project_donator_3/src/java/controller/admin/CategoryManagement.java</file>
-            <file>file:/D:/library_java/project_donator_3/web/layout/header.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/web/admin/project.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/web/home.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/web/admin/dashboard.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/web/contact.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/src/java/model/Category.java</file>
-            <file>file:/D:/library_java/project_donator_3/web/admin/contact.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/web/admin/category.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/web/404.jsp</file>
-            <file>file:/D:/library_java/project_donator_3/web/admin/privacypolicy.jsp</file>
+            <file>file:/D:/Semester%205-FPT/SWP/donatedodream/web/changepassword.jsp</file>
+            <file>file:/D:/Semester%205-FPT/SWP/donatedodream/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/Semester%205-FPT/SWP/donatedodream/src/java/controller/home/ChangePasswordServlet.java</file>
         </group>
     </open-files>
 </project-private>
