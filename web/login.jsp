@@ -58,7 +58,7 @@
                                             <div class="col-12 mb-3">
                                                 <div class="form-group position-relative pe-2">
                                                     <span class="zmdi zmdi-account p-2 d-flex justify-content-center"></span>
-                                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email">
+                                                    <input type="text" id="userName" name="userName" class="form-control" placeholder="User Name">
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -73,7 +73,7 @@
                                                     <span>Remember me</span>
                                                 </div>
                                                 <div class="col-6 text-end">
-                                                    <a href="resetpassword.jsp" class="link-dark text-end">
+                                                    <a href="forgotpassword.jsp" class="link-dark text-end">
                                                         <span class="">Forgot password?</span>
                                                     </a>
                                                 </div>
@@ -95,8 +95,9 @@
                                     </div>
                                     <h5 class="c-black mb-4 mt-n1">Or Sign In With</h5>
                                     <div class="socials">
-                                        <a href="#" class="zmdi zmdi-facebook text-decoration-none"></a>
-                                        <a href="#" class="zmdi zmdi-google text-decoration-none"></a>
+                                        <a href="#" class="zmdi zmdi-facebook"></a>
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/project_donator_3/logingoogle&response_type=code
+                                           &client_id=884665707063-d40mpr7r5uqcn707n7uvtjqvj4kggqjf.apps.googleusercontent.com&approval_prompt=force" class="zmdi zmdi-google"></a>
                                     </div>
                                 </div>
                             </div>

@@ -46,67 +46,29 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
-        <div class="profile container-fluid bg-secondary-subtle show active">
-            <div class="row">
-                <div class="col-3 bg-primary mx-2 rounded" style="height: 36rem;">
-                    <div class="py-5 d-flex justify-content-center align-items-center">
-                        <div class="border border-5 rounded-circle" style="width: 10rem; height: 10rem;">
-                            <a class="bg-dark" href="#">
-
-                            </a> 
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Change Password
                         </div>
-                    </div>
-                    <h3 class="text-center text-light text-capitalize">${sessionScope.user.fullName}</h3>
-                    <p class="text-center text-light">${sessionScope.user.email}</p>
-                    <ul class="m-0 p-0">
-                        <li class="py-2 bg-white active">
-                            <a class="ps-3 text-decoration-none link-primary" href="profile.jsp">
-                                <i class="fa fa-user"></i> 
-                                <span class="ps-2">My Profile</span>
-                            </a>
-                        </li>
-                        <li class="py-2 bg-white">
-                            <a class="ps-3 text-decoration-none link-primary" href="project.jsp">
-                                <i class="fa-solid fa-list"></i>
-                                <span class="ps-2">My Projects</span>
-                            </a>
-                        </li>
-                        <li class="py-2 bg-white">
-                            <a class="ps-3 text-decoration-none link-primary" href="changepassword.jsp">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <span class="ps-2">Change Password</span>
-                            </a>
-                        </li>
-                        <li class="py-2 bg-white">
-                            <a class="ps-3 text-decoration-none link-primary" href="#"> 
-                                <i class="fa fa-edit"></i> 
-                                <span class="ps-2">Edit profile</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-8 mx-2 py-3 bg-white rounded">
-                    <nav class="ms-3" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a class="link-primary" href="home">Home</a></li>
-                            <li class="breadcrumb-item active fw-bold">Change Password</li>
-                        </ol>
-                    </nav>
-
-                    <h3 class="ms-3 text-capitalize">Change Password</h3>
-                    <div class="ms-2 my-4 row">
-                        <form action="user?action=changepass" method="POST">
-                            <label for="oldpassword" class="form-label">Old Password</label>
-                            <input type="password" id="oldpassword" class="form-control">
-                            <label for="newpassword" class="form-label">New Password</label>
-                            <input type="password" id="newpassword" class="form-control" aria-describedby="passwordHelpBlock">
-                            <div id="passwordHelpBlock" class="form-text">
-                                New password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                            </div>
-                            <div class="my-4">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
+                        <div class="card-body">
+                            <form action="changepassword" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="email" value="${email}" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Change Password</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

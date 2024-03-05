@@ -60,6 +60,26 @@
         <servlet-name>CategoryManagement</servlet-name>
         <servlet-class>controller.admin.CategoryManagement</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HandleEmailSignUp</servlet-name>
+        <servlet-class>controller.home.HandleEmailSignUp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendEmailServlet</servlet-name>
+        <servlet-class>controller.home.SendEmailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <servlet-class>controller.home.ChangePasswordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>controller.home.EditProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePassword</servlet-name>
+        <servlet-class>controller.home.UpdatePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -102,7 +122,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginGoogle</servlet-name>
-        <url-pattern>/loginGoogle</url-pattern>
+        <url-pattern>/logingoogle</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -119,6 +139,26 @@
     <servlet-mapping>
         <servlet-name>CategoryManagement</servlet-name>
         <url-pattern>/categorymanagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleEmailSignUp</servlet-name>
+        <url-pattern>/handleemail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendEmailServlet</servlet-name>
+        <url-pattern>/sendemail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/editprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePassword</servlet-name>
+        <url-pattern>/updatepassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
