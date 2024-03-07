@@ -125,7 +125,7 @@ public class UserDAO {
     public void addUserLoginByEmail(UserGoogle ug, String accessToken) throws Exception {
         conn = new DonationDBContext().getConnection();
         String sql = "INSERT INTO UserGoogle (userName,email,accessToken) VALUES (?, ?, ?)";
-        try ( PreparedStatement statement = conn.prepareStatement(sql)) {
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(3, accessToken);
             statement.setString(1, ug.getName());
             statement.setString(2, ug.getEmail());
@@ -344,7 +344,7 @@ public class UserDAO {
     public void updatePassword(String username, String newPassword) throws Exception {
         conn = new DonationDBContext().getConnection();
         String query = "UPDATE Users SET password = ? WHERE email = ?";
-        try ( PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
             preparedStatement.setString(1, newPassword);
             preparedStatement.setString(2, username);
@@ -354,10 +354,11 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+
     public void updatePasswordwithUserName(String username, String newPassword) throws Exception {
         conn = new DonationDBContext().getConnection();
         String query = "UPDATE Users SET password = ? WHERE userName = ?";
-        try ( PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
             preparedStatement.setString(1, newPassword);
             preparedStatement.setString(2, username);
@@ -370,8 +371,51 @@ public class UserDAO {
 
     public boolean deleteUser(int userId) {
         String sql = "DELETE FROM Users WHERE userId=?";
+        String deleteAuthenticationSql = "DELETE FROM Authentication WHERE userId=?";
+        String deleteProjectSql = "DELETE FROM Project WHERE userId=?";
+        String deleteProjectProcessSql = "DELETE FROM ProjectProcess WHERE userId=?";
+        String deleteCommentSql = "DELETE FROM Comments WHERE userId=?";
+        String deleteFeedbackSql = "DELETE FROM Feedback WHERE userId=?";
+        String deleteProjectMilestoneGiftSql = "DELETE FROM ProjectMilestoneGift WHERE userId=?";
+        String deleteDonationSql = "DELETE FROM Donation WHERE userId=?";
         try {
             conn = new DonationDBContext().getConnection();
+
+            // Delete records in Donation table
+            ps = conn.prepareStatement(deleteDonationSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+            // Delete records in ProjectMilestoneGift table
+            ps = conn.prepareStatement(deleteProjectMilestoneGiftSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+            // Delete records in Feedback table
+            ps = conn.prepareStatement(deleteFeedbackSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+            // Delete records in Comments table
+            ps = conn.prepareStatement(deleteCommentSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+            // Delete records in ProjectProcess table
+            ps = conn.prepareStatement(deleteProjectProcessSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+            // Delete records in Project table
+            ps = conn.prepareStatement(deleteProjectSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+            // Delete records in Authentication table
+            ps = conn.prepareStatement(deleteAuthenticationSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userId);
             int rowsAffected = ps.executeUpdate();
@@ -390,26 +434,93 @@ public class UserDAO {
     }
 
     public boolean deleteUserSelected(int[] userIds) {
+        String deleteDonationSql = "DELETE FROM Donation WHERE userId=?";
+        String deleteProjectMilestoneGiftSql = "DELETE FROM ProjectMilestoneGift WHERE userId=?";
+        String deleteFeedbackSql = "DELETE FROM Feedback WHERE userId=?";
+        String deleteCommentSql = "DELETE FROM Comments WHERE userId=?";
+        String deleteProjectProcessSql = "DELETE FROM ProjectProcess WHERE userId=?";
+        String deleteProjectSql = "DELETE FROM Project WHERE userId=?";
+        String deleteAuthenticationSql = "DELETE FROM Authentication WHERE userId=?";
+        String deleteUserSql = "DELETE FROM Users WHERE userId=?";
+
         try {
-            String sql = "DELETE FROM Users WHERE userId=?";
             conn = new DonationDBContext().getConnection();
-            ps = conn.prepareStatement(sql);
+            conn.setAutoCommit(false);
 
-            // Delete users based on the user IDs
+            PreparedStatement deleteDonationPs = conn.prepareStatement(deleteDonationSql);
+            PreparedStatement deleteProjectMilestoneGiftPs = conn.prepareStatement(deleteProjectMilestoneGiftSql);
+            PreparedStatement deleteFeedbackPs = conn.prepareStatement(deleteFeedbackSql);
+            PreparedStatement deleteCommentPs = conn.prepareStatement(deleteCommentSql);
+            PreparedStatement deleteProjectProcessPs = conn.prepareStatement(deleteProjectProcessSql);
+            PreparedStatement deleteProjectPs = conn.prepareStatement(deleteProjectSql);
+            PreparedStatement deleteAuthenticationPs = conn.prepareStatement(deleteAuthenticationSql);
+            PreparedStatement deleteUserPs = conn.prepareStatement(deleteUserSql);
+
+            // Delete records in Donation table
             for (int userId : userIds) {
-                ps.setInt(1, userId);
-                ps.addBatch(); // Add the delete operation to the batch
+                deleteDonationPs.setInt(1, userId);
+                deleteDonationPs.addBatch();
             }
+            deleteDonationPs.executeBatch();
 
-            int[] rowsAffected = ps.executeBatch(); // Execute the batch delete operation
+            // Delete records in ProjectMilestoneGift table
+            for (int userId : userIds) {
+                deleteProjectMilestoneGiftPs.setInt(1, userId);
+                deleteProjectMilestoneGiftPs.addBatch();
+            }
+            deleteProjectMilestoneGiftPs.executeBatch();
+
+            // Delete records in Feedback table
+            for (int userId : userIds) {
+                deleteFeedbackPs.setInt(1, userId);
+                deleteFeedbackPs.addBatch();
+            }
+            deleteFeedbackPs.executeBatch();
+
+            // Delete records in Comments table
+            for (int userId : userIds) {
+                deleteCommentPs.setInt(1, userId);
+                deleteCommentPs.addBatch();
+            }
+            deleteCommentPs.executeBatch();
+
+            // Delete records in ProjectProcess table
+            for (int userId : userIds) {
+                deleteProjectProcessPs.setInt(1, userId);
+                deleteProjectProcessPs.addBatch();
+            }
+            deleteProjectProcessPs.executeBatch();
+
+            // Delete records in Project table
+            for (int userId : userIds) {
+                deleteProjectPs.setInt(1, userId);
+                deleteProjectPs.addBatch();
+            }
+            deleteProjectPs.executeBatch();
+
+            // Delete records in Authentication table
+            for (int userId : userIds) {
+                deleteAuthenticationPs.setInt(1, userId);
+                deleteAuthenticationPs.addBatch();
+            }
+            deleteAuthenticationPs.executeBatch();
+
+            // Delete records in Users table
+            for (int userId : userIds) {
+                deleteUserPs.setInt(1, userId);
+                deleteUserPs.addBatch();
+            }
+            int[] rowsAffected = deleteUserPs.executeBatch();
 
             // Check if any rows were affected by the delete operation
             for (int affectedRows : rowsAffected) {
                 if (affectedRows <= 0) {
+                    conn.rollback(); // Rollback the transaction
                     return false; // Deletion failed
                 }
             }
 
+            conn.commit(); // Commit the transaction
             return true; // Deletion successful
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "An error occurred while deleting the users.", ex);

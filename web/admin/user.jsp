@@ -97,7 +97,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-content text-white ps-4 py-3 border sidebar-js active">
-                                <a class="sidebar-content-link link-dark text-decoration-none" href="usermanagement">
+                                <a class="sidebar-content-link link-dark text-decoration-none" href="#">
                                     <i class="fa-solid fa-users"></i>
                                     <span class="ps-2">User Management</span>
                                 </a>

@@ -151,74 +151,83 @@
                         </p>
                         <div id="clock" class="ms-4 my-2"></div>
                         <div class="ms-2">
-                            <form action="updateproject.jsp" method="POST">
-                                <table class="table table-hover table-bordered" id="projectmanager">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <input type="checkbox" class="select-all" id="select-all-project"/>
-                                                Project
-                                            </th>
-                                            <th>Target</th>
-                                            <th>Donated</th>
-                                            <!--<th>Image</th>-->
-                                            <th class="text-center">Status</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th class="text-center">Approved</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${projectsApproved}" var="project">
-                                            <tr>
-                                                <td class="checkbox-project">
-                                                    <input type="checkbox" class="project_${project.projectId}" value="${project.projectId}"/>
-                                                    <a class="link-dark text-decoration-none" href="#">${project.projectName}</a>
-                                                </td>
-                                                <td>${project.projectTarget}</td>
-                                                <td>
-                                                    ${project.donatedAmountOfMoney}
-                                                </td>
-                                                <td class="text-center">
-                                                    <c:if test="${project.projectStatus.equalsIgnoreCase('active')}">
-                                                        <span class="bg-success text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
-                                                    </c:if>
-                                                    <c:if test="${project.projectStatus.equalsIgnoreCase('outdated')}">
-                                                        <span class="bg-warning text-dark rounded-pill px-3 py-1">${project.projectStatus}</span>
-                                                    </c:if>
-                                                    <c:if test="${project.projectStatus.equalsIgnoreCase('new')}">
-                                                        <span class="bg-danger text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
-                                                    </c:if>
-                                                </td>
-                                                <td>${project.startDate}</td>
-                                                <td>${project.endDate}</td>
-                                                <td class="text-center">
-                                                    <c:choose>
-                                                        <c:when test="${project.isApproved == 1}">
-                                                            <span class="bg-success text-light rounded-pill px-3 py-1">Yes</span>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <span class="bg-danger text-light rounded-pill px-3 py-1">No</span>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeProject(${project.projectId})">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateProject(${project.projectId})">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                                <button type="button" id="remove" class="btn btn-danger delete-project d-none" title="Delete" onclick="deleteProjectSelected(selectedProjectIds)">
-                                    DELETE
-                                </button>
-                            </form>
+                            <c:choose>
+                                <c:when test="${not empty projectsApproved}">
+                                    <form action="updateproject.jsp" method="POST">
+                                        <table class="table table-hover table-bordered" id="projectmanager">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <input type="checkbox" class="select-all" id="select-all-project"/>
+                                                        Project
+                                                    </th>
+                                                    <th>Target</th>
+                                                    <th>Donated</th>
+                                                    <!--<th>Image</th>-->
+                                                    <th class="text-center">Status</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th class="text-center">Approved</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${projectsApproved}" var="project">
+                                                    <tr>
+                                                        <td class="checkbox-project">
+                                                            <input type="checkbox" class="project_${project.projectId}" value="${project.projectId}"/>
+                                                            <a class="link-dark text-decoration-none" href="#">${project.projectName}</a>
+                                                        </td>
+                                                        <td>${project.projectTarget}</td>
+                                                        <td>
+                                                            ${project.donatedAmountOfMoney}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <c:if test="${project.projectStatus.equalsIgnoreCase('active')}">
+                                                                <span class="bg-success text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                            </c:if>
+                                                            <c:if test="${project.projectStatus.equalsIgnoreCase('outdated')}">
+                                                                <span class="bg-warning text-dark rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                            </c:if>
+                                                            <c:if test="${project.projectStatus.equalsIgnoreCase('new')}">
+                                                                <span class="bg-danger text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                            </c:if>
+                                                        </td>
+                                                        <td>${project.startDate}</td>
+                                                        <td>${project.endDate}</td>
+                                                        <td class="text-center">
+                                                            <c:choose>
+                                                                <c:when test="${project.isApproved == 1}">
+                                                                    <span class="bg-success text-light rounded-pill px-3 py-1">Yes</span>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <span class="bg-danger text-light rounded-pill px-3 py-1">No</span>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeProject(${project.projectId})">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateProject(${project.projectId})">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" id="remove" class="btn btn-danger delete-project d-none" title="Delete" onclick="deleteProjectSelected(selectedProjectIds)">
+                                            DELETE
+                                        </button>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="ms-3 text-danger">
+                                        Currently, there are no projects available.
+                                    </p>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
 
@@ -229,58 +238,66 @@
                             </a>
                         </h3>
                         <div class="ms-2">
-                            <form action="updateproject.jsp" method="POST">
-
-                                <div id="userProjectCarousel" class="carousel carousel-dark slide">
-                                    <div class="carousel-inner">
-                                        <c:forEach items="${projectsUnapproved}" var="project" varStatus="status">
-                                            <c:if test="${status.index % 3 == 0}">
-                                                <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-                                                    <div class="row d-flex justify-content-evenly mx-5">
-                                                    </c:if>
-                                                    <div class="card col-4 m-0 p-0 mx-3 my-5" style="width: 18rem;">
-                                                        <img src="./assets/img/needy/refugee.jpg" class="card-img-top" alt="project">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title mt-2">
-                                                                <a href="project?action=project" class="text-decoration-none link-dark">${project.projectName}</a>
-                                                            </h5>
-                                                            <div class="goal-target d-flex justify-content-between">
-                                                                <span class="card-text text-dark m-0">${project.projectTarget}</span>
-                                                                <span class="card-text text-dark m-0">${project.donatedAmountOfMoney}</span>
-                                                            </div>
-                                                            <div class="d-flex justify-content-between">
-                                                                <span class="card-text text-dark m-0">Goal</span>
-                                                                <span class="card-text text-dark m-0">Supported</span>
-                                                            </div>
-                                                            <div class="progress my-3" role="progressbar" aria-label="progressLabel"
-                                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar bg-danger"
-                                                                     style="width: ${project.donatedAmountOfMoney * 100 / project.projectTarget}%">
-                                                                    ${project.donatedAmountOfMoney * 100 / project.projectTarget}%
+                            <c:choose>
+                                <c:when test="${not empty projectsUnapproved}">
+                                    <form action="updateproject.jsp" method="POST">
+                                        <div id="userProjectCarousel" class="carousel carousel-dark slide">
+                                            <div class="carousel-inner">
+                                                <c:forEach items="${projectsUnapproved}" var="project" varStatus="status">
+                                                    <c:if test="${status.index % 3 == 0}">
+                                                        <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                                            <div class="row d-flex justify-content-evenly mx-5">
+                                                            </c:if>
+                                                            <div class="card col-4 m-0 p-0 mx-3 my-5" style="width: 18rem;">
+                                                                <img src="./assets/img/needy/refugee.jpg" class="card-img-top" alt="project">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title mt-2">
+                                                                        <a href="project?action=project" class="text-decoration-none link-dark">${project.projectName}</a>
+                                                                    </h5>
+                                                                    <div class="goal-target d-flex justify-content-between">
+                                                                        <span class="card-text text-dark m-0">${project.projectTarget}</span>
+                                                                        <span class="card-text text-dark m-0">${project.donatedAmountOfMoney}</span>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <span class="card-text text-dark m-0">Goal</span>
+                                                                        <span class="card-text text-dark m-0">Supported</span>
+                                                                    </div>
+                                                                    <div class="progress my-3" role="progressbar" aria-label="progressLabel"
+                                                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                        <div class="progress-bar bg-danger"
+                                                                             style="width: ${project.donatedAmountOfMoney * 100 / project.projectTarget}%">
+                                                                            ${project.donatedAmountOfMoney * 100 / project.projectTarget}%
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-around">
+                                                                        <button type="button" class="btn" onclick="approveProject(${project.projectId})">Approve</button>
+                                                                        <button type="button" class="btn" onclick="rejectProject(${project.projectId})">Reject</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex justify-content-around">
-                                                                <button type="button" class="btn" onclick="approveProject(${project.projectId})">Approve</button>
-                                                                <button type="button" class="btn" onclick="rejectProject(${project.projectId})">Reject</button>
+                                                            <c:if test="${status.index % 3 == 2 || status.last}">
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <c:if test="${status.index % 3 == 2 || status.last}">
-                                                    </div>
-                                                </div>
-                                            </c:if>
-                                        </c:forEach>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#userProjectCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#userProjectCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
-                            </form>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#userProjectCarousel" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#userProjectCarousel" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="ms-3 text-danger">
+                                        There are no new projects that need to be approved.
+                                    </p>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -320,46 +337,46 @@
         <script src="assets/js/main.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script type="text/javascript">
-                                    //Time
-                                    function time() {
-                                        var today = new Date();
-                                        var weekday = new Array(7);
-                                        weekday[0] = "Sunday";
-                                        weekday[1] = "Monday";
-                                        weekday[2] = "Tuesday";
-                                        weekday[3] = "Wednesday";
-                                        weekday[4] = "Thursday";
-                                        weekday[5] = "Friday";
-                                        weekday[6] = "Saturday";
-                                        var day = weekday[today.getDay()];
-                                        var dd = today.getDate();
-                                        var mm = today.getMonth() + 1;
-                                        var yyyy = today.getFullYear();
-                                        var h = today.getHours();
-                                        var m = today.getMinutes();
-                                        var s = today.getSeconds();
-                                        m = checkTime(m);
-                                        s = checkTime(s);
-                                        nowTime = h + ":" + m + ":" + s;
-                                        if (dd < 10) {
-                                            dd = '0' + dd;
-                                        }
-                                        if (mm < 10) {
-                                            mm = '0' + mm;
-                                        }
-                                        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                '</span>';
-                                        document.getElementById("clock").innerHTML = tmp;
-                                        clocktime = setTimeout("time()", "1000", "Javascript");
+                                                                            //Time
+                                                                            function time() {
+                                                                                var today = new Date();
+                                                                                var weekday = new Array(7);
+                                                                                weekday[0] = "Sunday";
+                                                                                weekday[1] = "Monday";
+                                                                                weekday[2] = "Tuesday";
+                                                                                weekday[3] = "Wednesday";
+                                                                                weekday[4] = "Thursday";
+                                                                                weekday[5] = "Friday";
+                                                                                weekday[6] = "Saturday";
+                                                                                var day = weekday[today.getDay()];
+                                                                                var dd = today.getDate();
+                                                                                var mm = today.getMonth() + 1;
+                                                                                var yyyy = today.getFullYear();
+                                                                                var h = today.getHours();
+                                                                                var m = today.getMinutes();
+                                                                                var s = today.getSeconds();
+                                                                                m = checkTime(m);
+                                                                                s = checkTime(s);
+                                                                                nowTime = h + ":" + m + ":" + s;
+                                                                                if (dd < 10) {
+                                                                                    dd = '0' + dd;
+                                                                                }
+                                                                                if (mm < 10) {
+                                                                                    mm = '0' + mm;
+                                                                                }
+                                                                                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                                                                                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                                                                        '</span>';
+                                                                                document.getElementById("clock").innerHTML = tmp;
+                                                                                clocktime = setTimeout("time()", "1000", "Javascript");
 
-                                        function checkTime(i) {
-                                            if (i < 10) {
-                                                i = "0" + i;
-                                            }
-                                            return i;
-                                        }
-                                    }
+                                                                                function checkTime(i) {
+                                                                                    if (i < 10) {
+                                                                                        i = "0" + i;
+                                                                                    }
+                                                                                    return i;
+                                                                                }
+                                                                            }
         </script>
         <script>
             const projectManagement = document.getElementById('projectManagement');
@@ -566,7 +583,7 @@
                     }
                 });
             }
-            
+
             function rejectProject(projectId) {
                 $.ajax({
                     url: "projectmanagement?action=reject&projectId=" + projectId,
