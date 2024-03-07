@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="container col-10 pt-3 pb-5 bg-secondary-subtle">
-                    
+
                     <h3 class="main-title fw-bold ms-3">
                         <a class="link-dark text-decoration-none" href="#">
                             Manage categories
@@ -140,6 +140,27 @@
                         <span>Manage categories and create new for necessary</span>
                     </p>
                     <div id="clock" class="ms-3 my-2"></div>
+
+                    <c:if test="${not empty updateSuccess}">
+                        <p class="ms-3 text-success">
+                            ${updateSuccess}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty updateFail}">
+                        <p class="ms-3 text-danger">
+                            ${updateFail}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty insertSuccess}">
+                        <p class="ms-3 text-success">
+                            ${insertSuccess}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty insertFail}">
+                        <p class="ms-3 text-danger">
+                            ${insertFail}
+                        </p>
+                    </c:if>
                     <div class="row ms-1">
                         <form action="categorymanagement?updatecategory" method="POST">
                             <table class="table table-hover table-bordered" id="categorymanager">
@@ -149,8 +170,6 @@
                                             <input type="checkbox" class="select-all" id="select-all-category"/>
                                             Category
                                         </th>
-                                        <th>Description</th>
-                                        <th class="text-center">Image</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -161,17 +180,11 @@
                                                 <input type="checkbox" class="category_${category.categoryId}" value="${category.categoryId}"/>
                                                 ${category.categoryName}
                                             </td>
-                                            <td>${category.categoryDescription}</td>
-                                            <td class="text-center">
-                                                <a class="btn btn-warning rounded-pill px-4 py-1 fw-bold" style="font-size: 12px;">
-                                                    View
-                                                </a>
-                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeCategory(${category.categoryId})">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="update(${category.categoryId})">
+                                                <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="openEditModal(${category.categoryId}, '${category.categoryName}'); $('#updateCategoryModal').modal('show');">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
@@ -198,19 +211,11 @@
                         <h1 class="modal-title fs-5 fw-bold" id="createCategoryLabel">Create Category</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="categorymanagement?action=insertcategory" method="post">
+                    <form id="createCategoryForm" action="categorymanagement?action=insertcategory" method="post">
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Category Name</label>
-                                <input type="text" class="form-control" id="name" name="categoryName" placeholder="Category Name...">
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="categoryDescription" placeholder="Description..." style="height: 200px;"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="image" name="imgCategory">
+                                <input type="text" class="form-control" id="name" name="categoryName" placeholder="Category Name..." required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -218,38 +223,30 @@
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
 
-        <div class="update-category modal fade" id="updateCategory" tabindex="-1" aria-labelledby="updateCategoryLabel" aria-hidden="true">
+        <div class="update-category modal fade" id="updateCategoryModal" tabindex="-1" aria-labelledby="updateCategoryLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5 fw-bold" id="updateCategoryLabel">Update Category</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form action="categorymanagement?action=insertcategory" method="post">
+                    <form id="updateCategoryForm" action="categorymanagement?action=updatecategory" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" id="editCategoryId" name="categoryId"/>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Category Name</label>
-                                <input type="text" class="form-control" id="name" name="categoryName" placeholder="Category Name...">
+                                <label for="editCategoryName" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="editCategoryName" name="categoryName" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="categoryDescription" placeholder="Description..." style="height: 200px;"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="image" name="imgCategory">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -286,46 +283,46 @@
         <script src="assets/js/main.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script type="text/javascript">
-                                    //Time
-                                    function time() {
-                                        var today = new Date();
-                                        var weekday = new Array(7);
-                                        weekday[0] = "Sunday";
-                                        weekday[1] = "Monday";
-                                        weekday[2] = "Tuesday";
-                                        weekday[3] = "Wednesday";
-                                        weekday[4] = "Thursday";
-                                        weekday[5] = "Friday";
-                                        weekday[6] = "Saturday";
-                                        var day = weekday[today.getDay()];
-                                        var dd = today.getDate();
-                                        var mm = today.getMonth() + 1;
-                                        var yyyy = today.getFullYear();
-                                        var h = today.getHours();
-                                        var m = today.getMinutes();
-                                        var s = today.getSeconds();
-                                        m = checkTime(m);
-                                        s = checkTime(s);
-                                        nowTime = h + ":" + m + ":" + s;
-                                        if (dd < 10) {
-                                            dd = '0' + dd;
-                                        }
-                                        if (mm < 10) {
-                                            mm = '0' + mm;
-                                        }
-                                        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                '</span>';
-                                        document.getElementById("clock").innerHTML = tmp;
-                                        clocktime = setTimeout("time()", "1000", "Javascript");
-
-                                        function checkTime(i) {
-                                            if (i < 10) {
-                                                i = "0" + i;
-                                            }
-                                            return i;
-                                        }
+                                //Time
+                                function time() {
+                                    var today = new Date();
+                                    var weekday = new Array(7);
+                                    weekday[0] = "Sunday";
+                                    weekday[1] = "Monday";
+                                    weekday[2] = "Tuesday";
+                                    weekday[3] = "Wednesday";
+                                    weekday[4] = "Thursday";
+                                    weekday[5] = "Friday";
+                                    weekday[6] = "Saturday";
+                                    var day = weekday[today.getDay()];
+                                    var dd = today.getDate();
+                                    var mm = today.getMonth() + 1;
+                                    var yyyy = today.getFullYear();
+                                    var h = today.getHours();
+                                    var m = today.getMinutes();
+                                    var s = today.getSeconds();
+                                    m = checkTime(m);
+                                    s = checkTime(s);
+                                    nowTime = h + ":" + m + ":" + s;
+                                    if (dd < 10) {
+                                        dd = '0' + dd;
                                     }
+                                    if (mm < 10) {
+                                        mm = '0' + mm;
+                                    }
+                                    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                                    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                            '</span>';
+                                    document.getElementById("clock").innerHTML = tmp;
+                                    clocktime = setTimeout("time()", "1000", "Javascript");
+
+                                    function checkTime(i) {
+                                        if (i < 10) {
+                                            i = "0" + i;
+                                        }
+                                        return i;
+                                    }
+                                }
         </script>
         <script>
             const selectAll = document.querySelector('#select-all-category');
@@ -399,57 +396,30 @@
             });
         </script>
         <script>
-
-            function updateCategory(categoryId) {
-                $.ajax({
-                    url: "categorymanagement?action=updatecategory&categoryId=" + categoryId + "&isApproved=" + isApproved,
-                })
-                if (choice) {
-                    Swal.fire({
-                        text: `You selected: ` + choice,
-                        showCancelButton: true,
-                        cancelButtonColor: "#d33"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const isApproved = choice === "Approve" ? "true" : "false";
-                            console.log(isApproved);
-
-                            $.ajax({
-                                url: "categorymanagement?action=updatecategory&categoryId=" + categoryId + "&isApproved=" + isApproved,
-                                type: "POST",
-                                success: function (response) {
-                                    // Check the response from the server
-                                    if (response === "success") {
-                                        Swal.fire({
-                                            title: "Updated successfully!",
-                                            icon: "success"
-                                        }).then(() => {
-                                            // Reload the page
-                                            location.reload();
-                                        });
-                                    } else {
-                                        Swal.fire({
-                                            title: "Error!",
-                                            text: "Failed to update the category.",
-                                            icon: "error"
-                                        });
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    // Handle the error
-                                    Swal.fire({
-                                        title: "Error!",
-                                        text: "An error occurred while updating the category.",
-                                        icon: "error"
-                                    });
-                                }
-                            });
-                        }
-                    });
+            // Prevent event default submit of form
+            document.getElementById('createCategoryForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
                 }
+            });
+            document.getElementById('updateCategoryForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+        </script>
+        <script>
+            function openEditModal(categoryId, categoryName) {
+                event.preventDefault();
+                document.getElementById('editCategoryId').value = categoryId;
+                document.getElementById('editCategoryName').value = categoryName;
+
+                // Show the modal
+                $('#updateCategory').modal('show');
             }
 
             function deleteCategorySelected(categoryId) {
+                event.preventDefault();
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",
@@ -493,6 +463,7 @@
             }
 
             function removeCategory(categoryId) {
+                event.preventDefault();
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",

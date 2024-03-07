@@ -31,29 +31,43 @@ public class CategoryManagement extends HttpServlet {
                 if (action == null || action.equalsIgnoreCase("")) {
                     List<Category> categoryList = categoryDAO.getAllCategories();
                     request.setAttribute("categoryList", categoryList);
-                    
+
                     request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
                 } else if (action.equalsIgnoreCase("updatecategory")) {
                     String categoryIdStr = request.getParameter("categoryId");
+                    String categoryName = request.getParameter("categoryName");
 
-                    int categoryId = 0;
-                    try {
-                        categoryId = Integer.parseInt(categoryIdStr);
-                    } catch (NullPointerException ex) {
-                        ex.printStackTrace();
-                    } catch (NumberFormatException ex) {
-                        ex.printStackTrace();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                    boolean isCategoryNameExisted = categoryDAO.checkCategoryName(categoryName);
 
-                    boolean updateSuccess = categoryDAO.updateUserStatus(categoryId, userStatus);
-                    if (updateSuccess) {
-                        response.setStatus(HttpServletResponse.SC_OK);
-                        response.getWriter().print("success");
+                    if (isCategoryNameExisted) {
+                        request.setAttribute("updateFail", "Update failed! Category name exists!");
+                        List<Category> categoryList = categoryDAO.getAllCategories();
+                        request.setAttribute("categoryList", categoryList);
+
+                        request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
                     } else {
-                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                        response.getWriter().print("error");
+                        int categoryId = 0;
+                        try {
+                            categoryId = Integer.parseInt(categoryIdStr);
+                        } catch (NullPointerException ex) {
+                            ex.printStackTrace();
+                        } catch (NumberFormatException ex) {
+                            ex.printStackTrace();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+
+                        boolean updateSuccess = categoryDAO.updateCategoryByCategoryId(categoryId, categoryName);
+
+                        if (updateSuccess) {
+                            request.setAttribute("updateSuccess", "Update category successfully!");
+                        } else {
+                            request.setAttribute("updateFail", "Fail to update the category!");
+                        }
+                        List<Category> categoryList = categoryDAO.getAllCategories();
+                        request.setAttribute("categoryList", categoryList);
+
+                        request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
                     }
                 } else if (action.equalsIgnoreCase("deletecategory")) {
                     String categoryIdStr = request.getParameter("categoryId");
@@ -96,6 +110,30 @@ public class CategoryManagement extends HttpServlet {
                     } else {
                         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                         response.getWriter().print("error");
+                    }
+                } else if (action.equalsIgnoreCase("insertcategory")) {
+                    String categoryName = request.getParameter("categoryName");
+
+                    boolean isCategoryNameExisted = categoryDAO.checkCategoryName(categoryName);
+
+                    if (isCategoryNameExisted) {
+                        request.setAttribute("insertFail", "Create new failed! Category name exists!");
+                        List<Category> categoryList = categoryDAO.getAllCategories();
+                        request.setAttribute("categoryList", categoryList);
+
+                        request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
+                    } else {
+                        boolean insertSuccess = categoryDAO.insertCategory(categoryName);
+
+                        if (insertSuccess) {
+                            request.setAttribute("insertSuccess", "Create new category successfully!");
+                        } else {
+                            request.setAttribute("insertFail", "Fail to create new category!");
+                        }
+                        List<Category> categoryList = categoryDAO.getAllCategories();
+                        request.setAttribute("categoryList", categoryList);
+
+                        request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
                     }
                 }
             } else {

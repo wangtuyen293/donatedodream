@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -183,14 +184,18 @@
                                                             ${project.donatedAmountOfMoney}
                                                         </td>
                                                         <td class="text-center">
-                                                            <c:if test="${project.projectStatus.equalsIgnoreCase('active')}">
-                                                                <span class="bg-success text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                            <c:set var="defaultAmount" value="0.00" />
+                                                            <c:set var="currentDate" value="<fmt:formatDate value='now' pattern='yyyy-MM-dd' />" />
+                                                            <c:set var="endDate" value="<fmt:formatDate value='${project.endDate}' pattern='yyyy-MM-dd' />" />
+                                                            <c:out value="${endDate le currentDate}"></c:out>
+                                                            <c:if test="${project.donatedAmountOfMoney > defaultAmount}">
+                                                                <span class="bg-success text-light rounded-pill px-3 py-1">Active</span>
                                                             </c:if>
-                                                            <c:if test="${project.projectStatus.equalsIgnoreCase('outdated')}">
-                                                                <span class="bg-warning text-dark rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                            <c:if test="${endDate lt currentDate}">
+                                                                <span class="bg-warning text-dark rounded-pill px-3 py-1">Outdated</span>
                                                             </c:if>
-                                                            <c:if test="${project.projectStatus.equalsIgnoreCase('new')}">
-                                                                <span class="bg-danger text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                            <c:if test="${project.donatedAmountOfMoney == defaultAmount && endDate ge currentDate}">
+                                                                <span class="bg-danger text-light rounded-pill px-3 py-1">New</span>
                                                             </c:if>
                                                         </td>
                                                         <td>${project.startDate}</td>
@@ -209,9 +214,9 @@
                                                             <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeProject(${project.projectId})">
                                                                 <i class="fa-solid fa-trash"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateProject(${project.projectId})">
+<!--                                                            <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateProject(${project.projectId})">
                                                                 <i class="fas fa-edit"></i>
-                                                            </button>
+                                                            </button>-->
                                                         </td>
                                                     </tr>
                                                 </c:forEach>

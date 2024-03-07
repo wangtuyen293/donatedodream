@@ -254,9 +254,9 @@ public class ProjectDAO {
             ps.setByte(1, isApproved);
             ps.setInt(2, projectId);
             int rowsAffected = ps.executeUpdate();
-            return rowsAffected > 0; // Check if any rows were affected by the delete operation
+            return rowsAffected > 0; // Check if any rows were affected by the update operation
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "An error occurred while deleting the user.", ex);
+            logger.log(Level.SEVERE, "An error occurred while update the project.", ex);
             return false;
         } catch (ClassNotFoundException ex) {
             logger.log(Level.SEVERE, "Database driver class not found.", ex);
@@ -278,10 +278,10 @@ public class ProjectDAO {
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0; // Check if any rows were affected by the delete operation
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "An error occurred while deleting the user.", ex);
+            logger.log(Level.SEVERE, "An error occurred while deleting the project!", ex);
             return false;
         } catch (ClassNotFoundException ex) {
-            logger.log(Level.SEVERE, "Database driver class not found.", ex);
+            logger.log(Level.SEVERE, "Database driver class not found!", ex);
             return false;
         } finally {
             closeResources(conn, ps, rs);
@@ -311,7 +311,7 @@ public class ProjectDAO {
 
             return true; // Deletion successful
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "An error occurred while deleting the users.", ex);
+            logger.log(Level.SEVERE, "An error occurred while deleting the projects.", ex);
             return false;
         } catch (ClassNotFoundException ex) {
             logger.log(Level.SEVERE, "Database driver class not found.", ex);
