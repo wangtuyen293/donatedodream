@@ -21,24 +21,21 @@
         <link rel="stylesheet" href="./assets/css/slicknav.css">
         <link rel="stylesheet" href="./assets/css/animate.min.css">
         <link rel="stylesheet" href="./assets/css/magnific-popup.css">
-        <!--<link rel="stylesheet" href="assets/css/fontawesome.min.css">-->
         <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
         <link rel="stylesheet" href="./assets/css/themify-icons.css">
         <link rel="stylesheet" href="./assets/css/slick.css">
         <link rel="stylesheet" href="./assets/css/nice-select.css">
         <link rel="stylesheet" href="./assets/css/style.css">
-        <!--<link rel="stylesheet" href="./assets/css/style.min.css">-->
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
         <style>
-            /* Đặt độ rộng cho form và căn giữa trang */
             .custom-form {
                 max-width: 50%;
                 margin: auto;
-                margin-top: 50px; /* Điều chỉnh khoảng cách từ trên xuống theo ý muốn */
+                margin-top: 50px;
             }
         </style>
         <style>
@@ -214,16 +211,6 @@
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', 'UA-23581568-13');
-        </script>
         <script>
             window.dataLayer = window.dataLayer || [];
 

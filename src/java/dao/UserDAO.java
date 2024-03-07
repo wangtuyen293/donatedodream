@@ -569,7 +569,7 @@ public class UserDAO {
 
     public static void main(String[] args) {
         UserDAO userDAO = new UserDAO();
-        System.out.println(userDAO.getUserByEmail("admin1@gmail.com"));
+//        System.out.println(userDAO.checkUser("admin1@gmail.com"));
     }
 
 }

@@ -340,6 +340,6 @@ public class ProjectDAO {
 
     public static void main(String[] args) {
         ProjectDAO projectDAO = new ProjectDAO();
-//        System.out.println(projectDAO.updateProjectApproval(1, 1));
+        System.out.println(projectDAO.getProjectsApproved());
     }
 }

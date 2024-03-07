@@ -20,6 +20,7 @@ public class ProjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProjectDAO projectDAO = new ProjectDAO();
+        PrintWriter out = response.getWriter();
         List<Project> listProjects = projectDAO.getProjectsApproved();
         String action = request.getParameter("action");
 

@@ -96,24 +96,6 @@
                                     <span class="ps-2">Dashboard</span>
                                 </a>
                             </li>
-                            <li class="accordion-item text-white shadow-none border sidebar-js">
-                                <a class="accordion-button text-decoration-none shadow-none border-0" href="#" data-bs-toggle="collapse" data-bs-target="#posts" aria-expanded="true" aria-controls="posts">
-                                    <i class="fa-solid fa-file-lines ms-1"></i>
-                                    <span class="ps-2 ms-2 main-title">Posts</span>
-                                </a>
-                                <ul id="posts" class="accordion-collapse collapse m-0 p-0">
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#dashboard-sidebar">
-                                            <span class="sidebar-link-item ps-2">All Post</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#dashboard-sidebar">
-                                            <span class="sidebar-link-item ps-2">Create new post</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
                             <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
                                 <a class="sidebar-content-link link-dark text-decoration-none" href="usermanagement">
                                     <i class="fa-solid fa-users"></i>
@@ -142,35 +124,6 @@
                                 <a class="sidebar-content-link link-dark text-decoration-none" href="categorymanagement">
                                     <i class="fa-regular fa-file"></i>
                                     <span class="ps-2">Categories</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="py-3 border">
-                            <span class="ps-2 link-dark">SYSTEM</span>
-                        </div>
-                        <ul class="m-0 p-0">
-                            <li class="accordion-item text-white shadow-none border rounded-0 accordion-active-light sidebar-js">
-                                <a class="accordion-button text-decoration-none shadow-none border-0 rounded-0" href="#" data-bs-toggle="collapse" data-bs-target="#extensions" aria-expanded="true" aria-controls="extensions">
-                                    <i class="fa-solid fa-puzzle-piece ms-1"></i>
-                                    <span class="ps-2 ms-2 main-title">Extensions</span>
-                                </a>
-                                <ul id="extensions" class="accordion-collapse collapse m-0 p-0">
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#sidebar">
-                                            <span class="sidebar-link-item ps-2">Extension 1</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#sidebar">
-                                            <span class="sidebar-link-item ps-2">Extension 2</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
-                                <a class="sidebar-content-link link-dark text-decoration-none" href="#">
-                                    <i class="fa-solid fa-gear"></i>
-                                    <span class="ps-2">Settings</span>
                                 </a>
                             </li>
                         </ul>

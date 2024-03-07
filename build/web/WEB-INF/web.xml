@@ -80,6 +80,10 @@
         <servlet-name>UpdatePassword</servlet-name>
         <servlet-class>controller.home.UpdatePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProjectServlet</servlet-name>
+        <servlet-class>controller.home.ProjectServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -106,7 +110,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ContactFounder</servlet-name>
-        <url-pattern>/ContactFounder</url-pattern>
+        <url-pattern>/contactfounder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>UpdatePassword</servlet-name>
         <url-pattern>/updatepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProjectServlet</servlet-name>
+        <url-pattern>/project</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
