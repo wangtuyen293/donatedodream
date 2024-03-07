@@ -85,7 +85,7 @@
     </head>
     <body onload="time()">
         <jsp:include page="../layout/header.jsp" />
-        <div class="category-management container-fluid bg-secondary-subtle show active" style="height: 36rem;">
+        <div class="category-management container-fluid bg-secondary-subtle show active">
             <div class="row">
                 <div class="col-2 p-0" style="background: #f3f6f9">
                     <div class="accordion" id="sidebar">
@@ -95,24 +95,6 @@
                                     <i class="fa-solid fa-house"></i>
                                     <span class="ps-2">Dashboard</span>
                                 </a>
-                            </li>
-                            <li class="accordion-item text-white shadow-none border sidebar-js">
-                                <a class="accordion-button text-decoration-none shadow-none border-0" href="#" data-bs-toggle="collapse" data-bs-target="#posts" aria-expanded="true" aria-controls="posts">
-                                    <i class="fa-solid fa-file-lines ms-1"></i>
-                                    <span class="ps-2 ms-2 main-title">Posts</span>
-                                </a>
-                                <ul id="posts" class="accordion-collapse collapse m-0 p-0">
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#dashboard-sidebar">
-                                            <span class="sidebar-link-item ps-2">All Post</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#dashboard-sidebar">
-                                            <span class="sidebar-link-item ps-2">Create new post</span>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                             <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
                                 <a class="sidebar-content-link link-dark text-decoration-none" href="usermanagement">
@@ -139,44 +121,16 @@
                                 </a>
                             </li>
                             <li class="sidebar-content text-white ps-4 py-3 border sidebar-js active">
-                                <a class="sidebar-content-link link-dark text-decoration-none" href="categorymanagement">
+                                <a class="sidebar-content-link link-dark text-decoration-none" href="#">
                                     <i class="fa-regular fa-file"></i>
                                     <span class="ps-2">Categories</span>
                                 </a>
                             </li>
                         </ul>
-                        <div class="py-3 border">
-                            <span class="ps-2 link-dark">SYSTEM</span>
-                        </div>
-                        <ul class="m-0 p-0">
-                            <li class="accordion-item text-white shadow-none border rounded-0 accordion-active-light sidebar-js">
-                                <a class="accordion-button text-decoration-none shadow-none border-0 rounded-0" href="#" data-bs-toggle="collapse" data-bs-target="#extensions" aria-expanded="true" aria-controls="extensions">
-                                    <i class="fa-solid fa-puzzle-piece ms-1"></i>
-                                    <span class="ps-2 ms-2 main-title">Extensions</span>
-                                </a>
-                                <ul id="extensions" class="accordion-collapse collapse m-0 p-0">
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#sidebar">
-                                            <span class="sidebar-link-item ps-2">Extension 1</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-item ps-5 py-2">
-                                        <a class="sidebar-link text-dark text-decoration-none" href="#" data-bs-parent="#sidebar">
-                                            <span class="sidebar-link-item ps-2">Extension 2</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
-                                <a class="sidebar-content-link link-dark text-decoration-none" href="#">
-                                    <i class="fa-solid fa-gear"></i>
-                                    <span class="ps-2">Settings</span>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
-                <div class="container col-10 py-3 bg-secondary-subtle">
+                <div class="container col-10 pt-3 pb-5 bg-secondary-subtle">
+
                     <h3 class="main-title fw-bold ms-3">
                         <a class="link-dark text-decoration-none" href="#">
                             Manage categories
@@ -186,6 +140,27 @@
                         <span>Manage categories and create new for necessary</span>
                     </p>
                     <div id="clock" class="ms-3 my-2"></div>
+
+                    <c:if test="${not empty updateSuccess}">
+                        <p class="ms-3 text-success">
+                            ${updateSuccess}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty updateFail}">
+                        <p class="ms-3 text-danger">
+                            ${updateFail}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty insertSuccess}">
+                        <p class="ms-3 text-success">
+                            ${insertSuccess}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty insertFail}">
+                        <p class="ms-3 text-danger">
+                            ${insertFail}
+                        </p>
+                    </c:if>
                     <div class="row ms-1">
                         <form action="categorymanagement?updatecategory" method="POST">
                             <table class="table table-hover table-bordered" id="categorymanager">
@@ -195,8 +170,6 @@
                                             <input type="checkbox" class="select-all" id="select-all-category"/>
                                             Category
                                         </th>
-                                        <th>Description</th>
-                                        <th class="text-center">Image</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -207,17 +180,11 @@
                                                 <input type="checkbox" class="category_${category.categoryId}" value="${category.categoryId}"/>
                                                 ${category.categoryName}
                                             </td>
-                                            <td>${category.categoryDescription}</td>
-                                            <td class="text-center">
-                                                <a class="btn btn-warning rounded-pill px-4 py-1 fw-bold" style="font-size: 12px;">
-                                                    View
-                                                </a>
-                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeCategory(${category.categoryId})">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateCategory(${category.categoryId})">
+                                                <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="openEditModal(${category.categoryId}, '${category.categoryName}'); $('#updateCategoryModal').modal('show');">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
@@ -228,43 +195,58 @@
                             <button type="button" id="remove" class="btn btn-danger delete-category d-none" title="Delete" onclick="deleteCategorySelected(selectedCategoryIds)">
                                 DELETE
                             </button>
+                            <button type="button" id="create" class="btn btn-success create-category" title="Create" data-bs-toggle="modal" data-bs-target="#createCategory">
+                                CREATE
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="create-category modal fade" id="createCategory" tabindex="-1" aria-labelledby="createCategoryLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5 text-center fw-bold" id="exampleModalLabel">Update Category</h1>
+                        <h1 class="modal-title fs-5 fw-bold" id="createCategoryLabel">Create Category</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <label for="name" class="col-sm-2 col-form-label">
-                                Name
-                            </label>
-                            <div class="col-sm-10">
-                                <input id="name" class="form-control"/>
+                    <form id="createCategoryForm" action="categorymanagement?action=insertcategory" method="post">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="name" name="categoryName" placeholder="Category Name..." required>
                             </div>
                         </div>
-                        <div>
-                            <input id="status" type="radio" value="active"/>
-                            <label>
-                                Active
-                            </label>
-                            <input id="status" type="radio" value="outdated"/>
-                            <label>
-                                Outdated
-                            </label>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="update-category modal fade" id="updateCategoryModal" tabindex="-1" aria-labelledby="updateCategoryLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 fw-bold" id="updateCategoryLabel">Update Category</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                    <form id="updateCategoryForm" action="categorymanagement?action=updatecategory" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" id="editCategoryId" name="categoryId"/>
+                            <div class="mb-3">
+                                <label for="editCategoryName" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="editCategoryName" name="categoryName" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -414,78 +396,30 @@
             });
         </script>
         <script>
-            async function updateCategory(categoryId) {
-                const inputOptions = new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve({
-                            "Approve": "Approve",
-                            "Refuse": "Refuse"
-                        });
-                    }, 0);
-                });
-
-                const {value: choice} = await Swal.fire({
-                    title: "Do you want to approve the category?",
-                    input: "radio",
-                    icon: "info",
-                    inputOptions,
-                    showCancelButton: true,
-                    cancelButtonColor: "#d33",
-
-                    inputValidator: (value) => {
-                        if (!value) {
-                            return "You need to choose something!";
-                        }
-                    }
-                });
-
-                if (choice) {
-                    console.log(choice);
-                    Swal.fire({
-                        text: `You selected: ` + choice,
-                        showCancelButton: true,
-                        cancelButtonColor: "#d33"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const isApproved = choice === "Approve" ? "true" : "false";
-                            console.log(isApproved);
-                            
-                            $.ajax({
-                                url: "categorymanagement?action=updatecategory&categoryId=" + categoryId + "&isApproved=" + isApproved,
-                                type: "POST",
-                                success: function (response) {
-                                    // Check the response from the server
-                                    if (response === "success") {
-                                        Swal.fire({
-                                            title: "Updated successfully!",
-                                            icon: "success"
-                                        }).then(() => {
-                                            // Reload the page
-                                            location.reload();
-                                        });
-                                    } else {
-                                        Swal.fire({
-                                            title: "Error!",
-                                            text: "Failed to update the category.",
-                                            icon: "error"
-                                        });
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    // Handle the error
-                                    Swal.fire({
-                                        title: "Error!",
-                                        text: "An error occurred while updating the category.",
-                                        icon: "error"
-                                    });
-                                }
-                            });
-                        }
-                    });
+            // Prevent event default submit of form
+            document.getElementById('createCategoryForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
                 }
+            });
+            document.getElementById('updateCategoryForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+        </script>
+        <script>
+            function openEditModal(categoryId, categoryName) {
+                event.preventDefault();
+                document.getElementById('editCategoryId').value = categoryId;
+                document.getElementById('editCategoryName').value = categoryName;
+
+                // Show the modal
+                $('#updateCategory').modal('show');
             }
 
             function deleteCategorySelected(categoryId) {
+                event.preventDefault();
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",
@@ -529,6 +463,7 @@
             }
 
             function removeCategory(categoryId) {
+                event.preventDefault();
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",

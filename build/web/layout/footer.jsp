@@ -1,49 +1,62 @@
-<%-- Document : footer Created on : Jan 13, 2024, 3:48:45 PM Author : quang --%>
+<%-- Document : footer Created on : Jan 13, 2024, 3:48:45 PM Author : OS --%>
 
+<div class="footer container-fluid bg-body-secondary pt-5">
+    <footer class="mx-5 pt-5">
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h2 class="fw-bold mb-2">DonationDoDreaming</h2>
+                <form>
+                    <h5>Subscribe to our newsletter</h5>
+                    <div class="row">
+                        <div class="col-8 p-0 ps-2">
+                            <input id="newsletter1" type="text" class="form-control rounded-0" placeholder="Email address (required)">
+                        </div>
+                        <div class="col-2 p-0">
+                            <button class="btn btn-primary rounded-0" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3 mb-3">
+                <h5>Project</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="project" class="nav-link p-0 text-muted">All Projects</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Create a project</a></li>
+                </ul>
+            </div>
+            <div class="col-3 mb-3">
+                <h5>Detail</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="home" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="contact.jsp" class="nav-link p-0 text-muted">Contact</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                </ul>
+            </div>
 
+        </div>
 
-<!--<script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
-
-<script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="../assets/js/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
-<script src="../assets/js/jquery.slicknav.min.js"></script>
-
-<script src="../assets/js/owl.carousel.min.js"></script>
-<script src="../assets/js/slick.min.js"></script>
-
-<script src="../assets/js/wow.min.js"></script>
-<script src="../assets/js/animated.headline.js"></script>
-<script src="../assets/js/jquery.magnific-popup.js"></script>
-
-<script src="../assets/js/jquery.scrollUp.min.js"></script>
-<script src="../assets/js/jquery.nice-select.min.js"></script>
-<script src="../assets/js/jquery.sticky.js"></script>
-
-<script src="../assets/js/contact.js"></script>
-<script src="../assets/js/jquery.form.js"></script>
-<script src="../assets/js/jquery.validate.min.js"></script>
-<script src="../assets/js/mail-script.js"></script>
-<script src="../assets/js/jquery.ajaxchimp.min.js"></script>
-
-<script src="../assets/js/plugins.js"></script>
-<script src="../assets/js/main.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-23581568-13');
-</script>
-<script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
-        data-cf-beacon='{"rayId":"84651653f9703e54","version":"2023.10.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
-crossorigin="anonymous"></script>-->
-</body>
-
-</html>
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 border-top border-secondary-subtle">
+            <p>&copy; 2024 
+                <a href="#" class="text-decoration-none link-dark fw-bold">DonationDoDreaming.</a>
+                All rights reserved.
+            </p>
+            <ul class="list-unstyled d-flex">
+                <li class="ps-3">
+                    <a class="link-dark" href="#">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </li>
+                <li class="ps-3">
+                    <a class="link-dark" href="#">
+                        <i class="fa-brands fa-google"></i>
+                    </a>
+                </li>
+                <li class="ps-3">
+                    <a class="link-dark" href="#">
+                        <svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>

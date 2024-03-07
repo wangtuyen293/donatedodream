@@ -16,12 +16,13 @@ import model.Category;
  * @author OS
  */
 public class CategoryDAO {
+
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
     private static final Logger logger = Logger.getLogger(CategoryDAO.class.getName());
-    
+
     public List<Category> getAllCategories() {
         List<Category> list = new ArrayList<>();
         String sql = "SELECT * FROM Category";
@@ -40,7 +41,66 @@ public class CategoryDAO {
         }
         return list;
     }
-    
+
+    public boolean checkCategoryName(String categoryName) {
+        try {
+            String query = "SELECT COUNT(*) FROM Category WHERE categoryName = ?";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, categoryName);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return false;
+    }
+
+    public boolean insertCategory(String categoryName) {
+        try {
+            String query = "INSERT INTO Categories (categoryName) VALUES (?)";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, categoryName);
+            int rowsAffected = ps.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            closeResources(conn, ps, null);
+        }
+    }
+
+    public boolean updateCategoryByCategoryId(int categoryId, String categoryName) {
+        String sql = "UPDATE Category SET categoryName = ? WHERE categoryId = ?";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, categoryName);
+            ps.setInt(2, categoryId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // Check if any rows were affected by the delete operation
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "An error occurred while update the category!", ex);
+            return false;
+        } catch (ClassNotFoundException ex) {
+            logger.log(Level.SEVERE, "Database driver class not found!", ex);
+            return false;
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+    }
+
     public boolean deleteCategory(int categoryId) {
         String sql = "DELETE FROM Category WHERE categoryId = ?";
         try {
@@ -96,7 +156,7 @@ public class CategoryDAO {
             closeResources(conn, ps, rs);
         }
     }
-    
+
     // Close database resources (connection, statement, and result set)
     private void closeResources(Connection conn, PreparedStatement ps, ResultSet rs) {
         try {
@@ -113,9 +173,9 @@ public class CategoryDAO {
             System.out.println("Error closing resources: " + e.getMessage());
         }
     }
-    
+
     public static void main(String[] args) {
         CategoryDAO categoryDAO = new CategoryDAO();
-        System.out.println(categoryDAO.getAllCategories());
+        System.out.println(categoryDAO.checkCategoryName("Volunteer"));
     }
 }

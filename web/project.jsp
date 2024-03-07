@@ -12,7 +12,6 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>My Projects</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
         <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
@@ -21,13 +20,11 @@
         <link rel="stylesheet" href="./assets/css/slicknav.css">
         <link rel="stylesheet" href="./assets/css/animate.min.css">
         <link rel="stylesheet" href="./assets/css/magnific-popup.css">
-        <!--<link rel="stylesheet" href="assets/css/fontawesome.min.css">-->
         <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
         <link rel="stylesheet" href="./assets/css/themify-icons.css">
         <link rel="stylesheet" href="./assets/css/slick.css">
         <link rel="stylesheet" href="./assets/css/nice-select.css">
         <link rel="stylesheet" href="./assets/css/style.css">
-        <!--<link rel="stylesheet" href="./assets/css/style.min.css">-->
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">

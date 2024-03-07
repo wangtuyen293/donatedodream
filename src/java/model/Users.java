@@ -50,6 +50,20 @@ public class Users implements Serializable {
         this.dateCreated = dateCreated;
         this.userTypeId = userTypeId;
     }
+    
+    public Users(int userId, String fullName, String userName, byte gender, Date dateOfBirth, String avatar, String email, String phoneNumber, String userStatus, Date dateCreated, int userTypeId) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.userName = userName;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.avatar = avatar;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.userStatus = userStatus;
+        this.dateCreated = dateCreated;
+        this.userTypeId = userTypeId;
+    }
 
     public Users(int userId, String fullName, String userName, String password, byte gender, Date dateOfBirth, String avatar, String email, String phoneNumber, int userTypeId) {
         this.userId = userId;

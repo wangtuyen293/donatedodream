@@ -23,6 +23,7 @@ public class Project implements Serializable {
     private int userId;
     private int charityOrganizationId;
     private int categoryId;
+    private Users user;
     private Category category;
 
     public Project(int projectId, String projectName, BigDecimal projectTarget, String projectImage, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, int userId, int charityOrganizationId, Category category) {
@@ -69,6 +70,21 @@ public class Project implements Serializable {
         this.isApproved = isApproved;
         this.userId = userId;
         this.charityOrganizationId = charityOrganizationId;
+        this.category = category;
+    }
+
+    public Project(int projectId, String projectName, BigDecimal projectTarget, String projectImage, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Users user, Category category) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectTarget = projectTarget;
+        this.projectImage = projectImage;
+        this.donatedAmountOfMoney = donatedAmountOfMoney;
+        this.projectStatus = projectStatus;
+        this.projectDescription = projectDescription;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isApproved = isApproved;
+        this.user = user;
         this.category = category;
     }
 
