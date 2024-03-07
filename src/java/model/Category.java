@@ -20,6 +20,11 @@ public class Category implements Serializable {
         this.imgCategory = imgCategory;
     }
 
+    public Category(int categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+    }
+
     public Category(String categoryName) {
         this.categoryName = categoryName;
     }
@@ -64,5 +69,4 @@ public class Category implements Serializable {
         return "Category{" + "categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryDescription=" + categoryDescription + ", imgCategory=" + imgCategory + '}';
     }
 
-    
 }

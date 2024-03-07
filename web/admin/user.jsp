@@ -1,16 +1,18 @@
 <%-- 
-    Document   : updateproject
-    Created on : Feb 8, 2024, 3:16:28 PM
+    Document   : user
+    Created on : Jan 27, 2024, 3:02:07 PM
     Author     : OS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Project Management</title>
+        <title>User Management</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
@@ -81,9 +83,9 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="time()">
         <jsp:include page="../layout/header.jsp" />
-        <div class="project-management container-fluid bg-secondary-subtle show active" style="height: 36rem;">
+        <div class="user-management container-fluid bg-secondary-subtle show active">
             <div class="row">
                 <div class="col-2 p-0" style="background: #f3f6f9">
                     <div class="accordion" id="sidebar">
@@ -112,26 +114,32 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
+                            <li class="sidebar-content text-white ps-4 py-3 border sidebar-js active">
                                 <a class="sidebar-content-link link-dark text-decoration-none" href="usermanagement">
                                     <i class="fa-solid fa-users"></i>
                                     <span class="ps-2">User Management</span>
                                 </a>
                             </li>
-                            <li class="sidebar-content text-white ps-4 py-3 border sidebar-js active">
+                            <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
+                                <a class="sidebar-content-link link-dark text-decoration-none" href="charityorgmanagement">
+                                    <i class="fa-solid fa-sitemap"></i>
+                                    <span class="ps-2">Charity Organization Management</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
                                 <a class="sidebar-content-link link-dark text-decoration-none" href="projectmanagement">
                                     <i class="fa-solid fa-list-check"></i>
                                     <span class="ps-2">Project Management</span>
                                 </a>
                             </li>
                             <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
-                                <a class="sidebar-content-link link-dark text-decoration-none" href="#">
+                                <a class="sidebar-content-link link-dark text-decoration-none" href="privacypolicy">
                                     <i class="fa-solid fa-user-lock"></i>
                                     <span class="ps-2">Privacy Policy</span>
                                 </a>
                             </li>
                             <li class="sidebar-content text-white ps-4 py-3 border sidebar-js">
-                                <a class="sidebar-content-link link-dark text-decoration-none" href="#">
+                                <a class="sidebar-content-link link-dark text-decoration-none" href="categorymanagement">
                                     <i class="fa-regular fa-file"></i>
                                     <span class="ps-2">Categories</span>
                                 </a>
@@ -168,87 +176,89 @@
                         </ul>
                     </div>
                 </div>
-                <div class="container col-10 py-3 bg-secondary-subtle">
+                <div class="user-management container col-10 pt-3 pb-5 bg-secondary-subtle">
                     <h3 class="main-title fw-bold ms-3">
                         <a class="link-dark text-decoration-none" href="#">
-                            Management projects
+                            Manage invitations and users
                         </a>
                     </h3>
+                    <p class="ms-3 text-dark">
+                        <span>
+                            Manage users and their role, account access and projects from user section.
+                        </span>
+                    </p>
                     <div id="clock" class="ms-3 my-2"></div>
-                    <p class="ms-3">Manage user' projects and approve or refuse project announcements</p>
+
                     <div class="row ms-1">
-                        <form action="projectmanagement?action=updateproject" method="POST">
-                            <table class="table table-hover table-bordered" id="projectmanager">
+                        <form action="usermanagement?action=updateuser" method="POST">
+                            <table class="table table-hover table-bordered" id="usermanager">
                                 <thead>
                                     <tr>
                                         <th>
-                                            <input type="checkbox" class="select-all" id="select-all-project"/>
-                                            Project
+                                            <input type="checkbox" class="select-all" id="select-all-user"/>
+                                            User
                                         </th>
-                                        <th>Target</th>
-                                        <th>Donated</th>
-                                        <!--<th>Image</th>-->
+                                        <th>Email</th>
+                                        <th>Roles</th>
                                         <th>Status</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Approved</th>
+                                        <th>Created</th>
+                                        <th>Site Admin</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${projectList}" var="project">
-                                    <tr>
-                                        <td class="checkbox-project">
-                                            <input type="checkbox" class="project_${project.projectId}" value="${project.projectId}"/>
-                                            ${project.projectName}
-                                        </td>
-                                        <td>${project.projectTarget}</td>
-                                        <td>
-                                            ${project.donatedAmountOfMoney}
-                                        </td>
-                                        <!--                                            <td>
-                                                                                        <button class="btn btn-warning rounded-pill px-3 py-1 fw-bold" style="font-size: 10px;">
-                                                                                            View
-                                                                                            <span class="bg-warning text-dark rounded-pill px-3 py-1">View</span>
-                                                                                        </button>
-                                                                                    </td>-->
-                                        <td class="text-center">
-                                    <c:if test="${project.projectStatus.equalsIgnoreCase('active')}">
-                                        <span class="bg-success text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
-                                    </c:if>
-                                    <c:if test="${project.projectStatus.equalsIgnoreCase('outdated')}">
-                                        <span class="bg-warning text-dark rounded-pill px-3 py-1">${project.projectStatus}</span>
-                                    </c:if>
-                                    <c:if test="${project.projectStatus.equalsIgnoreCase('new')}">
-                                        <span class="bg-danger text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
-                                    </c:if>
-                                    </td>
-                                    <td>${project.startDate}</td>
-                                    <td>${project.endDate}</td>
-                                    <td>
-                                    <c:choose>
-                                        <c:when test="${project.isApproved == 1}">
-                                            Yes
-                                        </c:when>
-                                        <c:otherwise>
-                                            No
-                                        </c:otherwise>
-                                    </c:choose>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeProject(${project.projectId})">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm edit" title="Edit" id="show-emp"
-                                                data-toggle="modal" data-target="#ModalUP${c.courseId}">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </td>
-                                    </tr>
-                                </c:forEach>
+                                    <c:forEach items="${userList}" var="user">
+                                        <tr>
+                                            <td class="checkbox-user">
+                                                <input type="checkbox" class="user_${user.userId}" value="${user.userId}"/>
+                                                <a class="link-dark text-decoration-none" href="#">${user.fullName}</a>
+                                            </td>
+                                            <td>${user.email}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${user.userTypeId == 1}">
+                                                        Admin
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        Donator
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td class="text-center">
+                                                <c:if test="${user.userStatus.equalsIgnoreCase('active')}">
+                                                    <span class="bg-success text-light rounded-pill px-3 py-1">${user.userStatus}</span>
+                                                </c:if>
+                                                <c:if test="${user.userStatus.equalsIgnoreCase('warning')}">
+                                                    <span class="bg-warning text-dark rounded-pill px-3 py-1">${user.userStatus}</span>
+                                                </c:if>
+                                                <c:if test="${user.userStatus.equalsIgnoreCase('block')}">
+                                                    <span class="bg-danger text-light rounded-pill px-3 py-1">${user.userStatus}</span>
+                                                </c:if>
+                                            </td>
+                                            <td>${user.dateCreated}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${user.userTypeId == 1}">
+                                                        Yes
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        No
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm trash" title="Remove" onclick="removeUser(${user.userId})">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm edit" title="Edit" onclick="updateUser(${user.userId})">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
-                            <button type="button" id="remove" class="btn btn-danger delete-project d-none" title="Delete" onclick="deleteUserSelected(selectedUserIds)">
+                            <button type="button" id="remove" class="btn btn-danger delete-user d-none" title="Delete" onclick="deleteUserSelected(selectedUserIds)">
                                 DELETE
                             </button>
                         </form>
@@ -331,21 +341,21 @@
                                 }
         </script>
         <script>
-            const selectAll = document.querySelector('#select-all-project');
-            const allCheckbox = document.querySelectorAll('.checkbox-project input');
-            const deleteUser = document.querySelector('.delete-project');
+            const selectAll = document.querySelector('#select-all-user');
+            const allCheckbox = document.querySelectorAll('.checkbox-user input');
+            const deleteUser = document.querySelector('.delete-user');
             let listBoolean = [];
             let selectedUserIds = [];
 
-            function handleCheckboxChange(projectId) {
-                const checkbox = document.querySelector(`.project_` + projectId);
+            function handleCheckboxChange(userId) {
+                const checkbox = document.querySelector(`.user_` + userId);
 
                 if (checkbox.checked) {
-                    if (!selectedUserIds.includes(projectId)) {
-                        selectedUserIds.push(projectId); // Add the selected user ID to the list if it doesn't already exist
+                    if (!selectedUserIds.includes(userId)) {
+                        selectedUserIds.push(userId); // Add the selected user ID to the list if it doesn't already exist
                     }
                 } else {
-                    const index = selectedUserIds.indexOf(projectId);
+                    const index = selectedUserIds.indexOf(userId);
                     if (index !== -1) {
                         selectedUserIds.splice(index, 1); // Remove the selected user ID from the list
                     }
@@ -382,8 +392,8 @@
                     }
                     listBoolean = [];
                     checkDeleteButtonVisibility();
-                    const projectId = item.value;
-                    handleCheckboxChange(projectId);
+                    const userId = item.value;
+                    handleCheckboxChange(userId);
                 });
             });
 
@@ -400,8 +410,101 @@
 
                 checkDeleteButtonVisibility();
             });
+//            allCheckbox.forEach(item => {
+//                item.addEventListener('change', function () {
+//                    allCheckbox.forEach(i => {
+//                        listBoolean.push(i.checked);
+//                    })
+//                    if (listBoolean.includes(false)) {
+//                        selectAll.checked = false;
+//                    } else {
+//                        selectAll.checked = true;
+//                    }
+//                    listBoolean = [];
+//                })
+//            });
+
+//            selectAll.addEventListener('change', function () {
+//                if (this.checked) {
+//                    allCheckbox.forEach(i => {
+//                        i.checked = true;
+//                    })
+//                } else {
+//                    allCheckbox.forEach(i => {
+//                        i.checked = false;
+//                    })
+//                }
+//            });
         </script>
         <script>
+            async function updateUser(userId) {
+                const inputOptions = new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            "Active": "Active",
+                            "Warning": "Warning",
+                            "Block": "Block"
+                        });
+                    }, 0);
+                });
+
+                const {value: choice} = await Swal.fire({
+                    title: "Do you want to update the user's status?",
+                    input: "radio",
+                    icon: "info",
+                    inputOptions,
+                    showCancelButton: true,
+                    cancelButtonColor: "#d33",
+
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return "You need to choose something!";
+                        }
+                    }
+                });
+
+                if (choice) {
+                    Swal.fire({
+                        text: `You selected: ` + choice,
+                        showCancelButton: true,
+                        cancelButtonColor: "#d33"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "usermanagement?action=updateuser&userId=" + userId + "&userStatus=" + choice,
+                                type: "POST",
+                                success: function (response) {
+                                    // Check the response from the server
+                                    if (response === "success") {
+                                        Swal.fire({
+                                            title: "Updated successfully!",
+                                            icon: "success"
+                                        }).then(() => {
+                                            // Reload the page
+                                            location.reload();
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            title: "Error!",
+                                            text: "Failed to update the project.",
+                                            icon: "error"
+                                        });
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    // Handle the error
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: "An error occurred while updating the project.",
+                                        icon: "error"
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+
             function deleteUserSelected(userId) {
                 Swal.fire({
                     title: "Are you sure?",
@@ -451,7 +554,7 @@
                 });
             }
 
-            function removeProject(userId) {
+            function removeUser(userId) {
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",

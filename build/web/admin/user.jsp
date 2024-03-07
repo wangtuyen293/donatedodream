@@ -85,7 +85,7 @@
     </head>
     <body onload="time()">
         <jsp:include page="../layout/header.jsp" />
-        <div class="user-management container-fluid bg-secondary-subtle show active" style="height: 36rem;">
+        <div class="user-management container-fluid bg-secondary-subtle show active">
             <div class="row">
                 <div class="col-2 p-0" style="background: #f3f6f9">
                     <div class="accordion" id="sidebar">
@@ -176,7 +176,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="user-management container col-10 py-3 bg-secondary-subtle">
+                <div class="user-management container col-10 pt-3 pb-5 bg-secondary-subtle">
                     <h3 class="main-title fw-bold ms-3">
                         <a class="link-dark text-decoration-none" href="#">
                             Manage invitations and users
