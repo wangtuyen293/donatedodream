@@ -184,17 +184,20 @@
                                                             ${project.donatedAmountOfMoney}
                                                         </td>
                                                         <td class="text-center">
+                                                            <%
+                                                                java.util.Date currentDate = new java.util.Date();
+                                                                java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                                                                String formattedCurrentDate = dateFormat.format(currentDate);
+                                                            %>
                                                             <c:set var="defaultAmount" value="0.00" />
-                                                            <c:set var="currentDate" value="<fmt:formatDate value='now' pattern='yyyy-MM-dd' />" />
-                                                            <c:set var="endDate" value="<fmt:formatDate value='${project.endDate}' pattern='yyyy-MM-dd' />" />
-                                                            <c:out value="${endDate le currentDate}"></c:out>
-                                                            <c:if test="${project.donatedAmountOfMoney > defaultAmount}">
+                                                            <c:set var="currentDate" value="<%= formattedCurrentDate %>" />
+                                                            <c:if test="${project.donatedAmountOfMoney > defaultAmount && project.endDate ge currentDate}">
                                                                 <span class="bg-success text-light rounded-pill px-3 py-1">Active</span>
                                                             </c:if>
-                                                            <c:if test="${endDate lt currentDate}">
+                                                            <c:if test="${project.endDate lt currentDate}">
                                                                 <span class="bg-warning text-dark rounded-pill px-3 py-1">Outdated</span>
                                                             </c:if>
-                                                            <c:if test="${project.donatedAmountOfMoney == defaultAmount && endDate ge currentDate}">
+                                                            <c:if test="${project.donatedAmountOfMoney == defaultAmount && project.endDate ge currentDate}">
                                                                 <span class="bg-danger text-light rounded-pill px-3 py-1">New</span>
                                                             </c:if>
                                                         </td>
@@ -382,6 +385,11 @@
                                                                                     return i;
                                                                                 }
                                                                             }
+        </script>
+        <script>
+            var currentDate = new Date();
+            var formattedDate = currentDate.toISOString().split('T')[0];
+            document.write(formattedDate);
         </script>
         <script>
             const projectManagement = document.getElementById('projectManagement');
