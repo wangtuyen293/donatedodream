@@ -92,6 +92,9 @@
                 </h1>
             </div>
             <div class="projects container-fluid my-5">
+                <div class="search-project">
+                    <input class="form-control"/>
+                </div>
                 <div class="d-flex row justify-content-around mx-5">
                     <c:forEach items="${projectsApproved}" var="project">
                         <div class="card col-4 m-0 p-0 mx-3 my-5" style="width: 22rem;">
