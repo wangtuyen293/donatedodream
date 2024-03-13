@@ -25,22 +25,19 @@ public class Dashboard extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             Users user = (Users) session.getAttribute("user");
-            PrintWriter out = response.getWriter();
             
             if (user.getUserTypeId() == 1) {
                 UserDAO userDAO = new UserDAO();
                 ProjectDAO projectDAO = new ProjectDAO();
                 CharityOrganizationDAO charityOrgDAO = new CharityOrganizationDAO();
-                FeedbackDAO feedbackDAO = new FeedbackDAO();
                 int countProject = projectDAO.countProject();
                 int countUser = userDAO.countUserAsUser();
                 int countCharityOrg = charityOrgDAO.countCharityOrg();
                 int countSucceedProject = projectDAO.countSucceedProject();
-                int countFeedback = feedbackDAO.countFeedback();
                 request.setAttribute("project", countProject);
                 request.setAttribute("user", countUser);
                 request.setAttribute("charityOrg", countCharityOrg);
-                request.setAttribute("feedback", countSucceedProject);
+                request.setAttribute("succeedProject", countSucceedProject);
                 request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
             } else {
                 response.sendRedirect("login.jsp");

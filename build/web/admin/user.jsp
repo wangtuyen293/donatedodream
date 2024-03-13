@@ -97,7 +97,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-content text-white ps-4 py-3 border sidebar-js active">
-                                <a class="sidebar-content-link link-dark text-decoration-none" href="usermanagement">
+                                <a class="sidebar-content-link link-dark text-decoration-none" href="#">
                                     <i class="fa-solid fa-users"></i>
                                     <span class="ps-2">User Management</span>
                                 </a>
@@ -164,7 +164,7 @@
                                         <tr>
                                             <td class="checkbox-user">
                                                 <input type="checkbox" class="user_${user.userId}" value="${user.userId}"/>
-                                                <a class="link-dark text-decoration-none" href="#">${user.fullName}</a>
+                                                <a class="link-dark text-decoration-none" href="user?userId=${user.userId}">${user.fullName}</a>
                                             </td>
                                             <td>${user.email}</td>
                                             <td>
@@ -179,10 +179,10 @@
                                             </td>
                                             <td class="text-center">
                                                 <c:if test="${user.userStatus.equalsIgnoreCase('active')}">
-                                                    <span class="bg-success text-light rounded-pill px-3 py-1">${user.userStatus}</span>
+                                                    <span class="bg-primary text-light rounded-pill px-3 py-1">${user.userStatus}</span>
                                                 </c:if>
                                                 <c:if test="${user.userStatus.equalsIgnoreCase('warning')}">
-                                                    <span class="bg-warning text-dark rounded-pill px-3 py-1">${user.userStatus}</span>
+                                                    <span class="bg-warning rounded-pill px-3 py-1">${user.userStatus}</span>
                                                 </c:if>
                                                 <c:if test="${user.userStatus.equalsIgnoreCase('block')}">
                                                     <span class="bg-danger text-light rounded-pill px-3 py-1">${user.userStatus}</span>

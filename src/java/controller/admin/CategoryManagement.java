@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,9 @@ import model.Users;
  *
  * @author OS
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
+        maxFileSize = 1024 * 1024 * 1000, // 1 GB
+        maxRequestSize = 1024 * 1024 * 1000)   	// 1 GB
 public class CategoryManagement extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

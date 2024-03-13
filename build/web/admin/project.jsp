@@ -82,6 +82,14 @@
             .sidebar-item:active .sidebar-link-item, .sidebar-item:focus .sidebar-link-item {
                 color:#FFF !important;
             }
+            
+            .carousel-control-prev {
+                left: -2rem;
+            }
+            
+            .carousel-control-next {
+                right: -2rem;
+            }
         </style>
     </head>
     <body onload="time()">
@@ -152,92 +160,6 @@
                         </p>
                         <div id="clock" class="ms-4 my-2"></div>
                         <div class="ms-2">
-<<<<<<< HEAD
-                            <c:choose>
-                                <c:when test="${not empty projectsApproved}">
-                                    <form action="updateproject.jsp" method="POST">
-                                        <table class="table table-hover table-bordered" id="projectmanager">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <input type="checkbox" class="select-all" id="select-all-project"/>
-                                                        Project
-                                                    </th>
-                                                    <th>Target</th>
-                                                    <th>Donated</th>
-                                                    <!--<th>Image</th>-->
-                                                    <th class="text-center">Status</th>
-                                                    <th>Start Date</th>
-                                                    <th>End Date</th>
-                                                    <th class="text-center">Approved</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${projectsApproved}" var="project">
-                                                    <tr>
-                                                        <td class="checkbox-project">
-                                                            <input type="checkbox" class="project_${project.projectId}" value="${project.projectId}"/>
-                                                            <a class="link-dark text-decoration-none" href="#">${project.projectName}</a>
-                                                        </td>
-                                                        <td>${project.projectTarget}</td>
-                                                        <td>
-                                                            ${project.donatedAmountOfMoney}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <%
-                                                                java.util.Date currentDate = new java.util.Date();
-                                                                java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
-                                                                String formattedCurrentDate = dateFormat.format(currentDate);
-                                                            %>
-                                                            <c:set var="defaultAmount" value="0.00" />
-                                                            <c:set var="currentDate" value="<%= formattedCurrentDate %>" />
-                                                            <c:if test="${project.donatedAmountOfMoney > defaultAmount && project.endDate ge currentDate}">
-                                                                <span class="bg-success text-light rounded-pill px-3 py-1">Active</span>
-                                                            </c:if>
-                                                            <c:if test="${project.endDate lt currentDate}">
-                                                                <span class="bg-warning text-dark rounded-pill px-3 py-1">Outdated</span>
-                                                            </c:if>
-                                                            <c:if test="${project.donatedAmountOfMoney == defaultAmount && project.endDate ge currentDate}">
-                                                                <span class="bg-danger text-light rounded-pill px-3 py-1">New</span>
-                                                            </c:if>
-                                                        </td>
-                                                        <td>${project.startDate}</td>
-                                                        <td>${project.endDate}</td>
-                                                        <td class="text-center">
-                                                            <c:choose>
-                                                                <c:when test="${project.isApproved == 1}">
-                                                                    <span class="bg-success text-light rounded-pill px-3 py-1">Yes</span>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <span class="bg-danger text-light rounded-pill px-3 py-1">No</span>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeProject(${project.projectId})">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-<!--                                                            <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateProject(${project.projectId})">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>-->
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                        <button type="button" id="remove" class="btn btn-danger delete-project d-none" title="Delete" onclick="deleteProjectSelected(selectedProjectIds)">
-                                            DELETE
-                                        </button>
-                                    </form>
-                                </c:when>
-                                <c:otherwise>
-                                    <p class="ms-3 text-danger">
-                                        Currently, there are no projects available.
-                                    </p>
-                                </c:otherwise>
-                            </c:choose>
-=======
                             <form action="updateproject.jsp" method="POST">
                                 <table class="table table-hover table-bordered" id="projectmanager">
                                     <thead>
@@ -248,7 +170,6 @@
                                             </th>
                                             <th>Target</th>
                                             <th>Donated</th>
-                                            <!--<th>Image</th>-->
                                             <th class="text-center">Status</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>
@@ -268,14 +189,32 @@
                                                     ${project.donatedAmountOfMoney}
                                                 </td>
                                                 <td class="text-center">
-                                                    <c:if test="${project.projectStatus.equalsIgnoreCase('active')}">
-                                                        <span class="bg-success text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                    <%
+                                                        java.util.Date currentDate = new java.util.Date();
+                                                        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                                                        String formattedCurrentDate = dateFormat.format(currentDate);
+                                                    %>
+                                                    <c:set var="defaultAmount" value="0.00" />
+                                                    <c:set var="currentDate" value="<%= formattedCurrentDate%>" />
+                                                    <c:if test="${project.donatedAmountOfMoney > defaultAmount && project.endDate ge currentDate}">
+                                                        <span class="bg-primary text-light rounded-pill px-3 py-1">
+                                                            Active
+                                                        </span>
                                                     </c:if>
-                                                    <c:if test="${project.projectStatus.equalsIgnoreCase('outdated')}">
-                                                        <span class="bg-warning text-dark rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                    <c:if test="${project.endDate lt currentDate && project.donatedAmountOfMoney < project.projectTarget}">
+                                                        <span class="bg-warning text-dark rounded-pill px-3 py-1">
+                                                            Outdated
+                                                        </span>
                                                     </c:if>
-                                                    <c:if test="${project.projectStatus.equalsIgnoreCase('new')}">
-                                                        <span class="bg-danger text-light rounded-pill px-3 py-1">${project.projectStatus}</span>
+                                                    <c:if test="${project.donatedAmountOfMoney == defaultAmount && project.endDate ge currentDate}">
+                                                        <span class="bg-danger text-light rounded-pill px-3 py-1">
+                                                            New
+                                                        </span>
+                                                    </c:if>
+                                                    <c:if test="${project.donatedAmountOfMoney >= project.projectTarget}">
+                                                        <span class="bg-success text-light rounded-pill px-3 py-1">
+                                                            Success
+                                                        </span>
                                                     </c:if>
                                                 </td>
                                                 <td>${project.startDate}</td>
@@ -294,9 +233,9 @@
                                                     <button type="button" class="btn btn-primary btn-sm trash" title="Remove" onclick="removeProject(${project.projectId})">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateProject(${project.projectId})">
+<!--                                                    <button type="button" class="btn btn-primary btn-sm edit" title="Edit" onclick="updateProject(${project.projectId})">
                                                         <i class="fas fa-edit"></i>
-                                                    </button>
+                                                    </button>-->
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -306,7 +245,6 @@
                                     DELETE
                                 </button>
                             </form>
->>>>>>> parent of ad657a5 (update admin management)
                         </div>
                     </div>
 
@@ -408,51 +346,46 @@
         <script src="assets/js/main.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script type="text/javascript">
-                                    //Time
-                                    function time() {
-                                        var today = new Date();
-                                        var weekday = new Array(7);
-                                        weekday[0] = "Sunday";
-                                        weekday[1] = "Monday";
-                                        weekday[2] = "Tuesday";
-                                        weekday[3] = "Wednesday";
-                                        weekday[4] = "Thursday";
-                                        weekday[5] = "Friday";
-                                        weekday[6] = "Saturday";
-                                        var day = weekday[today.getDay()];
-                                        var dd = today.getDate();
-                                        var mm = today.getMonth() + 1;
-                                        var yyyy = today.getFullYear();
-                                        var h = today.getHours();
-                                        var m = today.getMinutes();
-                                        var s = today.getSeconds();
-                                        m = checkTime(m);
-                                        s = checkTime(s);
-                                        nowTime = h + ":" + m + ":" + s;
-                                        if (dd < 10) {
-                                            dd = '0' + dd;
-                                        }
-                                        if (mm < 10) {
-                                            mm = '0' + mm;
-                                        }
-                                        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                '</span>';
-                                        document.getElementById("clock").innerHTML = tmp;
-                                        clocktime = setTimeout("time()", "1000", "Javascript");
+                                                                    //Time
+                                                                    function time() {
+                                                                        var today = new Date();
+                                                                        var weekday = new Array(7);
+                                                                        weekday[0] = "Sunday";
+                                                                        weekday[1] = "Monday";
+                                                                        weekday[2] = "Tuesday";
+                                                                        weekday[3] = "Wednesday";
+                                                                        weekday[4] = "Thursday";
+                                                                        weekday[5] = "Friday";
+                                                                        weekday[6] = "Saturday";
+                                                                        var day = weekday[today.getDay()];
+                                                                        var dd = today.getDate();
+                                                                        var mm = today.getMonth() + 1;
+                                                                        var yyyy = today.getFullYear();
+                                                                        var h = today.getHours();
+                                                                        var m = today.getMinutes();
+                                                                        var s = today.getSeconds();
+                                                                        m = checkTime(m);
+                                                                        s = checkTime(s);
+                                                                        nowTime = h + ":" + m + ":" + s;
+                                                                        if (dd < 10) {
+                                                                            dd = '0' + dd;
+                                                                        }
+                                                                        if (mm < 10) {
+                                                                            mm = '0' + mm;
+                                                                        }
+                                                                        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                                                                        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                                                                '</span>';
+                                                                        document.getElementById("clock").innerHTML = tmp;
+                                                                        clocktime = setTimeout("time()", "1000", "Javascript");
 
-                                        function checkTime(i) {
-                                            if (i < 10) {
-                                                i = "0" + i;
-                                            }
-                                            return i;
-                                        }
-                                    }
-        </script>
-        <script>
-            var currentDate = new Date();
-            var formattedDate = currentDate.toISOString().split('T')[0];
-            document.write(formattedDate);
+                                                                        function checkTime(i) {
+                                                                            if (i < 10) {
+                                                                                i = "0" + i;
+                                                                            }
+                                                                            return i;
+                                                                        }
+                                                                    }
         </script>
         <script>
             const projectManagement = document.getElementById('projectManagement');
@@ -659,7 +592,7 @@
                     }
                 });
             }
-            
+
             function rejectProject(projectId) {
                 $.ajax({
                     url: "projectmanagement?action=reject&projectId=" + projectId,

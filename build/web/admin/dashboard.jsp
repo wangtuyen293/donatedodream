@@ -137,96 +137,92 @@
                         <div class="bg-light col-md-6 col-lg-5 rounded">
                             <article class="row p-3">
                                 <div class="col-lg-3 d-flex justify-content-center align-items-center" >
-                                    <div class="bg-secondary-subtle rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
-                                        <i class="fa-solid fa-users"></i>
+                                    <div class="bg-secondary-subtle text-danger rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
+                                        <i class="fa-solid fa-users fs-4"></i>
                                     </div>
                                 </div>
-                                <div class="col-lg-9">
-                                    <h5 class="m-0">Total Users</h5>
-                                    <p class="number fw-bold m-0">
-                                        <a class="link-dark text-decoration-none" href="usermanagement">
-                                            ${requestScope.user}
+                                <div class="col-lg-9 d-flex justify-content-center align-items-center">
+                                    <h5 class="m-0">
+                                        <a class="text-danger text-decoration-none" href="usermanagement">
+                                            Total Users: ${requestScope.user}
                                         </a>
-                                    </p>
-                                    <p class="title m-0">Total visits</p>
-                                    <p class="m-0">
-                                        <span class="stat-cards-info__profit success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>4.07%
-                                        </span>
-                                        Last month
-                                    </p>
+                                    </h5>
+                                    <!--                                    <p class="m-0">Total visits</p>
+                                                                        <p class="m-0">
+                                                                            <span class="stat-cards-info__profit success">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>4.07%
+                                                                            </span>
+                                                                            Last month
+                                                                        </p>-->
                                 </div>
                             </article>
                         </div>
                         <div class="bg-light col-md-6 col-lg-5 ms-4 rounded">
                             <article class="row p-3">
                                 <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                                    <div class="bg-secondary-subtle rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
-                                        <i class="fa-solid fa-people-group"></i>
+                                    <div class="bg-secondary-subtle text-warning rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
+                                        <i class="fa-solid fa-people-group fs-4"></i>
                                     </div>
                                 </div>
-                                <div class="col-lg-9">
-                                    <h5 class="m-0">Total organizations</h5>
-                                    <p class="number fw-bold m-0">
-                                        <a class="link-dark text-decoration-none" href="#">
-                                            ${requestScope.charityOrg}
+                                <div class="col-lg-9 d-flex justify-content-center align-items-center">
+                                    <h5 class="m-0">
+                                        <a class="text-warning text-decoration-none" href="charityorgmanagement">
+                                            Total Organizations: ${requestScope.charityOrg}
                                         </a>
-                                    </p>
-                                    <p class="title m-0">Total visits</p>
-                                    <p class="m-0">
-                                        <span class="stat-cards-info__profit success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>0.24%
-                                        </span>
-                                        Last month
-                                    </p>
+                                    </h5>
+                                    <!--                                    <p class="title m-0">Total visits</p>
+                                                                        <p class="m-0">
+                                                                            <span class="stat-cards-info__profit success">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>0.24%
+                                                                            </span>
+                                                                            Last month
+                                                                        </p>-->
                                 </div>
                             </article>
                         </div>
                         <div class="bg-light col-md-6 col-lg-5 mt-4 rounded">
                             <article class="row p-3">
                                 <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                                    <div class="bg-secondary-subtle rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
-                                        <i class="fa-regular fa-file"></i>
+                                    <div class="bg-secondary-subtle text-primary rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
+                                        <i class="fa-regular fa-file fs-4"></i>
                                     </div>
                                 </div>
-                                <div class="col-lg-9">
-                                    <h5 class="m-0">Total Projects</h5>
-                                    <p class="number fw-bold m-0">
-                                        <a class="link-dark text-decoration-none" href="projectmanagement">
-                                            ${requestScope.project}
+                                <div class="col-lg-9 d-flex justify-content-center align-items-center">
+                                    <h5 class="m-0">
+                                        <a class="text-primary text-decoration-none" href="projectmanagement">
+                                            Total Projects: ${requestScope.project}
                                         </a>
-                                    </p>
-                                    <p class="title m-0">Total visits</p>
-                                    <p class="m-0">
-                                        <span class="stat-cards-info__profit success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>0.24%
-                                        </span>
-                                        Last month
-                                    </p>
+                                    </h5>
+                                    <!--                                    <p class="title m-0">Total visits</p>
+                                                                        <p class="m-0">
+                                                                            <span class="stat-cards-info__profit success">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>0.24%
+                                                                            </span>
+                                                                            Last month
+                                                                        </p>-->
                                 </div>
                             </article>
                         </div>
                         <div class="bg-light col-md-6 col-lg-5 ms-4 mt-4 rounded">
                             <article class="row p-3">
                                 <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                                    <div class="bg-secondary-subtle rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
-                                        <i class="fa-solid fa-file-circle-check"></i>
+                                    <div class="bg-secondary-subtle text-success rounded-circle d-flex justify-content-center align-items-center" style="height: 4rem; width: 4rem">
+                                        <i class="fa-solid fa-file-circle-check fs-4"></i>
                                     </div>
                                 </div>
-                                <div class="col-lg-9">
-                                    <h5 class="m-0">Succeed Projects</h5>
-                                    <p class="number fw-bold m-0">
-                                        <a class="link-dark text-decoration-none" href="#">
-                                            ${requestScope.feedback}
+                                <div class="col-lg-9 d-flex justify-content-center align-items-center">
+                                    <h5 class="m-0">
+                                        <a class="text-success text-decoration-none" href="projectmanagement">
+                                            Succeed Projects: ${requestScope.succeedProject}
                                         </a>
-                                    </p>
-                                    <p class="title m-0">Total visits</p>
-                                    <p class="m-0">
-                                        <span class="stat-cards-info__profit success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>0.24%
-                                        </span>
-                                        Last month
-                                    </p>
+                                    </h5>
+                                    <!--                                    <p class="title m-0">Total visits</p>
+                                                                        <p class="m-0">
+                                                                            <span class="stat-cards-info__profit success">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>0.24%
+                                                                            </span>
+                                                                            Last month
+                                                                        </p>-->
                                 </div>
                             </article>
                         </div>
@@ -416,18 +412,18 @@
                                 }
         </script>
 
-<!--        <script>
-            const sideBars = document.querySelectorAll('.sidebar-js');
-
-            sideBars.forEach(item => {
-                item.addEventListener('click', () => {
-                    sideBars.forEach(sidebar => {
-                        sidebar.classList.remove('active');
+        <!--        <script>
+                    const sideBars = document.querySelectorAll('.sidebar-js');
+        
+                    sideBars.forEach(item => {
+                        item.addEventListener('click', () => {
+                            sideBars.forEach(sidebar => {
+                                sidebar.classList.remove('active');
+                            });
+                            item.classList.add('active');
+                        });
                     });
-                    item.classList.add('active');
-                });
-            });
-        </script>-->
+                </script>-->
         <script>
             window.dataLayer = window.dataLayer || [];
 

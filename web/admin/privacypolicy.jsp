@@ -131,7 +131,7 @@
                 <div class="container col-10 pt-3 pb-5 bg-secondary-subtle">
                     <h3 class="main-title fw-bold ms-3">
                         <a class="link-dark text-decoration-none text-uppercase" href="privacypolicy">
-                            Privacy policy
+                            Privacy Policy
                         </a>
                     </h3>
                     <p class="ms-3 text-dark">

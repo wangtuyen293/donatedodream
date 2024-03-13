@@ -162,7 +162,7 @@
                         </p>
                     </c:if>
                     <div class="row ms-1">
-                        <form action="categorymanagement?updatecategory" method="POST">
+                        <form action="categorymanagement?action=updatecategory" method="POST">
                             <table class="table table-hover table-bordered" id="categorymanager">
                                 <thead>
                                     <tr>
@@ -214,8 +214,8 @@
                     <form id="createCategoryForm" action="categorymanagement?action=insertcategory" method="post">
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Category Name</label>
-                                <input type="text" class="form-control" id="name" name="categoryName" placeholder="Category Name..." required>
+                                <label for="categoryName" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Category Name..." required="">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -239,7 +239,7 @@
                             <input type="hidden" id="editCategoryId" name="categoryId"/>
                             <div class="mb-3">
                                 <label for="editCategoryName" class="form-label">Category Name</label>
-                                <input type="text" class="form-control" id="editCategoryName" name="categoryName" required>
+                                <input type="text" class="form-control" id="editCategoryName" name="categoryName" placeholder="Category Name..." required="">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -325,6 +325,25 @@
                                 }
         </script>
         <script>
+            // Prevent event default submit of form
+            document.getElementById('createCategoryForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+            document.getElementById('updateCategoryForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+        </script>
+        <script>
+            function openEditModal(categoryId, categoryName) {
+                document.getElementById('editCategoryId').value = categoryId;
+                document.getElementById('editCategoryName').value = categoryName;
+            }
+        </script>
+        <script>
             const selectAll = document.querySelector('#select-all-category');
             const allCheckbox = document.querySelectorAll('.checkbox-category input');
             const deleteCategory = document.querySelector('.delete-category');
@@ -396,30 +415,7 @@
             });
         </script>
         <script>
-            // Prevent event default submit of form
-            document.getElementById('createCategoryForm').addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                }
-            });
-            document.getElementById('updateCategoryForm').addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                }
-            });
-        </script>
-        <script>
-            function openEditModal(categoryId, categoryName) {
-                event.preventDefault();
-                document.getElementById('editCategoryId').value = categoryId;
-                document.getElementById('editCategoryName').value = categoryName;
-
-                // Show the modal
-                $('#updateCategory').modal('show');
-            }
-
             function deleteCategorySelected(categoryId) {
-                event.preventDefault();
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",
@@ -463,7 +459,6 @@
             }
 
             function removeCategory(categoryId) {
-                event.preventDefault();
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",

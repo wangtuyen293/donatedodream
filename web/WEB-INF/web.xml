@@ -21,10 +21,6 @@
         <servlet-class>controller.admin.PrivacyPolicyManagement</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CommentFeedbackManagement</servlet-name>
-        <servlet-class>controller.admin.CommentFeedbackManagement</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ContactFounder</servlet-name>
         <servlet-class>controller.admin.ContactFounder</servlet-class>
     </servlet>
@@ -103,10 +99,6 @@
     <servlet-mapping>
         <servlet-name>PrivacyPolicyManagement</servlet-name>
         <url-pattern>/privacypolicy</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CommentFeedbackManagement</servlet-name>
-        <url-pattern>/commentfeedback</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ContactFounder</servlet-name>
