@@ -43,7 +43,7 @@ public class ProjectDAO {
         }
         return list;
     }
-    
+
     public List<Project> getProjectsApproved() {
         List<Project> list = new ArrayList<>();
         String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
@@ -84,7 +84,7 @@ public class ProjectDAO {
         }
         return list;
     }
-    
+
     public List<Project> getProjectsUnapproved() {
         List<Project> list = new ArrayList<>();
         String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
@@ -125,7 +125,48 @@ public class ProjectDAO {
         }
         return list;
     }
-    
+
+    public List<Project> getProjectsByUserIdApproved(int userId) {
+        List<Project> list = new ArrayList<>();
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.userId = ? AND p.isApproved = 1";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(rs.getInt("userId"), fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+                list.add(project);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return list;
+    }
+
     public List<Project> getListByPage(List<Project> list, int start, int end) {
         List<Project> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
@@ -133,7 +174,7 @@ public class ProjectDAO {
         }
         return arr;
     }
-    
+
 //    public List<Project> getProjectsByCategory() {
 //        List<Project> list = new ArrayList<>();
 //        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.userId, p.charityOrganizationId, p.isApproved, c.categoryId, c.categoryName, c.categoryDescription, c.imgCategory FROM Project p INNER JOIN Category c ON p.categoryId = c.categoryId";
@@ -153,7 +194,6 @@ public class ProjectDAO {
 //        }
 //        return list;
 //    }
-
     public List<Category> getCategories() {
         List<Category> list = new ArrayList<>();
         String sql = "SELECT * FROM Category ORDER BY categoryName";
@@ -193,6 +233,319 @@ public class ProjectDAO {
         }
         return list;
     }
+    
+    public Project getProjectApprovedByProjectId(int projectId) {
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.isApproved = 1 AND p.projectId = ?";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, projectId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int userId = rs.getInt("userId");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+
+                return project;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return null;
+    }
+    
+    public List<Project> getOutdatedProject() {
+        List<Project> list = new ArrayList<>();
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.isApproved = 1 AND p.endDate < CAST(CURRENT_TIMESTAMP AS DATE) AND p.donatedAmountOfMoney < p.projectTarget";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt("userId");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+                list.add(project);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return list;
+    }
+    
+    public List<Project> getActiveProject() {
+        List<Project> list = new ArrayList<>();
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.isApproved = 1 AND p.donatedAmountOfMoney > 0 AND p.endDate >= CAST(CURRENT_TIMESTAMP AS DATE)";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt("userId");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+                list.add(project);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return list;
+    }
+    
+    public List<Project> getNewProject() {
+        List<Project> list = new ArrayList<>();
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.isApproved = 1 AND p.donatedAmountOfMoney = 0 AND p.endDate >= CAST(CURRENT_TIMESTAMP AS DATE)";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt("userId");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+                list.add(project);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return list;
+    }
+    
+    public List<Project> getSuccessProject() {
+        List<Project> list = new ArrayList<>();
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.isApproved = 1 AND p.donatedAmountOfMoney >= p.projectTarget";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt("userId");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+                list.add(project);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return list;
+    }
+    
+    public List<Project> getProjectByProjectNameAZ() {
+        List<Project> list = new ArrayList<>();
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.isApproved = 1 "
+                + "ORDER BY p.projectName";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt("userId");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+                list.add(project);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return list;
+    }
+    
+    public List<Project> searchProject(String searchQuery) {
+        List<Project> searchProjectResult = new ArrayList<>();
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, c.categoryId, c.categoryName "
+                + "FROM Project p "
+                + "INNER JOIN Users u ON p.userId = u.userId "
+                + "INNER JOIN Category c ON p.categoryId = c.categoryId "
+                + "WHERE p.isApproved = 1 AND p.projectName LIKE ?";
+        try {
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + searchQuery + "%");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt("userId");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                byte gender = rs.getByte("gender");
+                java.util.Date dateOfBirth = rs.getDate("dateOfBirth");
+                String avatar = rs.getString("avatar");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phoneNumber");
+                String userStatus = rs.getString("userStatus");
+                java.util.Date dateCreated = rs.getDate("dateCreated");
+                int userTypeId = rs.getInt("userTypeId");
+                Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
+
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                Category category = new Category(categoryId, categoryName);
+
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getString("projectImage"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, category);
+                searchProjectResult.add(project);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return searchProjectResult;
+    }
 
     public int countProject() {
         int count = 0;
@@ -212,7 +565,7 @@ public class ProjectDAO {
         }
         return count;
     }
-    
+
     public int countSucceedProject() {
         int count = 0;
         String sql = "SELECT COUNT(*) as 'count'\n"

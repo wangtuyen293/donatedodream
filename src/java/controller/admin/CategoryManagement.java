@@ -124,7 +124,7 @@ public class CategoryManagement extends HttpServlet {
                         request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
                     } else {
                         boolean insertSuccess = categoryDAO.insertCategory(categoryName);
-
+                        out.println(insertSuccess);
                         if (insertSuccess) {
                             request.setAttribute("insertSuccess", "Create new category successfully!");
                         } else {
@@ -137,7 +137,7 @@ public class CategoryManagement extends HttpServlet {
                     }
                 }
             } else {
-                response.sendRedirect("login");
+                response.sendRedirect("login.jsp");
             }
         } catch (Exception e) {
             response.sendRedirect("404.jsp");

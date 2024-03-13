@@ -22,7 +22,7 @@ public class CharityOrganizationDAO {
     private ResultSet rs = null;
 
     private static final Logger logger = Logger.getLogger(CharityOrganizationDAO.class.getName());
-    
+
     public List<CharityOrganization> getAllCharityOrg() {
         List<CharityOrganization> list = new ArrayList<>();
         String sql = "SELECT * FROM CharityOrganization";
@@ -41,7 +41,112 @@ public class CharityOrganizationDAO {
         }
         return list;
     }
+
+    public boolean checkCharityOrgName(String charityOrganizationName) {
+        try {
+            String query = "SELECT COUNT(*) FROM CharityOrganization WHERE charityOrganizationName = ?";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, charityOrganizationName);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return false;
+    }
     
+    public boolean checkCharityOrgEmail(String charityOrganizationEmail) {
+        try {
+            String query = "SELECT COUNT(*) FROM CharityOrganization WHERE charityOrganizationEmail = ?";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, charityOrganizationEmail);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return false;
+    }
+    
+    public boolean updateCharityOrgWithoutLogo(CharityOrganization charityorg) {
+        try {
+            String query = "UPDATE CharityOrganization SET charityOrganizationName = ?, charityOrganizationEmail = ?, charityOrganizationAddress = ?, charityOrganizationPhone = ? WHERE charityOrganizationId = ?";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, charityorg.getCharityOrganizationName());
+            ps.setString(2, charityorg.getCharityOrganizationEmail());
+            ps.setString(3, charityorg.getCharityOrganizationAddress());
+            ps.setString(4, charityorg.getCharityOrganizationPhone());
+            ps.setInt(5, charityorg.getCharityOrganizationId());
+            int rowsAffected = ps.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+    }
+    
+    public boolean updateCharityOrg(CharityOrganization charityorg) {
+        try {
+            String query = "UPDATE CharityOrganization SET charityOrganizationName = ?, charityOrganizationEmail = ?, charityOrganizationLogo = ?, charityOrganizationAddress = ?, charityOrganizationPhone = ? WHERE charityOrganizationId = ?";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, charityorg.getCharityOrganizationName());
+            ps.setString(2, charityorg.getCharityOrganizationEmail());
+            ps.setString(3, charityorg.getCharityOrganizationLogo());
+            ps.setString(4, charityorg.getCharityOrganizationAddress());
+            ps.setString(5, charityorg.getCharityOrganizationPhone());
+            ps.setInt(6, charityorg.getCharityOrganizationId());
+            int rowsAffected = ps.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+    }
+    
+    public boolean insertCharityOrg(CharityOrganization charityorg) {
+        try {
+            String query = "INSERT INTO CharityOrganization (charityOrganizationName, charityOrganizationEmail, charityOrganizationLogo, charityOrganizationAddress, charityOrganizationPhone) VALUES (?, ?, ?, ?, ?)";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, charityorg.getCharityOrganizationName());
+            ps.setString(2, charityorg.getCharityOrganizationEmail());
+            ps.setString(3, charityorg.getCharityOrganizationLogo());
+            ps.setString(4, charityorg.getCharityOrganizationAddress());
+            ps.setString(5, charityorg.getCharityOrganizationPhone());
+            int rowsAffected = ps.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+    }
+
     public boolean deleteCharityOrgByCharityOrgId(int charityOrganizationId) {
         String sql = "DELETE FROM CharityOrganization WHERE charityOrganizationId = ?";
         try {
@@ -60,7 +165,7 @@ public class CharityOrganizationDAO {
             closeResources(conn, ps, rs);
         }
     }
-    
+
     public boolean deleteCharityOrgSelectedByCharityOrgId(int[] charityOrgIds) {
         try {
             String sql = "DELETE FROM CharityOrganization WHERE charityOrganizationId = ?";

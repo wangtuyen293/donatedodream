@@ -107,7 +107,7 @@ public class SignUp extends HttpServlet {
                 script += "window.location.href='" + redirectUrl + "';</script>";
                 response.getWriter().println(script);
             } else if (!checkEmail) {
-                String alertMessage = "Email has taken or. Please try again.";
+                String alertMessage = "Email has taken. Please try again.";
                 String redirectUrl = "signup.jsp";
                 String script = "<script>alert('" + alertMessage + "');";
                 script += "window.location.href='" + redirectUrl + "';</script>";

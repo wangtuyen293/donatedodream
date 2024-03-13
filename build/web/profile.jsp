@@ -127,6 +127,46 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-8 mx-2 py-3 bg-white rounded">
+                    <nav class="ms-3" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="home">Home</a></li>
+                            <li class="breadcrumb-item active">Profile</li>
+                        </ol>
+                    </nav>
+
+                    <h3 class="ms-3 text-capitalize fw-bold">My Profile</h3>
+                    <div class="ms-2 my-4 row">
+                        <div class="col-12 col-lg-6">
+                            <p>Full Name: ${sessionScope.user.fullName}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <p>Username: ${sessionScope.user.userName}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <p>Email: ${sessionScope.user.email}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <p>Gender: 
+                                <c:if test="${empty sessionScope.user.gender}">
+                                </c:if>
+                                <c:if test="${sessionScope.user.gender eq 1}">
+                                    Female
+                                </c:if>
+                                <c:if test="${sessionScope.user.gender eq 0}">
+                                    Male
+                                </c:if>
+                            </p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <p>Phone: ${sessionScope.user.phoneNumber}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <p>Birthday: ${sessionScope.user.dateOfBirth}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <jsp:include page="./layout/footer.jsp" />

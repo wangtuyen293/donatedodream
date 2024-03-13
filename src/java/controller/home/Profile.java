@@ -1,5 +1,6 @@
 package controller.home;
 
+import dao.ProjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Project;
 import model.Users;
 
 /**
@@ -20,11 +22,14 @@ public class Profile extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        ProjectDAO projectDAO = new ProjectDAO();
         try {
             Users user = (Users) session.getAttribute("user");
             if (user != null) {
                 int userId = user.getUserId();
-                request.getRequestDispatcher("my-account.jsp").forward(request, response);
+                List<Project> listProjects = projectDAO.getProjectsByUserIdApproved(userId);
+                request.setAttribute("projectList", listProjects);
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
             } else {
                 response.sendRedirect("user?action=login");
             }
