@@ -31,7 +31,7 @@
                         <nav>
                             <ul id="navigation" class="mb-0">
                                 <li><a class="text-decoration-none" href="home">Home</a></li>
-                                <li><a class="text-decoration-none" href="buildproject.jsp">Start a project</a></li>
+                                <li><a class="text-decoration-none" href="createproject">Start a project</a></li>
                                 <li><a class="text-decoration-none" href="project">Projects</a></li>
                                 <li><a class="text-decoration-none" href="contact.jsp">Contact</a></li>
                             </ul>
@@ -67,7 +67,7 @@
                                     <ul class="dropdown-menu">
                                         <c:if test="${sessionScope.user != null || sessionScope.userName != null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="profile.jsp">My Profile</a>
+                                                <a class="dropdown-item text-capitalize" href="/profile">My Profile</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.userTypeId == 1}">
@@ -120,7 +120,7 @@
                                     <ul class="dropdown-menu">
                                         <c:if test="${sessionScope.user != null || sessionScope.userName != null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="profile.jsp">My Profile</a>
+                                                <a class="dropdown-item text-capitalize" href="profile">My Profile</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.userTypeId == 1}">

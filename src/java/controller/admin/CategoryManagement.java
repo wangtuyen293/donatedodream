@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,9 @@ import model.Users;
  *
  * @author OS
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
+        maxFileSize = 1024 * 1024 * 1000, // 1 GB
+        maxRequestSize = 1024 * 1024 * 1000)   	// 1 GB
 public class CategoryManagement extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -124,7 +128,7 @@ public class CategoryManagement extends HttpServlet {
                         request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
                     } else {
                         boolean insertSuccess = categoryDAO.insertCategory(categoryName);
-
+                        out.println(insertSuccess);
                         if (insertSuccess) {
                             request.setAttribute("insertSuccess", "Create new category successfully!");
                         } else {
@@ -132,18 +136,18 @@ public class CategoryManagement extends HttpServlet {
                         }
                         List<Category> categoryList = categoryDAO.getAllCategories();
                         request.setAttribute("categoryList", categoryList);
-
+                        
                         request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
                     }
                 }
             } else {
-                response.sendRedirect("login");
+                response.sendRedirect("login.jsp");
             }
         } catch (Exception e) {
             response.sendRedirect("404.jsp");
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

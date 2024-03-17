@@ -65,6 +65,10 @@
         <servlet-class>controller.home.HandleEmailSignUp</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ReadExcelServlet</servlet-name>
+        <servlet-class>controller.transaction.ReadExcelServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SendEmailServlet</servlet-name>
         <servlet-class>controller.home.SendEmailServlet</servlet-class>
     </servlet>
@@ -83,6 +87,42 @@
     <servlet>
         <servlet-name>ProjectServlet</servlet-name>
         <servlet-class>controller.home.ProjectServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateProject</servlet-name>
+        <servlet-class>controller.project.CreateProject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProjectDetailsServlet</servlet-name>
+        <servlet-class>controller.project.ProjectDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DonationServlet</servlet-name>
+        <servlet-class>controller.transaction.DonationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckDonate</servlet-name>
+        <servlet-class>controller.transaction.CheckDonate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DonateHistory</servlet-name>
+        <servlet-class>controller.transaction.DonateHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProjectProcess</servlet-name>
+        <servlet-class>controller.project.UpdateProjectProcess</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <servlet-class>controller.project.FeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFeedbackProject</servlet-name>
+        <servlet-class>controller.project.EditFeedbackProject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDonatorWant</servlet-name>
+        <servlet-class>controller.project.ViewDonatorWant</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
@@ -168,6 +208,38 @@
         <servlet-name>ProjectServlet</servlet-name>
         <url-pattern>/project</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProjectDetailsServlet</servlet-name>
+        <url-pattern>/projectdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DonationServlet</servlet-name>
+        <url-pattern>/donation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckDonate</servlet-name>
+        <url-pattern>/checkdonate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DonateHistory</servlet-name>
+        <url-pattern>/donatehistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProjectProcess</servlet-name>
+        <url-pattern>/updateprojectprocess</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <url-pattern>/feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFeedbackProject</servlet-name>
+        <url-pattern>/editfeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDonatorWant</servlet-name>
+        <url-pattern>/viewdonatorwant</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -176,4 +248,12 @@
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>CreateProject</servlet-name>
+        <url-pattern>/createproject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadExcelServlet</servlet-name>
+        <url-pattern>/readexcel</url-pattern>
+    </servlet-mapping>
 </web-app>

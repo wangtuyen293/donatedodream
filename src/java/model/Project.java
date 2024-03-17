@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -13,7 +14,6 @@ public class Project implements Serializable {
     private int projectId;
     private String projectName;
     private BigDecimal projectTarget;
-    private String projectImage;
     private BigDecimal donatedAmountOfMoney;
     private String projectStatus;
     private String projectDescription;
@@ -22,62 +22,23 @@ public class Project implements Serializable {
     private byte isApproved;
     private int userId;
     private int charityOrganizationId;
-    private int categoryId;
     private Users user;
-    private Category category;
+    private ProjectImages prj;
 
-    public Project(int projectId, String projectName, BigDecimal projectTarget, String projectImage, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, int userId, int charityOrganizationId, Category category) {
-        this.projectId = projectId;
+    public Project(String projectName, BigDecimal projectTarget, String projectDescription, Date startDate, Date endDate, int userId, int charityOrganizationId) {
         this.projectName = projectName;
         this.projectTarget = projectTarget;
-        this.projectImage = projectImage;
-        this.donatedAmountOfMoney = donatedAmountOfMoney;
-        this.projectStatus = projectStatus;
-        this.projectDescription = projectDescription;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.isApproved = isApproved;
-        this.userId = userId;
-        this.charityOrganizationId = charityOrganizationId;
-        this.category = category;
-    }
-
-    public Project(int projectId, String projectName, BigDecimal projectTarget, String projectImage, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, int userId, int charityOrganizationId, int categoryId) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.projectTarget = projectTarget;
-        this.projectImage = projectImage;
-        this.donatedAmountOfMoney = donatedAmountOfMoney;
-        this.projectStatus = projectStatus;
         this.projectDescription = projectDescription;
         this.startDate = startDate;
         this.endDate = endDate;
         this.userId = userId;
         this.charityOrganizationId = charityOrganizationId;
-        this.isApproved = isApproved;
-        this.categoryId = categoryId;
     }
-
-    public Project(String projectName, BigDecimal projectTarget, String projectImage, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, int userId, int charityOrganizationId, Category category) {
-        this.projectName = projectName;
-        this.projectTarget = projectTarget;
-        this.projectImage = projectImage;
-        this.donatedAmountOfMoney = donatedAmountOfMoney;
-        this.projectStatus = projectStatus;
-        this.projectDescription = projectDescription;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.isApproved = isApproved;
-        this.userId = userId;
-        this.charityOrganizationId = charityOrganizationId;
-        this.category = category;
-    }
-
-    public Project(int projectId, String projectName, BigDecimal projectTarget, String projectImage, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Users user, Category category) {
+    
+    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Users user, ProjectImages prj) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectTarget = projectTarget;
-        this.projectImage = projectImage;
         this.donatedAmountOfMoney = donatedAmountOfMoney;
         this.projectStatus = projectStatus;
         this.projectDescription = projectDescription;
@@ -85,33 +46,45 @@ public class Project implements Serializable {
         this.endDate = endDate;
         this.isApproved = isApproved;
         this.user = user;
-        this.category = category;
+        this.prj = prj;
     }
 
-    public Project(int projectId, String projectName, BigDecimal projectTarget, String projectImage, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, int userId, int charityOrganizationId, int categoryId) {
+    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, int userId, int charityOrganizationId) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectTarget = projectTarget;
-        this.projectImage = projectImage;
         this.donatedAmountOfMoney = donatedAmountOfMoney;
         this.projectStatus = projectStatus;
         this.projectDescription = projectDescription;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.isApproved = isApproved;
         this.userId = userId;
         this.charityOrganizationId = charityOrganizationId;
-        this.categoryId = categoryId;
+    }
+
+    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Users user) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectTarget = projectTarget;
+        this.donatedAmountOfMoney = donatedAmountOfMoney;
+        this.projectStatus = projectStatus;
+        this.projectDescription = projectDescription;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isApproved = isApproved;
+        this.user = user;
     }
 
     public Project() {
     }
 
-    public Category getCategory() {
-        return category;
+    public ProjectImages getPrj() {
+        return prj;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setPrj(ProjectImages prj) {
+        this.prj = prj;
     }
 
     public int getProjectId() {
@@ -136,14 +109,6 @@ public class Project implements Serializable {
 
     public void setProjectTarget(BigDecimal projectTarget) {
         this.projectTarget = projectTarget;
-    }
-
-    public String getProjectImage() {
-        return projectImage;
-    }
-
-    public void setProjectImage(String projectImage) {
-        this.projectImage = projectImage;
     }
 
     public BigDecimal getDonatedAmountOfMoney() {
@@ -210,17 +175,17 @@ public class Project implements Serializable {
         this.charityOrganizationId = charityOrganizationId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Users getUser() {
+        return user;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "Project{" + "projectId=" + projectId + ", projectName=" + projectName + ", projectTarget=" + projectTarget + ", projectImage=" + projectImage + ", donatedAmountOfMoney=" + donatedAmountOfMoney + ", projectStatus=" + projectStatus + ", projectDescription=" + projectDescription + ", startDate=" + startDate + ", endDate=" + endDate + ", isApproved=" + isApproved + ", userId=" + userId + ", charityOrganizationId=" + charityOrganizationId + ", categoryId=" + categoryId + '}';
+        return "Project{" + "projectId=" + projectId + ", projectName=" + projectName + ", projectTarget=" + projectTarget + ", donatedAmountOfMoney=" + donatedAmountOfMoney + ", projectStatus=" + projectStatus + ", projectDescription=" + projectDescription + ", startDate=" + startDate + ", endDate=" + endDate + ", isApproved=" + isApproved + ", userId=" + userId + ", charityOrganizationId=" + charityOrganizationId + '}';
     }
 
 }
