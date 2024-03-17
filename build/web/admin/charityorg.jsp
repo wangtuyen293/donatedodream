@@ -142,6 +142,27 @@
                     </p>
                     <div id="clock" class="ms-3 my-2"></div>
 
+                    <c:if test="${not empty insertSuccess}">
+                        <p class="ms-3 text-success">
+                            ${insertSuccess}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty insertFail}">
+                        <p class="ms-3 text-danger">
+                            ${insertFail}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty updateSuccess}">
+                        <p class="ms-3 text-success">
+                            ${updateSuccess}
+                        </p>
+                    </c:if>
+                    <c:if test="${not empty updateFail}">
+                        <p class="ms-3 text-danger">
+                            ${updateFail}
+                        </p>
+                    </c:if>
+
                     <div class="ms-1">
                         <div>
                             <form action="charityorgmanagement?action=updatecharityorg" method="POST">
@@ -167,9 +188,11 @@
                                                 </td>
                                                 <td>${org.charityOrganizationEmail}</td>
                                                 <td class="text-center">
-                                                    <a class="text-decoration-none" href="#">
-                                                        <span class="bg-warning text-dark rounded-pill px-3 py-1">View</span>
-                                                    </a>
+                                                    <c:if test="${not empty org.charityOrganizationLogo}">
+                                                        <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+                                                        <c:set var="fullCharityOrgPath" value="${contextPath}/${org.charityOrganizationLogo}" />
+                                                        <img src="${fullCharityOrgPath}" class="img-fluid" alt="CharityOrg" style="width: 100%; height: 4rem;">
+                                                    </c:if>
                                                 </td>
                                                 <td>
                                                     ${org.charityOrganizationAddress}
@@ -178,7 +201,7 @@
                                                     <button type="button" class="btn btn-danger btn-sm trash" title="Remove" onclick="removeCharityOrg(${org.charityOrganizationId})">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-warning btn-sm edit" title="Edit" onclick="updateCharityOrg(${org.charityOrganizationId})">
+                                                    <button type="button" class="btn btn-warning btn-sm edit" title="Edit" onclick="openEditModal(${org.charityOrganizationId}, '${org.charityOrganizationName}', '${org.charityOrganizationEmail}', '${org.charityOrganizationAddress}', '${org.charityOrganizationPhone}'); $('#updateCharityOrg').modal('show');">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                 </td>
@@ -189,15 +212,125 @@
                                 <button type="button" id="remove" class="btn btn-danger delete-charityorg d-none" title="Delete" onclick="deleteCharityOrgSelected(selectedCharityOrgIds)">
                                     DELETE
                                 </button>
+                                <button type="button" id="create" class="btn btn-success create-charityorg" title="Create" data-bs-toggle="modal" data-bs-target="#createCharityOrg">
+                                    CREATE
+                                </button>
                             </form>
-                        </div>
-                        <div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="insert-charityorg modal fade" id="createCharityOrg" tabindex="-1" aria-labelledby="createCharityOrgLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 fw-bold" id="createCharityOrgLabel">Create a new Charity Organization</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="createCharityOrgForm" action="charityorgmanagement?action=insertcharityorg" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Charity Organization Name 
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="name" name="charityOrganizationName" placeholder="Name..." required="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">
+                                    Email
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" class="form-control" id="email" name="charityOrganizationEmail" placeholder="Email..." required="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="logo">
+                                    Logo
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" class="form-control" id="logo" name="logo" size="100" required="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address">
+                                    Address
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="address" name="charityOrganizationAddress" placeholder="Address..." required="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone">
+                                    Phone
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="phone" name="charityOrganizationPhone" placeholder="Phone..." required="">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="update-charityorg modal fade" id="updateCharityOrg" tabindex="-1" aria-labelledby="updateCharityOrgLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 fw-bold" id="updateCharityOrgLabel">Update Charity Organization</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="updateCharityOrgForm" action="charityorgmanagement?action=updatecharityorg" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <input type="hidden" id="editId" name="charityOrganizationId" />
+                            <div class="mb-3">
+                                <label for="editName" class="form-label">
+                                    Charity Organization Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="editName" name="charityOrganizationName" placeholder="Name..." required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEmail" class="form-label">
+                                    Email
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" class="form-control" id="editEmail" name="charityOrganizationEmail" placeholder="Email..." required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editLogo">
+                                    Logo
+                                </label>
+                                <input type="file" class="form-control" id="editLogo" name="charityOrganizationLogo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editAddress">
+                                    Address
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="editAddress" name="charityOrganizationAddress" placeholder="Address..." required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPhone">
+                                    Phone
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="editPhone" name="charityOrganizationPhone" placeholder="Phone..." required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <jsp:include page="../layout/footer.jsp" />
 
         <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -231,46 +364,67 @@
         <script src="assets/js/main.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script type="text/javascript">
-                                //Time
-                                function time() {
-                                    var today = new Date();
-                                    var weekday = new Array(7);
-                                    weekday[0] = "Sunday";
-                                    weekday[1] = "Monday";
-                                    weekday[2] = "Tuesday";
-                                    weekday[3] = "Wednesday";
-                                    weekday[4] = "Thursday";
-                                    weekday[5] = "Friday";
-                                    weekday[6] = "Saturday";
-                                    var day = weekday[today.getDay()];
-                                    var dd = today.getDate();
-                                    var mm = today.getMonth() + 1;
-                                    var yyyy = today.getFullYear();
-                                    var h = today.getHours();
-                                    var m = today.getMinutes();
-                                    var s = today.getSeconds();
-                                    m = checkTime(m);
-                                    s = checkTime(s);
-                                    nowTime = h + ":" + m + ":" + s;
-                                    if (dd < 10) {
-                                        dd = '0' + dd;
-                                    }
-                                    if (mm < 10) {
-                                        mm = '0' + mm;
-                                    }
-                                    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                            '</span>';
-                                    document.getElementById("clock").innerHTML = tmp;
-                                    clocktime = setTimeout("time()", "1000", "Javascript");
-
-                                    function checkTime(i) {
-                                        if (i < 10) {
-                                            i = "0" + i;
+                                    //Time
+                                    function time() {
+                                        var today = new Date();
+                                        var weekday = new Array(7);
+                                        weekday[0] = "Sunday";
+                                        weekday[1] = "Monday";
+                                        weekday[2] = "Tuesday";
+                                        weekday[3] = "Wednesday";
+                                        weekday[4] = "Thursday";
+                                        weekday[5] = "Friday";
+                                        weekday[6] = "Saturday";
+                                        var day = weekday[today.getDay()];
+                                        var dd = today.getDate();
+                                        var mm = today.getMonth() + 1;
+                                        var yyyy = today.getFullYear();
+                                        var h = today.getHours();
+                                        var m = today.getMinutes();
+                                        var s = today.getSeconds();
+                                        m = checkTime(m);
+                                        s = checkTime(s);
+                                        nowTime = h + ":" + m + ":" + s;
+                                        if (dd < 10) {
+                                            dd = '0' + dd;
                                         }
-                                        return i;
+                                        if (mm < 10) {
+                                            mm = '0' + mm;
+                                        }
+                                        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                                        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                                '</span>';
+                                        document.getElementById("clock").innerHTML = tmp;
+                                        clocktime = setTimeout("time()", "1000", "Javascript");
+
+                                        function checkTime(i) {
+                                            if (i < 10) {
+                                                i = "0" + i;
+                                            }
+                                            return i;
+                                        }
                                     }
-                                }
+        </script>
+        <script>
+            document.getElementById('createCharityOrgForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+            document.getElementById('updateCharityOrgForm').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+        </script>
+        <script>
+            function openEditModal(charityOrganizationId, charityOrganizationName, charityOrganizationEmail, charityOrganizationAddress, charityOrganizationPhone) {
+                document.getElementById('editId').value = charityOrganizationId;
+                document.getElementById('editName').value = charityOrganizationName;
+                document.getElementById('editEmail').value = charityOrganizationEmail;
+                document.getElementById('editAddress').value = charityOrganizationAddress;
+                document.getElementById('editPhone').value = charityOrganizationPhone;
+            }
         </script>
         <script>
             const selectAll = document.querySelector('#select-all-charityorg');

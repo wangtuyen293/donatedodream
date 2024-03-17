@@ -121,6 +121,29 @@ public class UserDAO {
 
         return null;
     }
+    public String getEmailByProjectId(int id) throws Exception {
+        conn = new DonationDBContext().getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String sql = "SELECT email FROM Users u "
+                    + "INNER JOIN Project p ON u.userId = p.userId "
+                    + "WHERE projectId=?";
+
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("email");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý các ngoại lệ khác nếu cần
+        }
+
+        return null;
+    }
 
     public void addUserLoginByEmail(UserGoogle ug, String accessToken) throws Exception {
         conn = new DonationDBContext().getConnection();
@@ -229,7 +252,47 @@ public class UserDAO {
             closeResources(conn, ps, rs);
         }
     }
+    public int getIdByUserName(String us) throws Exception {
+        conn = new DonationDBContext().getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
+        try {
+            String sql = "SELECT userId FROM Users WHERE userName=?";
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, us);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("userId");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý các ngoại lệ khác nếu cần
+        }
+
+        return 0;
+    }
+    public String getUserNameById(int id) throws Exception {
+        conn = new DonationDBContext().getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String sql = "SELECT userName FROM Users WHERE userId=?";
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("userName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý các ngoại lệ khác nếu cần
+        }
+
+        return null;
+    }
+    
     public boolean checkExistedEmail(String email) {
         boolean isExisted = false;
         String sql = "select email from UserGoogle";

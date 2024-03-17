@@ -24,6 +24,22 @@ public class CharityOrganization implements Serializable {
         this.charityOrganizationPhone = charityOrganizationPhone;
     }
 
+    public CharityOrganization(int charityOrganizationId, String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationAddress, String charityOrganizationPhone) {
+        this.charityOrganizationId = charityOrganizationId;
+        this.charityOrganizationName = charityOrganizationName;
+        this.charityOrganizationEmail = charityOrganizationEmail;
+        this.charityOrganizationAddress = charityOrganizationAddress;
+        this.charityOrganizationPhone = charityOrganizationPhone;
+    }
+
+    public CharityOrganization(String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationLogo, String charityOrganizationAddress, String charityOrganizationPhone) {
+        this.charityOrganizationName = charityOrganizationName;
+        this.charityOrganizationEmail = charityOrganizationEmail;
+        this.charityOrganizationLogo = charityOrganizationLogo;
+        this.charityOrganizationAddress = charityOrganizationAddress;
+        this.charityOrganizationPhone = charityOrganizationPhone;
+    }
+
     public CharityOrganization() {
     }
 

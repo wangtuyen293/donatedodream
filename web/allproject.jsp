@@ -4,6 +4,11 @@
     Author     : OS
 --%>
 
+<%@page import="dao.ProjectDAO"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="model.Project"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -95,10 +100,10 @@
                 <div class="d-flex row justify-content-around mx-5">
                     <c:forEach items="${projectsApproved}" var="project">
                         <div class="card col-4 m-0 p-0 mx-3 my-5" style="width: 22rem;">
-                            <img src="./assets/img/needy/refugee.jpg" class="card-img-top" alt="project">
+                            <img src="${project.getPrj().getImage1_path()}" class="card-img-top" alt="project" >
                             <div class="card-body">
                                 <h5 class="card-title mt-2">
-                                    <a href="project?action=projectdetail" class="text-decoration-none link-dark">${project.projectName}</a>
+                                    <a href="projectdetail?action=projectdetail&id=${project.projectId}" class="text-decoration-none link-dark">${project.projectName}</a>
                                 </h5>
                                 <div class="goal-target d-flex justify-content-between ">
                                     <span class="card-text text-dark m-0">${project.projectTarget}</span>
@@ -115,7 +120,7 @@
                                 </div>
                                 <div class="user-infor pt-4 border-top d-flex justify-content-between">
                                     <div>
-                                        <img class="rounded-circle" src="./assets/img/avatar/user.png" height="40" width="40">
+                                        <img class="rounded-circle" src="${project.getUser().getAvatar()}" height="40" width="40">
                                         <span>
                                             <a href="user?userId=${project.getUser().getUserId()}" class="text-decoration-none link-dark">
                                                 ${project.getUser().getFullName()}
@@ -128,6 +133,37 @@
                                             Success
                                         </p>
                                     </div>
+
+                                </div>
+                                <%
+                                    // Lấy danh sách dự án từ request scope
+                                    List<Project> projectsApproved = (List<Project>) request.getAttribute("projectsApproved");
+
+                                    // Tạo một Map lưu trữ danh sách tên danh mục theo projectId
+                                    Map<Integer, List<String>> categoryNamesMap = new HashMap<>();
+
+                                    // Tạo một đối tượng ProjectDAO
+                                    ProjectDAO projectDAO = new ProjectDAO();
+
+                                    // Gọi getCategoryProject cho mỗi dự án và lưu vào Map
+                                    for (Project project : projectsApproved) {
+                                        List<String> categoryNames = projectDAO.getCategoryProject(project.getProjectId());
+                                        categoryNamesMap.put(project.getProjectId(), categoryNames);
+                                    }
+
+                                    // Lưu Map vào request scope để sử dụng trong JSP
+                                    request.setAttribute("categoryNamesMap", categoryNamesMap);
+                                %>
+
+                                <div>
+                                    <h4>Categories:</h4>
+                                    <c:forEach var="categoryName" items="${categoryNamesMap[project.projectId]}">
+                                        <div class="card text-bg-info" >
+                                            <div class="card-body">
+                                                ${categoryName}
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>

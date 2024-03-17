@@ -10,19 +10,33 @@ import java.util.Date;
 public class Feedback implements Serializable {
 
     private int feedbackId;
+    private int star;
     private String content;
     private Date realTime;
     private int projectId;
     private int userId;
 
-    public Feedback(int feedbackId, String content, Date realTime, int projectId, int userId) {
-        this.feedbackId = feedbackId;
+    @Override
+    public String toString() {
+        return "Feedback{" + "feedbackId=" + feedbackId + ", star=" + star + ", content=" + content + ", realTime=" + realTime + ", projectId=" + projectId + ", userId=" + userId + '}';
+    }
+    
+    public Feedback(int star, String content, Date realTime, int projectId, int userId) {
+        this.star = star;
         this.content = content;
         this.realTime = realTime;
         this.projectId = projectId;
         this.userId = userId;
     }
 
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
+    
     public Feedback() {
     }
 

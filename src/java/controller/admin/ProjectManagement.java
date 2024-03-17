@@ -66,7 +66,7 @@ public class ProjectManagement extends HttpServlet {
                     String projectIdStr = request.getParameter("projectId");
 
                     int projectId = 0;
-                    
+
                     try {
                         projectId = Integer.parseInt(projectIdStr);
                     } catch (NullPointerException ex) {
@@ -77,14 +77,21 @@ public class ProjectManagement extends HttpServlet {
                         ex.printStackTrace();
                     }
 
-                    boolean deletionSuccess = projectDAO.deleteProject(projectId);
-
-                    if (deletionSuccess) {
-                        response.setStatus(HttpServletResponse.SC_OK);
-                        response.getWriter().print("success");
-                    } else {
-                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                        response.getWriter().print("error");
+                    boolean deleteFeedback = projectDAO.deleteFeedback(projectId);
+                    System.out.println(deleteFeedback);
+                    boolean deleteCat = projectDAO.deleteCategories(projectId);
+                    boolean deleteImg = projectDAO.deleteImages(projectId);
+                    System.out.println(deleteCat);
+                    System.out.println(deleteImg);
+                    if ((deleteCat && deleteImg) || deleteFeedback) {
+                        boolean deletionSuccess = projectDAO.deleteProject(projectId);
+                        if (deletionSuccess) {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.getWriter().print("success");
+                        } else {
+                            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                            response.getWriter().print("error");
+                        }
                     }
                 } else if (action.equalsIgnoreCase("updateproject")) {
                     String projectIdStr = request.getParameter("projectId");
@@ -125,14 +132,30 @@ public class ProjectManagement extends HttpServlet {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-                    boolean deletionSuccess = projectDAO.deleteProject(projectId);
-                    if (deletionSuccess) {
-                        response.setStatus(HttpServletResponse.SC_OK);
-                        response.getWriter().print("success");
-                    } else {
+                    boolean checkdonate = projectDAO.isProjectOnDonate(projectId);
+                    System.out.println(checkdonate);
+                    if (checkdonate) {
                         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                        response.getWriter().print("error");
+                        response.getWriter().print("Project on donation");
+                    } else {
+                        boolean deleteFeedback = projectDAO.deleteFeedback(projectId);
+                        System.out.println(deleteFeedback);
+                        boolean deleteCat = projectDAO.deleteCategories(projectId);
+                        boolean deleteImg = projectDAO.deleteImages(projectId);
+                        System.out.println(deleteCat);
+                        System.out.println(deleteImg);
+                        if ((deleteCat && deleteImg) || deleteFeedback) {
+                            boolean deletionSuccess = projectDAO.deleteProject(projectId);
+                            if (deletionSuccess) {
+                                response.setStatus(HttpServletResponse.SC_OK);
+                                response.getWriter().print("success");
+                            } else {
+                                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                                response.getWriter().print("error");
+                            }
+                        }
                     }
+
                 } else if (action.equalsIgnoreCase("deleteprojectselected")) {
                     String projectIdStr = request.getParameter("projectId");
                     int[] projectIdList = null;
@@ -150,14 +173,20 @@ public class ProjectManagement extends HttpServlet {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
-                    boolean deletionSuccess = projectDAO.deleteProjectSelected(projectIdList);
-                    if (deletionSuccess) {
-                        response.setStatus(HttpServletResponse.SC_OK);
-                        response.getWriter().print("success");
-                    } else {
-                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                        response.getWriter().print("error");
+                    for (int i = 0; i < projectIdList.length; i++) {
+                        boolean deleteFeedback = projectDAO.deleteFeedback(i);
+                        boolean deleteCat = projectDAO.deleteCategories(i);
+                        boolean deleteImg = projectDAO.deleteImages(i);
+                        if ((deleteCat && deleteImg) || deleteFeedback) {
+                            boolean deletionSuccess = projectDAO.deleteProject(i);
+                            if (deletionSuccess) {
+                                response.setStatus(HttpServletResponse.SC_OK);
+                                response.getWriter().print("success");
+                            } else {
+                                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                                response.getWriter().print("error");
+                            }
+                        }
                     }
                 }
             } else {

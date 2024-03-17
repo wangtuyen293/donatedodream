@@ -68,9 +68,9 @@ public class EditProfileServlet extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            os = response.getOutputStream();
-            String folderName = "resources";
-            String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+            
+            String folderName = "ava";
+            String uploadPath = "D:\\Semester 5-FPT\\SWP\\donatedodream\\web\\" + File.separator + folderName;
             File dir = new File(uploadPath);
             if (!dir.exists()) {
                 dir.mkdirs();
@@ -93,7 +93,7 @@ public class EditProfileServlet extends HttpServlet {
             if (success) {
                 // Nếu cập nhật thành công, cập nhật lại thông tin người dùng trong session
                 session.setAttribute("user", editedUser);
-                response.sendRedirect("profile.jsp");
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
             } else {
                 String alertMessage = "Fail to update profile.Please try again";
                 String redirectUrl = "editprofile.jsp";

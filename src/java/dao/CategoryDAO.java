@@ -63,7 +63,7 @@ public class CategoryDAO {
 
     public boolean insertCategory(String categoryName) {
         try {
-            String query = "INSERT INTO Categories (categoryName) VALUES (?)";
+            String query = "INSERT INTO Category (categoryName) VALUES (?)";
             conn = new DonationDBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, categoryName);

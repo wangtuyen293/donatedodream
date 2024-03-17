@@ -11,21 +11,27 @@ import java.util.Date;
 public class ProjectProcess implements Serializable {
 
     private int processId;
+    private String processName;
     private Date updateDate;
     private String planOfPhase;
     private BigDecimal moneyCost;
-    private String image;
+    private String image1;
+    private String image2;
+    private String image3;
+    private String image4;
     private String description;
     private int userId;
     private int charityOrganizationId;
     private int projectId;
 
-    public ProjectProcess(int processId, Date updateDate, String planOfPhase, BigDecimal moneyCost, String image, String description, int userId, int charityOrganizationId, int projectId) {
-        this.processId = processId;
+    public ProjectProcess(String processName, Date updateDate, BigDecimal moneyCost, String image1, String image2, String image3, String image4, String description, int userId, int charityOrganizationId, int projectId) {
+        this.processName = processName;
         this.updateDate = updateDate;
-        this.planOfPhase = planOfPhase;
         this.moneyCost = moneyCost;
-        this.image = image;
+        this.image1 = image1;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.image4 = image4;
         this.description = description;
         this.userId = userId;
         this.charityOrganizationId = charityOrganizationId;
@@ -33,6 +39,14 @@ public class ProjectProcess implements Serializable {
     }
 
     public ProjectProcess() {
+    }
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
     }
 
     public int getProcessId() {
@@ -67,12 +81,36 @@ public class ProjectProcess implements Serializable {
         this.moneyCost = moneyCost;
     }
 
-    public String getImage() {
-        return image;
+    public String getImage1() {
+        return image1;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
+
+    public String getImage3() {
+        return image3;
+    }
+
+    public void setImage3(String image3) {
+        this.image3 = image3;
+    }
+
+    public String getImage4() {
+        return image4;
+    }
+
+    public void setImage4(String image4) {
+        this.image4 = image4;
     }
 
     public String getDescription() {

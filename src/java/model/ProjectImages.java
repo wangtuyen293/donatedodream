@@ -26,6 +26,10 @@ public class ProjectImages {
         this.image4_path = image4_path;
     }
 
+    public ProjectImages(String image1_path) {
+        this.image1_path = image1_path;
+    }
+    
     public int getProjectId() {
         return projectId;
     }

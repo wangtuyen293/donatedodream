@@ -88,29 +88,29 @@ public class UpdatePassword extends HttpServlet {
             if (!check) {
                 String alertMessage = "Current password doesn't match with your account. Please try again";
                 request.setAttribute("alertMessage", alertMessage);
-                request.getRequestDispatcher("checkpassword.jsp").forward(request, response);
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
                 return;
             } else if (curPassword.equals(newPassword)) {
                 String alertMessage = "Current password is similar as new password. Please try again";
                 request.setAttribute("alertMessage", alertMessage);
-                request.getRequestDispatcher("checkpassword.jsp").forward(request, response);
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
                 return;
             } else if (isPasswordValid == false) {
                 String alertMessage = "Password is invalid. Please try again.Password must at least one number, one lowercase letter, "
                         + "one uppercase letter, one special character and must not contain spaces, and at least 8 character.";
                 request.setAttribute("alertMessage", alertMessage);
-                request.getRequestDispatcher("checkpassword.jsp").forward(request, response);
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
                 return;
             } else if (!newPassword.equals(confirmPassword)) {
                 String alertMessage = "New password and Confirm password doesn't match. Please try again";
                 request.setAttribute("alertMessage", alertMessage);
-                request.getRequestDispatcher("checkpassword.jsp").forward(request, response);
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
                 return;
             } else {
                 dao.updatePasswordwithUserName(name, newPassword);
                 String alertMessage = "Change password successfully.";
                 request.setAttribute("alertMessage", alertMessage);
-                request.getRequestDispatcher("checkpassword.jsp").forward(request, response);
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
             }
         } catch (Exception ex) {
             Logger.getLogger(UpdatePassword.class.getName()).log(Level.SEVERE, null, ex);
