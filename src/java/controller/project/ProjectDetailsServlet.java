@@ -65,13 +65,15 @@ public class ProjectDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int projectId = Integer.parseInt(request.getParameter("id"));
+            int projectId = Integer.parseInt(request.getParameter("projectId"));
             HttpSession session = request.getSession();
             // Gọi DAO để lấy thông tin dự án từ cơ sở dữ liệu
             ProjectDAO projectDAO = new ProjectDAO();
             Project project = projectDAO.getProjectById(projectId);
             ProjectImages prg = projectDAO.getImagePathsByProjectId(projectId);
             List<ProjectMilestoneGift> pm = projectDAO.getProjectMilestoneGiftsByProjectId(projectId);
+            System.out.println("Hi" + pm);
+            System.out.println("Hi" + projectId);
             // Chuyển thông tin dự án đến trang JSP
             session.setAttribute("project", project);
             session.setAttribute("image", prg);

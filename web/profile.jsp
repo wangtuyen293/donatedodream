@@ -264,11 +264,11 @@
                         </div>
                         <div class="mx-3 mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" value="${sessionScope.user.userName}">
+                            <input type="text" class="form-control" id="username" name="username" value="${sessionScope.user.userName}" readonly>
                         </div>
                         <div class="mx-3 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="${sessionScope.user.email}"/>
+                            <input type="email" class="form-control" id="email" name="email" value="${sessionScope.user.email}" readonly/>
                         </div>
                         <div class="mx-3 mb-3">
                             <label for="phone" class="form-label">Phone</label>
