@@ -85,7 +85,7 @@
                     <input type="hidden" id="donationDate" name="date" required>
 
                     <div class="row mt-3 justify-content-center">
-                        <button type="submit" style="max-width: 150px" class="btn btn-primary">Đặt hàng</button>
+                        <button type="submit" style="max-width: 200px" class="btn btn-primary">Xác nhận ủng hộ</button>
                     </div>
                 </form>
             </div>
