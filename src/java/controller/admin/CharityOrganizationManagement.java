@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -31,6 +32,8 @@ public class CharityOrganizationManagement extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         CharityOrganizationDAO charityOrgDAO = new CharityOrganizationDAO();
@@ -180,8 +183,10 @@ public class CharityOrganizationManagement extends HttpServlet {
 
                             String charityOrganizationAddress = request.getParameter("charityOrganizationAddress");
                             String charityOrganizationPhone = request.getParameter("charityOrganizationPhone");
+                            
+                            Date dateCreated = new Date();
 
-                            CharityOrganization charityOrg = new CharityOrganization(charityOrganizationName, charityOrganizationEmail, path, charityOrganizationAddress, charityOrganizationPhone);
+                            CharityOrganization charityOrg = new CharityOrganization(charityOrganizationName, charityOrganizationEmail, path, charityOrganizationAddress, charityOrganizationPhone, dateCreated);
 
                             boolean success = charityOrgDAO.insertCharityOrg(charityOrg);
                             if (success) {
