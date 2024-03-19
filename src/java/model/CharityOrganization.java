@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -14,30 +15,34 @@ public class CharityOrganization implements Serializable {
     private String charityOrganizationLogo;
     private String charityOrganizationAddress;
     private String charityOrganizationPhone;
+    private Date dateCreated;
 
-    public CharityOrganization(int charityOrganizationId, String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationLogo, String charityOrganizationAddress, String charityOrganizationPhone) {
+    public CharityOrganization(int charityOrganizationId, String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationLogo, String charityOrganizationAddress, String charityOrganizationPhone, Date dateCreated) {
         this.charityOrganizationId = charityOrganizationId;
         this.charityOrganizationName = charityOrganizationName;
         this.charityOrganizationEmail = charityOrganizationEmail;
         this.charityOrganizationLogo = charityOrganizationLogo;
         this.charityOrganizationAddress = charityOrganizationAddress;
         this.charityOrganizationPhone = charityOrganizationPhone;
+        this.dateCreated = dateCreated;
     }
 
-    public CharityOrganization(int charityOrganizationId, String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationAddress, String charityOrganizationPhone) {
+    public CharityOrganization(int charityOrganizationId, String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationAddress, String charityOrganizationPhone, Date dateCreated) {
         this.charityOrganizationId = charityOrganizationId;
         this.charityOrganizationName = charityOrganizationName;
         this.charityOrganizationEmail = charityOrganizationEmail;
         this.charityOrganizationAddress = charityOrganizationAddress;
         this.charityOrganizationPhone = charityOrganizationPhone;
+        this.dateCreated = dateCreated;
     }
 
-    public CharityOrganization(String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationLogo, String charityOrganizationAddress, String charityOrganizationPhone) {
+    public CharityOrganization(String charityOrganizationName, String charityOrganizationEmail, String charityOrganizationLogo, String charityOrganizationAddress, String charityOrganizationPhone, Date dateCreated) {
         this.charityOrganizationName = charityOrganizationName;
         this.charityOrganizationEmail = charityOrganizationEmail;
         this.charityOrganizationLogo = charityOrganizationLogo;
         this.charityOrganizationAddress = charityOrganizationAddress;
         this.charityOrganizationPhone = charityOrganizationPhone;
+        this.dateCreated = dateCreated;
     }
 
     public CharityOrganization() {
@@ -73,6 +78,14 @@ public class CharityOrganization implements Serializable {
 
     public void setCharityOrganizationLogo(String charityOrganizationLogo) {
         this.charityOrganizationLogo = charityOrganizationLogo;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getCharityOrganizationAddress() {
