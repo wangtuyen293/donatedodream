@@ -32,33 +32,33 @@ public class Dashboard extends HttpServlet {
                 ProjectDAO projectDAO = new ProjectDAO();
                 CharityOrganizationDAO charityOrgDAO = new CharityOrganizationDAO();
                 int countProject = projectDAO.countProject();
-                int countProjectCurrentMonth = projectDAO.countProjectCurrentMonth();
-                int countProjectLastMonth = projectDAO.countProjectLastMonth();
-
-                int countUser = userDAO.countUserAsUser();
-                int countUserAsUserCurrentMonth = userDAO.countUserAsUserCurrentMonth();
-                int countUserAsUserLastMonth = userDAO.countUserAsUserLastMonth();
-
-                int countCharityOrg = charityOrgDAO.countCharityOrg();
-                int countCharityOrgCurrentMonth = charityOrgDAO.countCharityOrgCurrentMonth();
-                int countCharityOrgLastMonth = charityOrgDAO.countCharityOrgLastMonth();
-
-                int countSucceedProject = projectDAO.countSucceedProject();
-                int countSucceedProjectCurrentMonth = projectDAO.countSucceedProjectCurrentMonth();
-                int countSucceedProjectLastMonth = projectDAO.countSucceedProjectLastMonth();
-
-                request.setAttribute("project", countProject);
-                request.setAttribute("projectCurrentMonth", countProjectCurrentMonth);
-                request.setAttribute("projectLastMonth", countProjectLastMonth);
-                request.setAttribute("user", countUser);
-                request.setAttribute("userCurrentMonth", countUserAsUserCurrentMonth);
-                request.setAttribute("userLastMonth", countUserAsUserLastMonth);
-                request.setAttribute("charityOrg", countCharityOrg);
-                request.setAttribute("charityOrgCurrentMonth", countCharityOrgCurrentMonth);
-                request.setAttribute("charityOrgLastMonth", countCharityOrgLastMonth);
-                request.setAttribute("succeedProject", countSucceedProject);
-                request.setAttribute("succeedProjectCurrentMonth", countSucceedProjectCurrentMonth);
-                request.setAttribute("succeedProjectLastMonth", countSucceedProjectLastMonth);
+//                int countProjectCurrentMonth = projectDAO.countProjectCurrentMonth();
+//                int countProjectLastMonth = projectDAO.countProjectLastMonth();
+//
+//                int countUser = userDAO.countUserAsUser();
+//                int countUserAsUserCurrentMonth = userDAO.countUserAsUserCurrentMonth();
+//                int countUserAsUserLastMonth = userDAO.countUserAsUserLastMonth();
+//
+//                int countCharityOrg = charityOrgDAO.countCharityOrg();
+//                int countCharityOrgCurrentMonth = charityOrgDAO.countCharityOrgCurrentMonth();
+//                int countCharityOrgLastMonth = charityOrgDAO.countCharityOrgLastMonth();
+//
+//                int countSucceedProject = projectDAO.countSucceedProject();
+//                int countSucceedProjectCurrentMonth = projectDAO.countSucceedProjectCurrentMonth();
+//                int countSucceedProjectLastMonth = projectDAO.countSucceedProjectLastMonth();
+//
+//                request.setAttribute("project", countProject);
+//                request.setAttribute("projectCurrentMonth", countProjectCurrentMonth);
+//                request.setAttribute("projectLastMonth", countProjectLastMonth);
+//                request.setAttribute("user", countUser);
+//                request.setAttribute("userCurrentMonth", countUserAsUserCurrentMonth);
+//                request.setAttribute("userLastMonth", countUserAsUserLastMonth);
+//                request.setAttribute("charityOrg", countCharityOrg);
+//                request.setAttribute("charityOrgCurrentMonth", countCharityOrgCurrentMonth);
+//                request.setAttribute("charityOrgLastMonth", countCharityOrgLastMonth);
+//                request.setAttribute("succeedProject", countSucceedProject);
+//                request.setAttribute("succeedProjectCurrentMonth", countSucceedProjectCurrentMonth);
+//                request.setAttribute("succeedProjectLastMonth", countSucceedProjectLastMonth);
 
                 request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
             } else {

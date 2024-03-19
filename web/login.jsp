@@ -56,9 +56,11 @@
                                 <div class="form-wrap bg-white">
                                     <h2 class="text-center btm-sep pb-3 mb-5">Login</h2>
                                     <form action="login" method="post">
-                                        <p style="color: red; align-content: center;">
-                                            <!--${requestScope.error}-->
-                                        </p>
+                                        <c:if test="${!requestScope.error.equalsIgnoreCase('') && requestScope.error != null}">
+                                            <p class="p-2 bg-warning" style="background: #fcf8e3 ;color: red;">
+                                                ${requestScope.error}
+                                            </p>
+                                        </c:if>
                                         <div class="row">
                                             <div class="col-12 mb-3">
                                                 <div class="form-group position-relative pe-2">

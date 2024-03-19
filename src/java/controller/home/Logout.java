@@ -23,6 +23,9 @@ public class Logout extends HttpServlet {
         } else {
             session.removeAttribute("userName");
         }
+        if (session.getAttribute("warning") != null) {
+            session.removeAttribute("warning");
+        }
         response.sendRedirect("home");
     }
 
