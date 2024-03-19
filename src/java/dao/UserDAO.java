@@ -63,6 +63,25 @@ public class UserDAO {
         return null;
     }
 
+    public Users getUserByUserId(int userId) {
+        try {
+            String query = "SELECT * FROM Users WHERE userId = ?";
+            conn = new DonationDBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToUser(rs);
+            }
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+        return null;
+    }
+
     public Users getUserByUserName(String userName) {
         try {
             String query = "SELECT * FROM Users WHERE userName = ?";
@@ -121,6 +140,7 @@ public class UserDAO {
 
         return null;
     }
+
     public String getEmailByProjectId(int id) throws Exception {
         conn = new DonationDBContext().getConnection();
         PreparedStatement statement = null;
@@ -252,6 +272,7 @@ public class UserDAO {
             closeResources(conn, ps, rs);
         }
     }
+
     public int getIdByUserName(String us) throws Exception {
         conn = new DonationDBContext().getConnection();
         PreparedStatement statement = null;
@@ -272,6 +293,7 @@ public class UserDAO {
 
         return 0;
     }
+
     public String getUserNameById(int id) throws Exception {
         conn = new DonationDBContext().getConnection();
         PreparedStatement statement = null;
@@ -292,7 +314,7 @@ public class UserDAO {
 
         return null;
     }
-    
+
     public boolean checkExistedEmail(String email) {
         boolean isExisted = false;
         String sql = "select email from UserGoogle";
@@ -433,14 +455,15 @@ public class UserDAO {
     }
 
     public boolean deleteUser(int userId) {
-        String sql = "DELETE FROM Users WHERE userId=?";
-        String deleteAuthenticationSql = "DELETE FROM Authentication WHERE userId=?";
-        String deleteProjectSql = "DELETE FROM Project WHERE userId=?";
-        String deleteProjectProcessSql = "DELETE FROM ProjectProcess WHERE userId=?";
-        String deleteCommentSql = "DELETE FROM Comments WHERE userId=?";
-        String deleteFeedbackSql = "DELETE FROM Feedback WHERE userId=?";
-        String deleteProjectMilestoneGiftSql = "DELETE FROM ProjectMilestoneGift WHERE userId=?";
         String deleteDonationSql = "DELETE FROM Donation WHERE userId=?";
+        String deleteProjectMilestoneGiftSql = "DELETE FROM ProjectMilestoneGift WHERE userId=?";
+        String deleteFeedbackSql = "DELETE FROM Feedback WHERE userId=?";
+        String deleteCommentSql = "DELETE FROM Comments WHERE userId=?";
+        String deleteProjectProcessSql = "DELETE FROM ProjectProcess WHERE userId=?";
+        String deleteProjectSql = "DELETE FROM Project WHERE userId=?";
+        String deleteAuthenticationSql = "DELETE FROM Authentication WHERE userId=?";
+        String deleteUsersSql = "DELETE FROM Users WHERE userId=?";
+
         try {
             conn = new DonationDBContext().getConnection();
 
@@ -479,9 +502,11 @@ public class UserDAO {
             ps.setInt(1, userId);
             ps.executeUpdate();
 
-            ps = conn.prepareStatement(sql);
+            // Delete record in Users table
+            ps = conn.prepareStatement(deleteUsersSql);
             ps.setInt(1, userId);
             int rowsAffected = ps.executeUpdate();
+
             return rowsAffected > 0; // Check if any rows were affected by the delete operation
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "An error occurred while deleting the user.", ex);

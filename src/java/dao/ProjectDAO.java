@@ -32,13 +32,13 @@ public class ProjectDAO {
 
     public List<Project> getProjects() {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.userId, p.charityOrganizationId, p.isApproved, p.categoryId FROM Project p";
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.userId, p.charityOrganizationId, p.isApproved, p.dateCreated, p.categoryId FROM Project p";
         try {
             conn = new DonationDBContext().getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getInt("userId"), rs.getInt("charityOrganizationId"));
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), rs.getInt("userId"), rs.getInt("charityOrganizationId"));
                 list.add(project);
             }
         } catch (Exception ex) {
@@ -51,7 +51,7 @@ public class ProjectDAO {
      
     public List<Project> getProjectsByUserIdApproved(int userId) {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -75,7 +75,7 @@ public class ProjectDAO {
                 Users user = new Users(rs.getInt("userId"), fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
                 String image1_path = rs.getString("image1_path");
                 ProjectImages prj = new ProjectImages(image1_path);
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, prj);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user, prj);
                 list.add(project);
             }
 
@@ -89,7 +89,7 @@ public class ProjectDAO {
 
     public List<Project> getOutdatedProject() {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -117,7 +117,7 @@ public class ProjectDAO {
                 String categoryName = rs.getString("categoryName");
                 Category category = new Category(categoryId, categoryName);
 
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user);
                 list.add(project);
             }
         } catch (SQLException e) {
@@ -134,7 +134,7 @@ public class ProjectDAO {
     
     public List<Project> getActiveProject() {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -158,9 +158,7 @@ public class ProjectDAO {
                 int userTypeId = rs.getInt("userTypeId");
                 Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
 
-               
-
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user);
                 list.add(project);
             }
         } catch (SQLException e) {
@@ -177,7 +175,7 @@ public class ProjectDAO {
     
     public List<Project> getNewProject() {
         List<Project> list = new ArrayList<>();
-         String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+         String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -205,7 +203,7 @@ public class ProjectDAO {
                 String categoryName = rs.getString("categoryName");
                 Category category = new Category(categoryId, categoryName);
 
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user);
                 list.add(project);
             }
         } catch (SQLException e) {
@@ -222,7 +220,7 @@ public class ProjectDAO {
     
     public List<Project> getSuccessProject() {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -246,8 +244,7 @@ public class ProjectDAO {
                 int userTypeId = rs.getInt("userTypeId");
                 Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
 
-
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user);
                 list.add(project);
             }
         } catch (SQLException e) {
@@ -264,7 +261,7 @@ public class ProjectDAO {
     
     public List<Project> getProjectByProjectNameAZ() {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -291,7 +288,7 @@ public class ProjectDAO {
                 Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
 
 
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user);
                 list.add(project);
             }
         } catch (SQLException e) {
@@ -308,7 +305,7 @@ public class ProjectDAO {
     
     public List<Project> searchProject(String searchQuery) {
         List<Project> searchProjectResult = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -337,7 +334,7 @@ public class ProjectDAO {
                 String categoryName = rs.getString("categoryName");
                 Category category = new Category(categoryId, categoryName);
 
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user);
                 searchProjectResult.add(project);
             }
         } catch (SQLException e) {
@@ -354,7 +351,7 @@ public class ProjectDAO {
     
     public List<Project> getProjectsApproved() {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId, i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -378,7 +375,7 @@ public class ProjectDAO {
                 Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
                 String image1_path = rs.getString("image1_path");
                 ProjectImages prj = new ProjectImages(image1_path);
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, prj);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user, prj);
                 list.add(project);
             }
 
@@ -418,7 +415,7 @@ public class ProjectDAO {
 
     public List<Project> getProjectsUnapproved() {
         List<Project> list = new ArrayList<>();
-        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved , u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
+        String sql = "SELECT p.projectId, p.projectName, p.projectTarget, p.projectImage, p.donatedAmountOfMoney, p.projectStatus, p.projectDescription, p.startDate, p.endDate, p.isApproved, p.dateCreated, u.userId, u.fullName, u.userName, u.gender, u.dateOfBirth, u.avatar, u.email, u.phoneNumber, u.userStatus, u.dateCreated, u.userTypeId,i.image1_path "
                 + "FROM Project p "
                 + "INNER JOIN Users u ON p.userId = u.userId "
                 + "INNER JOIN project_images i ON p.projectId = i.projectId "
@@ -442,7 +439,7 @@ public class ProjectDAO {
                 Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
                 String image1_path = rs.getString("image1_path");
                 ProjectImages prj = new ProjectImages(image1_path);
-                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user, prj);
+                Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), rs.getDate("dateCreated"), user, prj);
                 list.add(project);
             }
 

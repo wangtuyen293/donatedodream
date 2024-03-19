@@ -31,7 +31,7 @@ public class CharityOrganizationDAO {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                CharityOrganization charityOrg = new CharityOrganization(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                CharityOrganization charityOrg = new CharityOrganization(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getDate(7));
                 list.add(charityOrg);
             }
         } catch (Exception ex) {
@@ -127,7 +127,7 @@ public class CharityOrganizationDAO {
 
     public boolean insertCharityOrg(CharityOrganization charityorg) {
         try {
-            String query = "INSERT INTO CharityOrganization (charityOrganizationName, charityOrganizationEmail, charityOrganizationLogo, charityOrganizationAddress, charityOrganizationPhone) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO CharityOrganization (charityOrganizationName, charityOrganizationEmail, charityOrganizationLogo, charityOrganizationAddress, charityOrganizationPhone, dateCreated) VALUES (?, ?, ?, ?, ?, ?)";
             conn = new DonationDBContext().getConnection();
             ps = conn.prepareStatement(query);
 
@@ -136,6 +136,10 @@ public class CharityOrganizationDAO {
             ps.setString(3, charityorg.getCharityOrganizationLogo());
             ps.setString(4, charityorg.getCharityOrganizationAddress());
             ps.setString(5, charityorg.getCharityOrganizationPhone());
+
+            java.sql.Date sqlDate = new java.sql.Date(charityorg.getDateCreated().getTime());
+            ps.setDate(6, sqlDate);
+            
             int rowsAffected = ps.executeUpdate();
 
             return rowsAffected > 0;

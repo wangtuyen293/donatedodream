@@ -7,6 +7,7 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -43,6 +44,11 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
+        <c:if test="${!sessionScope.warning.equalsIgnoreCase('') && sessionScope.warning != null}">
+            <p class="text-bg-warning m-0 p-2">
+                ${sessionScope.warning}
+            </p>
+        </c:if>
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">

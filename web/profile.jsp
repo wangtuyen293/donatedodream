@@ -87,6 +87,11 @@
     </head>
     <body>
         <jsp:include page="./layout/header.jsp" />
+        <c:if test="${!sessionScope.warning.equalsIgnoreCase('') && sessionScope.warning != null}">
+            <p class="text-bg-warning m-0 p-2">
+                ${sessionScope.warning}
+            </p>
+        </c:if>
         <div class="profile container-fluid bg-secondary-subtle show active" >
             <%
                 String alertMessage = (String) request.getAttribute("alertMessage");

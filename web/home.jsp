@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,6 +42,11 @@
     </head>
     <body>
         <jsp:include page="./layout/header.jsp" />
+        <c:if test="${!sessionScope.warning.equalsIgnoreCase('') && sessionScope.warning != null}">
+            <p class="text-bg-warning m-0 p-2">
+                ${sessionScope.warning}
+            </p>
+        </c:if>
         <main>
             <div class="slider-area ">
                 <div class="slider-active">

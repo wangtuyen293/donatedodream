@@ -46,6 +46,11 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
+        <c:if test="${!sessionScope.warning.equalsIgnoreCase('') && sessionScope.warning != null}">
+            <p class="text-bg-warning m-0 p-2">
+                ${sessionScope.warning}
+            </p>
+        </c:if>
         <div class="container mt-5">
             <h3>Cảm ơn bạn đã Donate cho dự án</h3>
             <a href="https://script.google.com/macros/s/AKfycbwPVjxL6iAdusKXy52tVUD31QtSfaMe1Yr710Kagsk/dev">Bạn có thể check lịch sử giao dịch của hệ thống tại đây</a>

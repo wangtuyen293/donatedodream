@@ -44,6 +44,11 @@
     </head>
     <body>
         <jsp:include page="./layout/header.jsp" />
+        <c:if test="${!sessionScope.warning.equalsIgnoreCase('') && sessionScope.warning != null}">
+            <p class="text-bg-warning m-0 p-2">
+                ${sessionScope.warning}
+            </p>
+        </c:if>
         <div class="user-detail">
             <div class="row bg-body-tertiary py-5">
                 <div class="col-4 text-center">

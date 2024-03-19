@@ -104,6 +104,11 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
+        <c:if test="${!sessionScope.warning.equalsIgnoreCase('') && sessionScope.warning != null}">
+            <p class="text-bg-warning m-0 p-2">
+                ${sessionScope.warning}
+            </p>
+        </c:if>
         <div class="container mt-5">
             <h2>Feedback Form</h2>
             <form action="submit_feedback.jsp" method="post">

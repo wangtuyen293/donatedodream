@@ -46,6 +46,11 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
+        <c:if test="${!sessionScope.warning.equalsIgnoreCase('') && sessionScope.warning != null}">
+            <p class="text-bg-warning m-0 p-2">
+                ${sessionScope.warning}
+            </p>
+        </c:if>
         <div class="container">
             <div class="row justify-content-center mt-3">
                 <div class="col-md-6" style="max-width: 500px">

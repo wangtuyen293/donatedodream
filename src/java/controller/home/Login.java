@@ -26,6 +26,7 @@ public class Login extends HttpServlet {
         String remember = request.getParameter("remember");
         UserDAO userDAO = new UserDAO();
         Users user = userDAO.checkUser(username, password);
+        PrintWriter out = response.getWriter();
 
         if (user == null) {
             String alertMessage = "Username or password is invalid. Please try again.";
@@ -34,24 +35,51 @@ public class Login extends HttpServlet {
             script += "window.location.href='" + redirectUrl + "';</script>";
             response.getWriter().println(script);
         } else {
-            Cookie cookieE = new Cookie("username", username);
-            Cookie cookieP = new Cookie("password", password);
-            Cookie cookieR = new Cookie("remember", remember);
+            if (user.getUserStatus().equalsIgnoreCase("block")) {
+                request.setAttribute("error", "Your account has been disabled. Please check our Terms of Use, and contact our customer support team for more information.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else if (user.getUserStatus().equalsIgnoreCase("warning")) {
+                session.setAttribute("warning", "Your account has been issued a warning due to a violation of our policies. We kindly remind you that any further violations will result in the suspension of your account!");
 
-            if (remember != null) {
-                cookieE.setMaxAge(60 * 60);
-                cookieP.setMaxAge(60 * 60);
-                cookieR.setMaxAge(60 * 60);
+                Cookie cookieE = new Cookie("username", username);
+                Cookie cookieP = new Cookie("password", password);
+                Cookie cookieR = new Cookie("remember", remember);
+
+                if (remember != null) {
+                    cookieE.setMaxAge(60 * 60);
+                    cookieP.setMaxAge(60 * 60);
+                    cookieR.setMaxAge(60 * 60);
+                } else {
+                    cookieE.setMaxAge(0);
+                    cookieP.setMaxAge(0);
+                    cookieR.setMaxAge(0);
+                }
+                session.setAttribute("user", user);
+                response.addCookie(cookieE);
+                response.addCookie(cookieP);
+                response.addCookie(cookieR);
+                response.sendRedirect("home");
             } else {
-                cookieE.setMaxAge(0);
-                cookieP.setMaxAge(0);
-                cookieR.setMaxAge(0);
+                Cookie cookieE = new Cookie("username", username);
+                Cookie cookieP = new Cookie("password", password);
+                Cookie cookieR = new Cookie("remember", remember);
+
+                if (remember != null) {
+                    cookieE.setMaxAge(60 * 60);
+                    cookieP.setMaxAge(60 * 60);
+                    cookieR.setMaxAge(60 * 60);
+                } else {
+                    cookieE.setMaxAge(0);
+                    cookieP.setMaxAge(0);
+                    cookieR.setMaxAge(0);
+                }
+                session.setAttribute("user", user);
+                response.addCookie(cookieE);
+                response.addCookie(cookieP);
+                response.addCookie(cookieR);
+                response.sendRedirect("home");
             }
-            session.setAttribute("user", user);
-            response.addCookie(cookieE);
-            response.addCookie(cookieP);
-            response.addCookie(cookieR);
-            response.sendRedirect("home");
+
         }
     }
 
