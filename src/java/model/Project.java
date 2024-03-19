@@ -20,22 +20,24 @@ public class Project implements Serializable {
     private Date startDate;
     private Date endDate;
     private byte isApproved;
+    private Date dateCreated;
     private int userId;
     private int charityOrganizationId;
     private Users user;
     private ProjectImages prj;
 
-    public Project(String projectName, BigDecimal projectTarget, String projectDescription, Date startDate, Date endDate, int userId, int charityOrganizationId) {
+    public Project(String projectName, BigDecimal projectTarget, String projectDescription, Date startDate, Date endDate, Date dateCreated, int userId, int charityOrganizationId) {
         this.projectName = projectName;
         this.projectTarget = projectTarget;
         this.projectDescription = projectDescription;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.dateCreated = dateCreated;
         this.userId = userId;
         this.charityOrganizationId = charityOrganizationId;
     }
-    
-    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Users user, ProjectImages prj) {
+
+    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Date dateCreated, Users user, ProjectImages prj) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectTarget = projectTarget;
@@ -45,11 +47,12 @@ public class Project implements Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.isApproved = isApproved;
+        this.dateCreated = dateCreated;
         this.user = user;
         this.prj = prj;
     }
 
-    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, int userId, int charityOrganizationId) {
+    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Date dateCreated, int userId, int charityOrganizationId) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectTarget = projectTarget;
@@ -59,11 +62,12 @@ public class Project implements Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.isApproved = isApproved;
+        this.dateCreated = dateCreated;
         this.userId = userId;
         this.charityOrganizationId = charityOrganizationId;
     }
 
-    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Users user) {
+    public Project(int projectId, String projectName, BigDecimal projectTarget, BigDecimal donatedAmountOfMoney, String projectStatus, String projectDescription, Date startDate, Date endDate, byte isApproved, Date dateCreated, Users user) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectTarget = projectTarget;
@@ -73,6 +77,7 @@ public class Project implements Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.isApproved = isApproved;
+        this.dateCreated = dateCreated;
         this.user = user;
     }
 
@@ -181,6 +186,14 @@ public class Project implements Serializable {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     @Override

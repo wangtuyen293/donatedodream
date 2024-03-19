@@ -23,8 +23,8 @@ public class DonationDBContext {
     private final String serverName = "localhost";
     private final String portNumber = "1433";
     private final String user = "sa";
-    private final String password = "123456";
-    private final String dbName = "DonateDoDream";
+    private final String password = "1234";
+    private final String dbName = "DonationMng";
 
     public static void main(String[] args) {
         DonationDBContext donationDBContext = new DonationDBContext();
