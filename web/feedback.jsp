@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Change Password</title>
+        <title>Nhận xét</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -105,10 +105,10 @@
     <body>
         <jsp:include page="layout/header.jsp" />
         <div class="container mt-5">
-            <h2>Feedback Form</h2>
+            <h2>Nhận xét cho dự án</h2>
             <form action="submit_feedback.jsp" method="post">
                 <div class="mb-3">
-                    <label for="rating">Rating:</label>
+                    <label for="rating">Đánh giá:</label>
                     <div class="rating">
                         <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"></label>
                         <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"></label>
@@ -118,10 +118,10 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="comment">Comment:</label>
+                    <label for="comment">Nhận xét:</label>
                     <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Xác nhận</button>
             </form>
         </div>
         <jsp:include page="layout/footer.jsp" />

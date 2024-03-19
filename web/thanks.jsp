@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Change Password</title>
+        <title>Success</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -46,10 +46,14 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
-        <div class="container mt-5">
+        <div class="container mt-5" style="width: 500px">
             <h3>Cảm ơn bạn đã Donate cho dự án</h3>
-            <a href="https://script.google.com/macros/s/AKfycbwPVjxL6iAdusKXy52tVUD31QtSfaMe1Yr710Kagsk/dev">Bạn có thể check lịch sử giao dịch của hệ thống tại đây</a>
-            <a href="home.jsp">Back to homepage</a>
+            <div>
+                <a href="https://script.google.com/macros/s/AKfycbwPVjxL6iAdusKXy52tVUD31QtSfaMe1Yr710Kagsk/dev">Bạn có thể check lịch sử giao dịch của hệ thống tại đây</a> 
+            </div>
+            <div>
+                <a href="home.jsp">Về trang chủ</a>
+            </div>
         </div>
         <jsp:include page="layout/footer.jsp" />
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>

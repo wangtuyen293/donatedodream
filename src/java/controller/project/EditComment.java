@@ -4,7 +4,7 @@
  */
 package controller.project;
 
-import dao.FeedbackDAO;
+import dao.CommentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Feedback;
+import model.Comments;
 import model.Users;
 
 /**
  *
  * @author quang
  */
-public class EditFeedbackProject extends HttpServlet {
+public class EditComment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class EditFeedbackProject extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditFeedbackProject</title>");
+            out.println("<title>Servlet EditComment</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditFeedbackProject at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditComment at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,21 +65,21 @@ public class EditFeedbackProject extends HttpServlet {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
         int u = user.getUserId();
-        int feedbackId = Integer.parseInt(request.getParameter("fdid"));
-        System.out.println(feedbackId);
+        int commentId = Integer.parseInt(request.getParameter("cmtid"));
+        System.out.println(commentId);
         System.out.println(u);
         int userIdFromQuery = Integer.parseInt(request.getParameter("id"));
 
         if (userIdFromQuery != u) {
-            String alertMessage = "That's isn't your feedback.";
+            String alertMessage = "That's isn't your comment.";
             request.setAttribute("alertMessage", alertMessage);
             request.getRequestDispatcher("projectdetails.jsp").forward(request, response);
             return;
 
         } else {
-            request.setAttribute("feedbackId", feedbackId);
+            request.setAttribute("commentId", commentId);
             request.setAttribute("userId", userIdFromQuery);
-            request.getRequestDispatcher("editfeedback.jsp").forward(request, response);
+            request.getRequestDispatcher("editcomment.jsp").forward(request, response);
         }
     }
 
@@ -99,24 +99,21 @@ public class EditFeedbackProject extends HttpServlet {
             Users user = (Users) session.getAttribute("user");
             int userId = user.getUserId(); // Rename variable to userId
             int projectId = Integer.parseInt(request.getParameter("projectId"));
-            int feedbackId = Integer.parseInt(request.getParameter("feedbackId"));
-            int rating = Integer.parseInt(request.getParameter("rating"));
-
-            String comment = new String(request.getParameter("comment").getBytes("ISO-8859-1"), "UTF-8");
+            int commentId = Integer.parseInt(request.getParameter("commentId"));    
+            String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
             // Get current time
             java.util.Date realTime = new java.util.Date();
-
-            FeedbackDAO fb = new FeedbackDAO();
-            Feedback feedback = new Feedback(feedbackId, rating, comment, realTime, projectId, userId);
-            System.out.println(feedback);// Pass userId instead of us
-            fb.updateFeedback(feedback);
-            request.setAttribute("projectId", projectId);
+            CommentDAO dao = new CommentDAO();
+            Comments comment = new Comments(commentId, content, realTime, projectId, userId);
+            dao.addComment(comment);
+            request.setAttribute("projectId", projectId);         
             request.getRequestDispatcher("projectdetails.jsp").forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(EditFeedbackProject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditComment.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditFeedbackProject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditComment.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
     }
 
     /**

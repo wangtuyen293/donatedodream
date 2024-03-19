@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Change Password</title>
+        <title>Success</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -46,7 +46,7 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
-        <div class="container mt-5">
+        <div class="container mt-5" style="width: 500px">
             <h3> Create project success. Please waiting for our website accept your project!</h3>
             <a href="home.jsp"> Return to Homepage.</a>
         </div>

@@ -29,6 +29,15 @@ public class Feedback implements Serializable {
         this.userId = userId;
     }
 
+    public Feedback(int feedbackId, int star, String content, Date realTime, int projectId, int userId) {
+        this.feedbackId = feedbackId;
+        this.star = star;
+        this.content = content;
+        this.realTime = realTime;
+        this.projectId = projectId;
+        this.userId = userId;
+    }
+    
     public int getStar() {
         return star;
     }

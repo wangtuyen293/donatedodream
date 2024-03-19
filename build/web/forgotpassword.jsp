@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Change Password</title>
+        <title>Lấy lại mật khẩu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -49,10 +49,10 @@
         <div class="container mt-5">
             <form action="sendemail" method="get">
                 <div class="form-group">
-                    <label for="code">Enter your email:</label>
+                    <label for="code">Nhập email của bạn cần lấy lại mất khẩu:</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Xác nhận</button>
             </form>
         </div>
         <jsp:include page="layout/footer.jsp" />

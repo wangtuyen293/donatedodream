@@ -30,10 +30,10 @@
                     <div class="col-6 main-menu d-none d-lg-block">
                         <nav>
                             <ul id="navigation" class="mb-0">
-                                <li><a class="text-decoration-none" href="home">Home</a></li>
-                                <li><a class="text-decoration-none" href="createproject">Start a project</a></li>
-                                <li><a class="text-decoration-none" href="project">Projects</a></li>
-                                <li><a class="text-decoration-none" href="contact.jsp">Contact</a></li>
+                                <li><a class="text-decoration-none" href="home">Trang chủ</a></li>
+                                <li><a class="text-decoration-none" href="createproject">Bắt đầu một dự án</a></li>
+                                <li><a class="text-decoration-none" href="project">Tất cả dự án</a></li>
+                                <li><a class="text-decoration-none" href="contact.jsp">Liên hệ</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -56,7 +56,7 @@
 
                                 <div class="dropdown col-3 d-flex justify-content-center align-items-center">
                                     <c:if test="${sessionScope.user == null && sessionScope.userName == null}">
-                                        <a class="dropdown-toggle link-primary text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="p-0">ACCOUNT<i class="ion-chevron-down"></i></span></a>
+                                        <a class="dropdown-toggle link-primary text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="p-0">Tài khoản<i class="ion-chevron-down"></i></span></a>
                                             </c:if>
                                             <c:if test="${sessionScope.user != null}">
                                         <a class="dropdown-toggle link-primary text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="p-0">Welcome ${sessionScope.user.userName}<i class="ion-chevron-down"></i></span></a>
@@ -67,7 +67,7 @@
                                     <ul class="dropdown-menu">
                                         <c:if test="${sessionScope.user != null || sessionScope.userName != null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="/profile">My Profile</a>
+                                                <a class="dropdown-item text-capitalize" href="/profile">Thông tin cá nhân</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.userTypeId == 1}">
@@ -77,17 +77,17 @@
                                         </c:if>
                                         <c:if test="${sessionScope.user == null && sessionScope.userName == null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="login.jsp"><span>Login</span></a>
+                                                <a class="dropdown-item text-capitalize" href="login.jsp"><span>Đăng nhập</span></a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user == null && sessionScope.userName == null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="signup.jsp"><span>Sign up</span></a>
+                                                <a class="dropdown-item text-capitalize" href="signup.jsp"><span>Đăng ký</span></a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user != null || sessionScope.userName != null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="logout">Sign out</a>
+                                                <a class="dropdown-item text-capitalize" href="logout">Đăng xuất</a>
                                             </li>
                                         </c:if>
                                     </ul>
@@ -101,15 +101,15 @@
                                         <i class="fa-regular fa-bell"></i>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="#">Thông báo</a></li>
+                                        <li><a class="dropdown-item" href="#"></a>Thông báo</li>
+                                        <li><a class="dropdown-item" href="#">Thông báo</a></li>
                                     </ul>
                                 </div>
 
                                 <div class="dropdown col-3 d-flex justify-content-center align-items-center">
                                     <c:if test="${sessionScope.user == null && sessionScope.userName == null}">
-                                        <a class="dropdown-toggle link-primary text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="p-0">ACCOUNT<i class="ion-chevron-down"></i></span></a>
+                                        <a class="dropdown-toggle link-primary text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="p-0">Tài khoản<i class="ion-chevron-down"></i></span></a>
                                             </c:if>
                                             <c:if test="${sessionScope.user != null}">
                                         <a class="dropdown-toggle link-primary text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="p-0">Welcome ${sessionScope.user.userName}<i class="ion-chevron-down"></i></span></a>
@@ -120,7 +120,7 @@
                                     <ul class="dropdown-menu">
                                         <c:if test="${sessionScope.user != null || sessionScope.userName != null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="profile">My Profile</a>
+                                                <a class="dropdown-item text-capitalize" href="profile">Thông tin cá nhân</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.userTypeId == 1}">
@@ -130,17 +130,17 @@
                                         </c:if>
                                         <c:if test="${sessionScope.user == null && sessionScope.userName == null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="login.jsp"><span>Login</span></a>
+                                                <a class="dropdown-item text-capitalize" href="login.jsp"><span>Đăng nhập</span></a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user == null && sessionScope.userName == null}">
                                             <li>
-                                                <a class="dropdown-item text-capitalize" href="signup.jsp"><span>Sign up</span></a>
+                                                <a class="dropdown-item text-capitalize" href="signup.jsp"><span>Đăng ký</span></a>
                                             </li>
                                         </c:if>
                                         <c:if test="${sessionScope.user != null || sessionScope.userName != null}">
                                             <li>
-                                                <a class="dropdown-item capitalize" href="logout">Sign out</a>
+                                                <a class="dropdown-item capitalize" href="logout">Đăng xuất</a>
                                             </li>
                                         </c:if>
                                     </ul>

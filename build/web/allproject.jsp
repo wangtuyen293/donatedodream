@@ -96,7 +96,7 @@
         <div class="all-project">
             <div class="bg-body-tertiary py-5">
                 <h1 class="text-center fw-medium mt-5">
-                    All Projects
+                    Tất cả dự án
                 </h1>
             </div>
             <div class="projects container-fluid my-5">
@@ -104,7 +104,7 @@
                     <form action="project?action=search" method="post">
                         <div class="input-group">
                             <input id="search" class="form-control" name="search" placeholder="Search..." aria-label="Search..." aria-describedby="btn-search" />
-                            <button id="btn-search" class="btn btn-success fw-bold" type="submit">Search</button>
+                            <button id="btn-search" class="btn btn-success fw-bold" type="submit">Tìm kiếm</button>
                         </div>
                     </form>
                 </div>
@@ -112,21 +112,21 @@
                     <div></div>
                     <div class="dropdown mt-2">
                         <button class="btn btn-light fw-bold dropdown-toggle fs-6" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Filter
+                            Bộ lọc
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="project?action=filter&type=a-z">Arranged from A to Z</a></li>
-                            <li><a class="dropdown-item" href="project?action=filter&type=success">Successful Projects</a></li>
-                            <li><a class="dropdown-item" href="project?action=filter&type=new">New Projects</a></li>
-                            <li><a class="dropdown-item" href="project?action=filter&type=active">Active Projects</a></li>
-                            <li><a class="dropdown-item" href="project?action=filter&type=outdated">Outdated Projects</a></li>
+                            <li><a class="dropdown-item" href="project?action=filter&type=a-z">Sắp xếp từ A tới Z</a></li>
+                            <li><a class="dropdown-item" href="project?action=filter&type=success">Các dự án thành công</a></li>
+                            <li><a class="dropdown-item" href="project?action=filter&type=new">Các dự án mới</a></li>
+                            <li><a class="dropdown-item" href="project?action=filter&type=active">Các dự án đang tiến hành</a></li>
+                            <li><a class="dropdown-item" href="project?action=filter&type=outdated">Các dự án hết hạn</a></li>
                         </ul>
                     </div>
                 </div>
                 <c:if test="${empty projectsApproved}">
                     <div class="container p-0 error mt-2">
                         <p class="error-title text-danger">
-                            No project found
+                            Không có dự án nào được tìm thấy
                         </p>
                     </div>
                 </c:if>
@@ -146,7 +146,7 @@
                                 <c:set var="currentDate" value="<%= formattedCurrentDate%>" />
                                 <c:if test="${project.donatedAmountOfMoney > defaultAmount && project.endDate ge currentDate}">
                                     <span class="position-absolute bg-primary text-light rounded px-3 py-1">
-                                        Active
+                                        Doing
                                     </span>
                                 </c:if>
                                 <c:if test="${project.endDate lt currentDate && project.donatedAmountOfMoney < project.projectTarget}">
@@ -175,8 +175,8 @@
                                         <span class="card-text text-dark m-0">${project.donatedAmountOfMoney}</span>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <span class="card-text text-dark m-0">Goal</span>
-                                        <span class="card-text text-dark m-0">Supported</span>
+                                        <span class="card-text text-dark m-0">Mục tiêu</span>
+                                        <span class="card-text text-dark m-0">Quyên góp được</span>
                                     </div>
                                     <div class="progress my-3" role="progressbar" aria-label="progressLabel" aria-valuemin="0" aria-valuemax="100">
                                         <div class="progress-bar bg-danger" style="width: ${project.donatedAmountOfMoney * 100 / project.projectTarget}%">
@@ -185,7 +185,7 @@
                                     </div>
                                     <div class="pt-4 border-top d-flex justify-content-between">
                                         <div class="user-infor">
-                                            <img class="rounded-circle" src="./assets/img/avatar/user.png" height="40" width="40">
+                                            <img class="rounded-circle" src="${project.getUser().getAvatar() }" height="40" width="40">
                                             <span>
                                                 <a href="user?userId=${project.getUser().getUserId()}" class="text-decoration-none link-dark">
                                                     ${project.getUser().getFullName()}
@@ -195,7 +195,7 @@
                                         <div>
                                             <span>${project.donatedAmountOfMoney * 100 / project.projectTarget}%</span>
                                             <p>
-                                                Success
+                                                Phần trăm tiến độ
                                             </p>
                                         </div>
                                     </div>
@@ -240,10 +240,10 @@
                             <span style="cursor: pointer;">
                                 <c:choose>
                                     <c:when test="${page == 1}">
-                                        PREV
+                                        Trước
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="project?page=${page - 1}">PREV</a>
+                                        <a href="project?page=${page - 1}">Trước</a>
                                     </c:otherwise>
                                 </c:choose>
                             </span>
@@ -276,10 +276,10 @@
                             <span style="cursor: pointer;">
                                 <c:choose>
                                     <c:when test="${page == num}">
-                                        NEXT
+                                        Sau
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="project?page=${page + 1}">NEXT</a>
+                                        <a href="project?page=${page + 1}">Sau</a>
                                     </c:otherwise>
                                 </c:choose>
                             </span>

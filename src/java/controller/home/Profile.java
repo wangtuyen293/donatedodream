@@ -100,7 +100,8 @@ public class Profile extends HttpServlet {
                 request.setCharacterEncoding("UTF-8");
                 try {
                     String us = user.getUserName();
-                    String fullName = request.getParameter("fullName");
+                    String fullName = new String(request.getParameter("fullName").getBytes("ISO-8859-1"), "UTF-8");
+                    System.out.println(fullName);
                     String email = request.getParameter("email");
                     String phoneNumber = request.getParameter("phoneNumber");
                     int gender = Integer.parseInt(request.getParameter("gender"));
@@ -129,7 +130,7 @@ public class Profile extends HttpServlet {
                     Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
 
                     Users editedUser = new Users(fullName, us, (byte) gender, dateOfBirth, path, email, phoneNumber);
-
+                    System.out.println(editedUser);
                     // Thực hiện cập nhật thông tin người dùng
                     UserDAO dao = new UserDAO();
                     boolean success = dao.updateUserProfile(editedUser);

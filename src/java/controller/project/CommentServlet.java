@@ -4,11 +4,10 @@
  */
 package controller.project;
 
-import dao.FeedbackDAO;
+import dao.CommentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,14 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Feedback;
+import model.Comments;
 import model.Users;
 
 /**
  *
  * @author quang
  */
-public class FeedbackServlet extends HttpServlet {
+public class CommentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,24 +40,18 @@ public class FeedbackServlet extends HttpServlet {
             Users user = (Users) session.getAttribute("user");
             int userId = user.getUserId(); // Rename variable to userId
             int projectId = Integer.parseInt(request.getParameter("projectId"));
-            int rating = Integer.parseInt(request.getParameter("rating"));
-            String comment = new String(request.getParameter("comment").getBytes("ISO-8859-1"), "UTF-8");
-            // Get current time
+            String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
             java.util.Date realTime = new java.util.Date();
-
-            FeedbackDAO fb = new FeedbackDAO();
-            Feedback feedback = new Feedback(rating, comment, realTime, projectId, userId); // Pass userId instead of us
-            int feedbackId =fb.addFeedback(feedback); // Pass feedback object
-            System.out.println(feedbackId);
-            feedback.setFeedbackId(feedbackId);
-            System.out.println(feedback);
-            // Forward to projectdetails.jsp after adding feedback
+            CommentDAO dao = new CommentDAO();
+            Comments cmt = new Comments(content, realTime, projectId, userId);
+            dao.addComment(cmt);
             request.setAttribute("projectId", projectId);
             request.getRequestDispatcher("projectdetails.jsp").forward(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(Feedback.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CommentServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

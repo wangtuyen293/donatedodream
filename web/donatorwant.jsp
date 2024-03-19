@@ -47,13 +47,13 @@
     <body>
         <jsp:include page="layout/header.jsp" />
         <div class="container mt-5">
-            <h1>List of Donations</h1>
+            <h1>Danh sách ủng hộ cho dự án</h1>
             <table border="1">
                 <tr>
-                    <th>User Name</th>
-                    <th>Amount of Money</th>
-                    <th>Description</th>
-                    <th>Address</th>
+                    <th>Họ và tên</th>
+                    <th>Số tiền ủng hộ</th>
+                    <th>Nội dung</th>
+                    <th>Địa chỉ</th>
                 </tr>
                 <c:forEach var="donation" items="${don}">
                     <tr>
@@ -65,7 +65,7 @@
                 </c:forEach>
                 <c:if test="${empty don}">
                     <tr>
-                        <td colspan="4">No donations found</td>
+                        <td colspan="4">Dự án chưa được ủng hộ</td>
                     </tr>
                 </c:if>
             </table>

@@ -47,7 +47,7 @@
     <body>
         <jsp:include page="layout/header.jsp" />
         <div class="container mt-5 mx-auto">
-            <h3 class="card-title text-center mb-4 bg-primary text-white p-2">Thông tin khách hàng</h3>
+            <h3 class="card-title text-center mb-4 bg-primary text-white p-2">Thông tin người ủng hộ</h3>
             <div class="card-body bg-light p-4"> <!-- Add a background color and padding to the card-body -->
                 <form action="donation" method="post"> <!-- Add your desired action URL -->                  
                     <div class="form-group">

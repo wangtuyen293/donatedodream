@@ -4,6 +4,8 @@
     Author     : OS
 --%>
 
+<%@page import="model.Comments"%>
+<%@page import="dao.CommentDAO"%>
 <%@page import="dao.UserDAO"%>
 <%@page import="model.ProjectMilestoneGift"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -152,19 +154,19 @@
                             <div id="exTab2" class="py-1 px-5 mx-5">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#1" data-bs-toggle="tab">Details</a>
+                                        <a class="nav-link active" href="#1" data-bs-toggle="tab">Thông tin</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#2" data-bs-toggle="tab">Feedback</a>
+                                        <a class="nav-link" href="#2" data-bs-toggle="tab">Nhận xét</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#3" data-bs-toggle="tab">Comment</a>
+                                        <a class="nav-link" href="#3" data-bs-toggle="tab">Bình luận</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#4" data-bs-toggle="tab">Process</a>
+                                        <a class="nav-link" href="#4" data-bs-toggle="tab">Tiến độ</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#5" data-bs-toggle="tab">Donate history</a>
+                                        <a class="nav-link" href="#5" data-bs-toggle="tab">Lịch sử</a>
                                     </li>
                                 </ul>
 
@@ -176,12 +178,12 @@
                                                 <h1 class="card-title">${project.projectName}</h1>
                                                 <p class="card-text">${project.projectDescription}</p>
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item"><strong>Goal:</strong> ${project.projectTarget}</li>
-                                                    <li class="list-group-item"><strong>Funded:</strong> ${project.donatedAmountOfMoney}</li>
-                                                    <li class="list-group-item"><strong>Time:</strong> ${project.startDate} to ${project.endDate}</li>
+                                                    <li class="list-group-item"><strong>Mục tiêu:</strong> ${project.projectTarget}</li>
+                                                    <li class="list-group-item"><strong>Đã ủng hộ:</strong> ${project.donatedAmountOfMoney}</li>
+                                                    <li class="list-group-item"><strong>Thời gian:</strong> ${project.startDate} đến ${project.endDate}</li>
                                                 </ul>
                                                 <div class="card-body">
-                                                    <a href="donation?action=donation&id=${project.projectId}&milestoneId=14" class="btn btn-danger">Donate to project</a>
+                                                    <a href="donation?action=donation&id=${project.projectId}&milestoneId=14" class="btn btn-danger">Ủng hộ cho dự án</a>
                                                 </div>
                                             </div>
 
@@ -190,7 +192,7 @@
 
                                     <div class="tab-pane" id="2">
 
-                                        <h3>Feedback For Project</h3>
+                                        <h3>Các nhận xét của người ủng hộ</h3>
                                         <%
                                             try {
                                                 int projectId = (int) request.getAttribute("projectId");
@@ -202,15 +204,36 @@
                                         %>
                                         <div class="card mb-3">
                                             <div class="card-body">
-                                                <p class="card-text">Real Time: <%= feedback.getRealTime()%></p>
-                                                <p class="card-text">Rating: <%= feedback.getStar()%></p>
-                                                <p class="card-text">Content: <%= feedback.getContent()%></p>
-
+                                                <p class="card-text"><%= feedback.getRealTime()%></p>
+                                                <p class="card-text">Đánh giá: <%= feedback.getStar()%> sao</p>
+                                                <p class="card-text">Nhận xét: <%= feedback.getContent()%></p>
 
                                                 <!-- Thêm nút sửa và nút xóa -->
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="editfeedback?id=<%= feedback.getUserId()%>" class="btn btn-warning">Edit</a>
-                                                    <a href="deleteFeedback?id=<%= feedback.getFeedbackId()%>" class="btn btn-danger">Delete</a>        
+                                                    <a href="editfeedback?id=<%= feedback.getUserId()%>&fdid=<%= feedback.getFeedbackId()%>" class="btn btn-warning">Sửa</a>
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<%= feedback.getFeedbackId()%>">
+                                                        Xoá
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal<%= feedback.getFeedbackId()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá feedback</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Bạn có muốn xoá không?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                                    <a href="deletefeedback?id=<%= feedback.getFeedbackId()%>&projectId=<%= feedback.getProjectId()%>" class="btn btn-danger">Xoá</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -239,7 +262,7 @@
                                                                     <input type="hidden" id="projectId" name="projectId" value="${project.projectId}">
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="rating">Rating:</label>
+                                                                    <label for="rating">Đánh giá:</label>
                                                                     <div class="rating">
                                                                         <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"></label>
                                                                         <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"></label>
@@ -249,7 +272,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="comment">Comment:</label>
+                                                                    <label for="comment">Nhận xét:</label>
                                                                     <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                                                                 </div>
                                                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -258,7 +281,7 @@
                                                     </c:forEach>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <p>No donations found for this project.</p>
+                                                    <p>Chưa có feedback nào.</p>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:if>
@@ -266,75 +289,74 @@
                                     </div>
 
                                     <div class="tab-pane" id="3">
-                                        <div class="panel-group" id="accordionMenu2" role="tablist" aria-multiselectable="true">
 
-                                            <c:forEach var="productReview" items="${requestScope.projectReviews}">
-                                                <div class="sin-rattings mb-4">
-                                                    <div class="star-author-all mb-2 clearfix">
-                                                        <div class="ratting-author float-start">
-                                                            <h5 class="float-start me-3">${productReview.user.fullName}</h5>
+                                        <%
+                                            CommentDAO cmtdao = new CommentDAO();
+                                            try {
+                                                List<Comments> comments = cmtdao.getProjectComments(projectId);
+                                                for (Comments comment : comments) {
+                                        %>
+                                        <div class="col-md-4" style="width: 600px;">
+                                            <div class="card" ">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">User ID: <%= comment.getUserId()%></h5>
+                                                    <p class="card-text" id="comment_<%= comment.getCommentId()%>"><%= comment.getContent()%></p>
+                                                    <p class="card-text">Time: <%= comment.getRealTime()%></p>
+                                                </div>
+                                                <div class="btn-group" role="group" aria-label="Basic example" style="max-width: 150px">
+                                                    <a href="editcomment?id=<%= comment.getUserId()%>&cmtid=<%= comment.getCommentId()%>" class="btn btn-light">Sửa</a>
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%= comment.getCommentId() %>">
+                                                        Xoá
+                                                    </button>
 
-                                                            <h5 class="float-start me-3">${productReview.content}</h5>
-                                                            <span>
-                                                                <fmt:parseDate value="${productReview.realTime}"
-                                                                               pattern="yyyy-MM-dd'T'HH:mm" var="parsedCreatedAt"
-                                                                               type="both"/>
-                                                                <fmt:formatDate pattern="HH:mm dd/MM/yyyy " value="${parsedCreatedAt}"/>
-                                                            </span>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal<%= comment.getCommentId()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá feedback</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Bạn có muốn xoá không?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                                    <a href="deletecomment?id=<%= comment.getCommentId()%>&projectId=<%= comment.getProjectId()%>" class="btn btn-danger">Xoá</a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
 
-                                                    <c:if test="${productReview.userId == sessionScope.currentUser.userId}">
-                                                        <form action="${pageContext.request.contextPath}/deleteReview" method="post">
-                                                            <input type="hidden" name="projectReviewId" value="${productReview.commentId}">
-                                                            <input type="hidden" name="projectId" value="${requestScope.product.projectId}">
-                                                            <div class="btn-group" role="group">
-                                                                <a href="${pageContext.request.contextPath}/updateReview?id=${productReview.commentId}"
-                                                                   role="button"
-                                                                   class="btn btn-primary btn-sm">
-                                                                    Sửa
-                                                                </a>
-                                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                                        onclick="return confirm('Bạn có muốn xóa?')">Xóa
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </c:if>
+                                        </div>
+                                        <%
+                                                }
+                                            } catch (SQLException e) {
+                                                e.printStackTrace();
+                                            } finally {
+                                                // Close resources
+                                            }
+                                        %>
+
+                                        <div class="container mt-5">
+                                            <h2 class="mb-4">Bình luận</h2>
+                                            <form action="comment" method="post">
+                                                <div class="form-group">
+                                                    <label for="content"></label>
+                                                    <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
                                                 </div>
-                                            </c:forEach>
-                                            <form action="${pageContext.request.contextPath}/addReview" method="post">
-                                                <div class="form-group row mb-3">
-                                                    <div class="col">
-                                                        <textarea class="form-control ${not empty sessionScope.violations.contentViolations
-                                                                                        ? 'is-invalid' : (not empty sessionScope.values.content ? 'is-valid' : '')}"
-                                                                  name="content"
-                                                                  placeholder="Nội dung đánh giá"
-                                                                  rows="3">${sessionScope.values.content}</textarea>
-                                                        <c:if test="${not empty sessionScope.violations.contentViolations}">
-                                                            <div class="invalid-feedback">
-                                                                <ul class="list-unstyled mb-0">
-                                                                    <c:forEach var="violation"
-                                                                               items="${sessionScope.violations.contentViolations}">
-                                                                        <li>${violation}</li>
-                                                                        </c:forEach>
-                                                                </ul>
-                                                            </div>
-                                                        </c:if>
-                                                    </div>
+                                                <div>
+                                                    <input type="hidden" id="projectId" name="projectId" value="${project.projectId}">
                                                 </div>
-                                                <input type="hidden" name="userId" value="${sessionScope.currentUser.userId}">
-                                                <input type="hidden" name="projectId" value="${requestScope.product.projectId}">
-                                                <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                                                <button type="submit" class="btn btn-primary">Bình luận</button>
                                             </form>
-                                            <c:remove var="values" scope="session"/>
-                                            <c:remove var="violations" scope="session"/>
-                                            <c:remove var="successMessage" scope="session"/>
-                                            <c:remove var="errorAddReviewMessage" scope="session"/>
-                                            <c:remove var="errorDeleteReviewMessage" scope="session"/>
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="4">
-                                        <h1>Project Process</h1>
+                                        <h1>Tiến độ dự án</h1>
                                         <%
                                             // Get project process object from session
                                             ProjectProcess projectProcess = (ProjectProcess) session.getAttribute("projectProcess");
@@ -342,19 +364,19 @@
                                             if (projectProcess != null) {
                                         %>
                                         <div>
-                                            <h2>Project Process Information</h2>
-                                            <p>Project Process: <%= projectProcess.getProcessName()%></p>
-                                            <p>Start Date: <%= projectProcess.getUpdateDate()%></p>
-                                            <p>Project Cost: <%= projectProcess.getMoneyCost()%></p>
-                                            <p>Project Description: <%= projectProcess.getDescription()%></p>
-                                            <h3>Project Images</h3>
+                                            <h2>Updating</h2>
+                                            <p><%= projectProcess.getProcessName()%></p>
+                                            <p>Ngày diễn ra: <%= projectProcess.getUpdateDate()%></p>
+                                            <p>Tổng vốn dự án: <%= projectProcess.getMoneyCost()%></p>
+                                            <p> <%= projectProcess.getDescription()%></p>
+                                            <h3>Hình ảnh mô tả</h3>
                                             <img src="<%= projectProcess.getImage1()%>" alt="Image 1">
                                             <img src="<%= projectProcess.getImage2()%>" alt="Image 2">
                                             <img src="<%= projectProcess.getImage3()%>" alt="Image 3">
                                             <img src="<%= projectProcess.getImage4()%>" alt="Image 4">
                                         </div>
                                         <% } else { %>
-                                        <p>No project process information available.</p>
+                                        <p>Dự án chưa được gọi vốn thành công hoặc đang trong quá trình thực hiện. Vui lòng quay lại sau.</p>
                                         <% } %>
                                     </div>
 
@@ -362,7 +384,7 @@
                                         <div class="card-body tab-content">
 
                                             <div class="form-group">
-                                                <h3>List of donations:</h3>
+                                                <h3>Danh sách ủng hộ:</h3>
                                                 <br>
                                                 <div class="list-group"> <!-- Sử dụng list-group của Bootstrap -->
                                                     <% for (Donation donation : donationList) {
@@ -393,7 +415,7 @@
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h2 class="card-title">Milestones</h2>
+                            <h2 class="card-title">Các mốc quà</h2>
                             <%
                                 List<ProjectMilestoneGift> milestones = (List<ProjectMilestoneGift>) session.getAttribute("milestone");
                                 if (milestones != null && !milestones.isEmpty()) {
@@ -411,7 +433,7 @@
                                 }
                             } else {
                             %>
-                            <p>No milestones available.</p>
+
                             <% }%>
                         </div>
                     </div>

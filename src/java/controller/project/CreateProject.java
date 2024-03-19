@@ -97,20 +97,20 @@ public class CreateProject extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             Users user = (Users) session.getAttribute("user");
-            String us = user.getUserName();
-            String charityOrganizationName = request.getParameter("charityOrganizationName");
+            String us = user.getUserName();            
+            String charityOrganizationName = new String(request.getParameter("charityOrganizationName").getBytes("ISO-8859-1"), "UTF-8");
             String projectName = request.getParameter("projectName");
             String projectTarget = request.getParameter("projectTarget");
             BigDecimal bigDecimalValue = new BigDecimal(projectTarget);
-            String projectDescription = request.getParameter("projectDescription");
+            String projectDescription = new String(request.getParameter("projectDescription").getBytes("ISO-8859-1"), "UTF-8");
             String reward1 = request.getParameter("reward1");
-            String reward1Description = request.getParameter("reward1Description");
+            String reward1Description = new String(request.getParameter("reward1Description").getBytes("ISO-8859-1"), "UTF-8");
             String reward2 = request.getParameter("reward2");
-            String reward2Description = request.getParameter("reward2Description");
+            String reward2Description = new String(request.getParameter("reward2Description").getBytes("ISO-8859-1"), "UTF-8");
             String reward3 = request.getParameter("reward3");
-            String reward3Description = request.getParameter("reward3Description");
+            String reward3Description = new String(request.getParameter("reward3Description").getBytes("ISO-8859-1"), "UTF-8");
             String reward4 = request.getParameter("reward4");
-            String reward4Description = request.getParameter("reward4Description");
+            String reward4Description = new String(request.getParameter("reward4Description").getBytes("ISO-8859-1"), "UTF-8");
             Date startDate = null;
             Date endDate = null;
             Date currentDate = new Date(System.currentTimeMillis());

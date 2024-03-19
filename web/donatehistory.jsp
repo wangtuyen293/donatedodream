@@ -46,10 +46,10 @@
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
-        <h1>Thank You Messages</h1>
+        <h1>Những người đã ủng hộ dự án</h1>
         <ul>
             <c:forEach var="donation" items="${donations}">
-                <li>Cảm ơn ${userName} đã donate ${donation.amountOfMoney}</li>
+                <li>Cảm ơn ${userName} đã ủng hộ cho dự án ${donation.amountOfMoney}</li>
                 </c:forEach>
         </ul>
         <jsp:include page="layout/footer.jsp" />

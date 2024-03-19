@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Profile</title>
+        <title>Thông tin cá nhân</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="./assets/css/slicknav.css">
         <link rel="stylesheet" href="./assets/css/animate.min.css">
         <link rel="stylesheet" href="./assets/css/magnific-popup.css">
-        <!--<link rel="stylesheet" href="assets/css/fontawesome.min.css">-->
+<!--        <link rel="stylesheet" href="assets/css/fontawesome.min.css">-->
         <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
         <link rel="stylesheet" href="./assets/css/themify-icons.css">
         <link rel="stylesheet" href="./assets/css/slick.css">
@@ -112,25 +112,25 @@
                         <li class="sidebar-myprofile py-2 active" onclick="handleUserInfor('myprofile')">
                             <a class="ps-3 text-decoration-none" href="#">
                                 <i class="fa fa-user"></i> 
-                                <span class="ps-2">My Profile</span>
+                                <span class="ps-2">Thông tin cá nhân</span>
                             </a>
                         </li>
                         <li class="sidebar-myproject py-2" onclick="handleUserInfor('myproject')">
                             <a class="ps-3 text-decoration-none" href="#">
                                 <i class="fa-solid fa-list"></i>
-                                <span class="ps-2">My Projects</span>
+                                <span class="ps-2">Dự án của tôi</span>
                             </a>
                         </li>
                         <li class="sidebar-editprofile py-2" onclick="handleUserInfor('editprofile')">
                             <a class="ps-3 text-decoration-none" href="#"> 
                                 <i class="fa fa-edit"></i> 
-                                <span class="ps-2">Edit Profile</span>
+                                <span class="ps-2">Thay đổi thông tin</span>
                             </a>
                         </li>
                         <li class="sidebar-changepass py-2" onclick="handleUserInfor('changepass')">
                             <a class="ps-3 text-decoration-none" href="#">
                                 <i class="fa-solid fa-calendar-days"></i>
-                                <span class="ps-2">Change Password</span>
+                                <span class="ps-2">Đổi mật khẩu</span>
                             </a>
                         </li>
                     </ul>
@@ -139,15 +139,15 @@
                 <div class="my-profile col-9 bg-white pt-3 pb-5">
                     <nav class="ms-3" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            <li class="breadcrumb-item active">My Profile</li>
+                            <li class="breadcrumb-item"><a href="home">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Thông tin cá nhân</li>
                         </ol>
                     </nav>
 
-                    <h3 class="ms-3 my-3 text-capitalize fw-bold">My Profile</h3>
+                    <h3 class="ms-3 my-3 text-capitalize fw-bold">Thông tin cá nhân của tôi</h3>
                     <div class="ms-2 my-4 row">
                         <div class="col-12 col-lg-6">
-                            <p>Full Name: ${sessionScope.user.fullName}</p>
+                            <p>Tên đầy đủ: ${sessionScope.user.fullName}</p>
                         </div>
                         <div class="col-12 col-lg-6">
                             <p>Username: ${sessionScope.user.userName}</p>
@@ -156,22 +156,22 @@
                             <p>Email: ${sessionScope.user.email}</p>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <p>Gender: 
+                            <p>Giới tính: 
                                 <c:if test="${empty sessionScope.user.gender}">
                                 </c:if>
                                 <c:if test="${sessionScope.user.gender eq 1}">
-                                    Female
+                                    Nữ
                                 </c:if>
                                 <c:if test="${sessionScope.user.gender eq 0}">
-                                    Male
+                                   Nam
                                 </c:if>
                             </p>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <p>Phone: ${sessionScope.user.phoneNumber}</p>
+                            <p>Số điện thoại: ${sessionScope.user.phoneNumber}</p>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <p>Birthday: ${sessionScope.user.dateOfBirth}</p>
+                            <p>Ngày sinh: ${sessionScope.user.dateOfBirth}</p>
                         </div>
                     </div>
                 </div>
@@ -179,12 +179,12 @@
                 <div class="my-project col-9 bg-white pt-3 pb-5 d-none">
                     <nav class="ms-3" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            <li class="breadcrumb-item active">My Projects</li>
+                            <li class="breadcrumb-item"><a href="home">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Dự án của tôi</li>
                         </ol>
                     </nav>
 
-                    <h3 class="ms-3 my-3 text-capitalize fw-bold">My Projects</h3>
+                    <h3 class="ms-3 my-3 text-capitalize fw-bold">Dự án của tôi</h3>
                     <div class="ms-2 my-4">
                         <c:if test="${projectList != null && !projectList.isEmpty()}">
                             <div id="userProjectCarousel" class="carousel carousel-dark slide">
@@ -205,8 +205,8 @@
                                                             <span class="card-text text-dark m-0">${project.donatedAmountOfMoney}</span>
                                                         </div>
                                                         <div class="d-flex justify-content-between">
-                                                            <span class="card-text text-dark m-0">Goal</span>
-                                                            <span class="card-text text-dark m-0">Supported</span>
+                                                            <span class="card-text text-dark m-0">Mục tiêu</span>
+                                                            <span class="card-text text-dark m-0">Đã ủng hộ</span>
                                                         </div>
                                                         <div class="progress my-3" role="progressbar" aria-label="progressLabel"
                                                              aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -216,10 +216,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-title mt-2" role="group" aria-label="Basic example">   
-                                                            <a href="updateprojectprocess?id=${project.projectId}&donationPercentage=${project.donatedAmountOfMoney * 100 / project.projectTarget}" class="btn btn-danger"">Update Process</a>
+                                                            <a href="updateprojectprocess?id=${project.projectId}&donationPercentage=${project.donatedAmountOfMoney * 100 / project.projectTarget}" class="btn btn-danger"">Cập nhật dự án</a>
                                                         </div>
                                                         <div class="card-title mt-2" role="group" aria-label="Basic example">   
-                                                            <a href="viewdonatorwant?id=${project.projectId}" class="btn btn-dark"">View donation types</a>
+                                                            <a href="viewdonatorwant?id=${project.projectId}" class="btn btn-dark"">Danh sách ủng hộ</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -246,20 +246,20 @@
                 <div class="edit-profile container col-9 bg-white pt-3 pb-5 d-none">
                     <nav class="ms-3" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Profile</li>
+                            <li class="breadcrumb-item"><a href="home">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Thay đổi thông tin cá nhân</li>
                         </ol>
                     </nav>
 
-                    <h3 class="ms-3 my-3 text-capitalize fw-bold">Edit Profile</h3>
+                    <h3 class="ms-3 my-3 text-capitalize fw-bold">Thay đổi thông tin cá nhân</h3>
 
                     <form action="profile?action=updateprofile" method="post" enctype="multipart/form-data">
                         <div class="mx-3 mb-3">
-                            <label for="avatar">Avatar:</label>
+                            <label for="avatar">Ảnh đại diện:</label>
                             <input type="file" class="form-control-file" id="avatar" name="avatar" size="100" required>
                         </div>
                         <div class="mx-3 mb-3">
-                            <label for="fullName" class="form-label">Full Name</label>
+                            <label for="fullName" class="form-label">Họ và tên:</label>
                             <input type="text" class="form-control" id="fullName" name="fullName" value="${sessionScope.user.fullName}">
                         </div>
                         <div class="mx-3 mb-3">
@@ -271,24 +271,24 @@
                             <input type="email" class="form-control" id="email" name="email" value="${sessionScope.user.email}" readonly/>
                         </div>
                         <div class="mx-3 mb-3">
-                            <label for="phone" class="form-label">Phone</label>
+                            <label for="phone" class="form-label">Số điện thoại</label>
                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="${sessionScope.user.phoneNumber}"/>
                         </div>
                         <div class="mx-3 mb-3">
-                            <label for="gender" class="form-label">Gender</label>
+                                <label for="gender" class="form-label">Giới tính</label>
                             <select class="form-control" id="gender" name="gender">
-                                <option value="1" ${sessionScope.user.gender == 1 ? 'selected' : ''}>Male</option>
-                                <option value="0" ${sessionScope.user.gender == 0 ? 'selected' : ''}>Female</option>
-                                <option ${(sessionScope.user.gender != 0 && sessionScope.user.gender != 1) ? 'selected' : ''}>Choose a gender</option>
+                                <option value="1" ${sessionScope.user.gender == 1 ? 'selected' : ''}>Nam</option>
+                                <option value="0" ${sessionScope.user.gender == 0 ? 'selected' : ''}>Nữ</option>
+                                <option ${(sessionScope.user.gender != 0 && sessionScope.user.gender != 1) ? 'selected' : ''}>Khác</option>
                             </select>
                         </div>
                         <div class="mx-3 mt-5 mb-3">
-                            <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                            <label for="dateOfBirth" class="form-label">Ngày sinh</label>
                             <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value="${sessionScope.user.dateOfBirth}"/>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </div>
                     </form>
                 </div>
@@ -297,29 +297,29 @@
                     
                     <nav class="ms-3" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            <li class="breadcrumb-item active">Change Password</li>
+                            <li class="breadcrumb-item"><a href="home">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Đổi mật khẩu</li>
                         </ol>
                     </nav>
 
-                    <h3 class="ms-3 my-3 text-capitalize fw-bold">Change Password</h3>
+                    <h3 class="ms-3 my-3 text-capitalize fw-bold">Đổi mật khẩu</h3>
 
                     <form action="profile?action=changepass" method="post">
                         <div class="mx-3 mb-3">
-                            <label for="oldpass" class="form-label">Old Password</label>
+                            <label for="oldpass" class="form-label">Mật khẩu hiện tại</label>
                             <input type="password" class="form-control" id="oldpass" name="oldpass">
                         </div>
                         <div class="mx-3 mb-3">
-                            <label for="newpass" class="form-label">New Password</label>
+                            <label for="newpass" class="form-label">Mật khẩu mới</label>
                             <input type="password" class="form-control" id="newpass" name="newpass">
                         </div>
                         <div class="mx-3 mb-3">
-                            <label for="confirmpass" class="form-label">Confirm New Password</label>
+                            <label for="confirmpass" class="form-label">Xác nhận mật khẩu mới</label>
                             <input type="password" class="form-control" id="confirmpass" name="confirmpass">
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
                         </div>
                     </form>
                 </div>

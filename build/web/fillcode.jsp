@@ -49,11 +49,11 @@
         <div class="container mt-5">
             <form action="sendemail" method="post">
                 <div class="form-group">
-                    <label for="code">Enter your code:</label>
+                    <label for="code">Điền code của bạn được gửi trong email.Hãy check email của bạn để lấy mã:</label>
                     <input type="number" class="form-control" id="code" name="code" required>
                     <input type="hidden" name="email" value="${email}">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Xác nhận</button>
             </form>
         </div>
         <jsp:include page="layout/footer.jsp" />

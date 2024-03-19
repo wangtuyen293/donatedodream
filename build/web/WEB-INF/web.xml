@@ -124,6 +124,22 @@
         <servlet-name>ViewDonatorWant</servlet-name>
         <servlet-class>controller.project.ViewDonatorWant</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteFeedbackServlet</servlet-name>
+        <servlet-class>controller.project.DeleteFeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>controller.project.CommentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditComment</servlet-name>
+        <servlet-class>controller.project.EditComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteComment</servlet-name>
+        <servlet-class>controller.project.DeleteComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -239,6 +255,22 @@
     <servlet-mapping>
         <servlet-name>ViewDonatorWant</servlet-name>
         <url-pattern>/viewdonatorwant</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedbackServlet</servlet-name>
+        <url-pattern>/deletefeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditComment</servlet-name>
+        <url-pattern>/editcomment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteComment</servlet-name>
+        <url-pattern>/deletecomment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

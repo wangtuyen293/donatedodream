@@ -4,26 +4,22 @@
  */
 package controller.project;
 
-import dao.FeedbackDAO;
+import dao.CommentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Feedback;
-import model.Users;
 
 /**
  *
  * @author quang
  */
-public class FeedbackServlet extends HttpServlet {
+public class DeleteComment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,29 +32,19 @@ public class FeedbackServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            HttpSession session = request.getSession();
-            Users user = (Users) session.getAttribute("user");
-            int userId = user.getUserId(); // Rename variable to userId
-            int projectId = Integer.parseInt(request.getParameter("projectId"));
-            int rating = Integer.parseInt(request.getParameter("rating"));
-            String comment = new String(request.getParameter("comment").getBytes("ISO-8859-1"), "UTF-8");
-            // Get current time
-            java.util.Date realTime = new java.util.Date();
-
-            FeedbackDAO fb = new FeedbackDAO();
-            Feedback feedback = new Feedback(rating, comment, realTime, projectId, userId); // Pass userId instead of us
-            int feedbackId =fb.addFeedback(feedback); // Pass feedback object
-            System.out.println(feedbackId);
-            feedback.setFeedbackId(feedbackId);
-            System.out.println(feedback);
-            // Forward to projectdetails.jsp after adding feedback
-            request.setAttribute("projectId", projectId);
-            request.getRequestDispatcher("projectdetails.jsp").forward(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(Feedback.class.getName()).log(Level.SEVERE, null, ex);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DeleteComment</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DeleteComment at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,7 +59,20 @@ public class FeedbackServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int commentId = Integer.parseInt(request.getParameter("id"));
+            System.out.println(commentId);
+            int projectId = Integer.parseInt(request.getParameter("projectId"));
+            System.out.println(projectId);
+            CommentDAO feedbackDAO = new CommentDAO();
+            feedbackDAO.deleteCommentById(commentId);
+            request.setAttribute("projectId", projectId);
+            request.getRequestDispatcher("projectdetails.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteComment.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DeleteComment.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

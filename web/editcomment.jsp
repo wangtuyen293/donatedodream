@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Lấy lại mật khẩu</title>
+        <title>Sửa nhận xét dự án</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -42,19 +42,83 @@
                 margin: auto;
                 margin-top: 50px; /* Điều chỉnh khoảng cách từ trên xuống theo ý muốn */
             }
+            .rating {
+                display: inline-block;
+                unicode-bidi: bidi-override;
+                direction: rtl;
+            }
+
+            .rating input {
+                display: none;
+            }
+
+            .rating label {
+                float: right;
+                color: #aaa;
+                font-size: 1.5rem;
+                padding: 0;
+                cursor: pointer;
+            }
+
+            .rating label:before {
+                content: '\2605';
+                padding: 5px;
+                font-size: 2rem;
+            }
+
+            .rating input:checked ~ label,
+            .rating input:checked ~ label ~ label {
+                color: #f8d61c;
+            }
+
+            .rating:not(:checked) > label:hover,
+            .rating:not(:checked) > label:hover ~ label {
+                color: #f8d61c;
+            }
+
+            .rating input:checked + label:hover,
+            .rating input:checked + label:hover ~ label,
+            .rating input:checked ~ label:hover ~ label,
+            .rating input:checked ~ label:hover ~ label:hover {
+                color: #f8d61c;
+            }
+
+            .rating label:hover:before,
+            .rating label:hover ~ label:before,
+            .rating input:checked:hover ~ label:before,
+            .rating input:checked:hover ~ label ~ label:before,
+            .rating input:checked ~ label:hover ~ label:before,
+            .rating input:checked ~ label:hover ~ label:hover:before {
+                content: '\2605';
+                color: #f8d61c;
+            }
+
+            .rating input:checked + label:hover:before,
+            .rating input:checked + label:hover ~ label:before,
+            .rating input:checked ~ label:hover ~ label:before,
+            .rating input:checked ~ label:hover ~ label:hover:before {
+                content: '\2605';
+                color: #f8d61c;
+            }
         </style>
     </head>
     <body>
         <jsp:include page="layout/header.jsp" />
-        <div class="container mt-5">
-            <form action="sendemail" method="get">
-                <div class="form-group">
-                    <label for="code">Nhập email của bạn cần lấy lại mất khẩu:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Xác nhận</button>
-            </form>
-        </div>
+        <h2>Sửa bình luận</h2>
+        <form action="editcomment" method="post">
+            <div>
+                <input type="hidden" id="projectId" name="projectId" value="${project.projectId}">
+            </div>
+            <div>
+                <input type="hidden" id="commentId" name="commentId" value="${commentId}">
+            </div>>
+            <div class="mb-3">
+                <label for="comment">Bình luận:</label>
+                <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Xác nhận</button>
+        </form>
+
         <jsp:include page="layout/footer.jsp" />
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
 

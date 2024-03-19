@@ -85,7 +85,7 @@ public class EditProfileServlet extends HttpServlet {
             }
 
             Users editedUser = new Users(fullName, us, (byte) gender, dateOfBirth, path, email, phoneNumber);
-
+            System.out.println(editedUser);
             // Thực hiện cập nhật thông tin người dùng
             UserDAO dao = new UserDAO();
             boolean success = dao.updateUserProfile(editedUser);

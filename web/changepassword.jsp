@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Change Password</title>
+        <title>Đổi mật khẩu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="manifest" href="site.webmanifest">-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -51,7 +51,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            Change Password
+                            Đổi mật khẩu
                         </div>
                         <div class="card-body">
                             <form action="changepassword" method="post">

@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Donate Do Dreaming</title>
+        <title>Trang chủ</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
         <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
@@ -50,12 +50,12 @@
                             <div class="row justify-content-between align-items-center">
                                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                     <div class="hero__caption">
-                                        <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Support Community Projects</h1>
-                                        <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">Enabling Community Empowerment: Fostering Positive Change for Those in Need</p>
+                                        <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Nền tảng kêu gọi quỹ cộng đồng</h1>
+                                        <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">Những dự án và quỹ từ thiện cần được xã hội chung tay.</p>
 
                                         <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s"
                                              data-duration="2000ms">
-                                            <a href="industries.html" class="btn hero-btn fw-bold btn-light">Donate now</a>
+                                            <a href="project" class="btn hero-btn fw-bold btn-light">Ủng hộ ngay</a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,14 +73,14 @@
                             <div class="row justify-content-between align-items-center">
                                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                     <div class="hero__caption">
-                                        <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Participate in Charitable Campaigns</h1>
+                                        <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Quỹ từ thiện</h1>
                                         <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">
-                                            When You Give, You Do Not Lose. Instead, You Gain Even More. Because the Inner Compassion Knows You Have Contributed to Making a Beautiful Difference in Others' Lives. 
+                                            Khi Bạn Cho Đi, Bạn Không Mất. Thay vào đó, bạn còn đạt được nhiều hơn nữa. Bởi vì Lòng trắc ẩn bên trong biết rằng bạn đã góp phần tạo nên sự khác biệt tốt đẹp trong cuộc sống của người khác. 
                                         </p>
 
                                         <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s"
                                              data-duration="2000ms">
-                                            <a href="industries.html" class="btn hero-btn fw-bold btn-light">Donate Now</a>
+                                            <a href="project" class="btn hero-btn fw-bold btn-light">Ủng hộ ngay</a>
                                         </div>
                                     </div>
                                 </div>
@@ -93,235 +93,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <section class="new-product-area section-padding30">
-                <div class="container">
-
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="section-tittle mb-70">
-                                <h2>Outstanding Projects</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-new-pro mb-30 text-center">
-                                <div class="product-img">
-                                    <img src="assets/img/hero/remotechild2.jpg" alt>
-                                </div>
-                                <div class="product-caption">
-                                    <h3>
-                                        <a href="product_details.html">Hopeful Hearts Project</a>
-                                    </h3>
-                                    <div id="progress-container">
-                                        <progress id="my-progress" value="75" max="100"></progress>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Project Process: </h5>
-                                        <h5>75%</h5>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Goal: </h5>
-                                        <h5>200,000,000 đ</h5>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Supported: </h5>
-                                        <h5>312,462,368 đ</h5>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm btn-light fw-bold">View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-new-pro mb-30 text-center">
-                                <div class="product-img">
-                                    <img src="assets/img/hero/refugee.jpg" alt>
-                                </div>
-                                <div class="product-caption">
-                                    <h3><a href="product_details.html">Nurturing Spirits Project</a></h3>
-
-                                    <div id="progress-container">
-                                        <progress id="my-progress" value="75" max="100"></progress>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Project Process: </h5>
-                                        <h5>75%</h5>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Goal: </h5>
-                                        <h5>200,000,000 đ</h5>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Supported: </h5>
-                                        <h5>312,462,368 đ</h5>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm btn-light fw-bold">View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-new-pro mb-30 text-center">
-                                <div class="product-img">
-                                    <img src="assets/img/hero/cancer.jpg" alt>
-                                </div>
-                                <div class="product-caption">
-                                    <h3><a href="product_details.html">Radiant Resilience Project</a></h3>
-                                    <div id="progress-container">
-                                        <progress id="my-progress" value="75" max="100"></progress>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Project Process: </h5>
-                                        <h5>75%</h5>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Goal: </h5>
-                                        <h5>200,000,000 đ</h5>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5>Supported: </h5>
-                                        <h5>312,462,368 đ</h5>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm btn-light fw-bold">View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button class="btn btn-danger fw-bold">View More</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="popular-items section-padding30">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-7 col-lg-8 col-md-10">
-                            <div class="section-tittle mb-70 text-center">
-                                <h2>Những dự án tiềm năng</h2>
-                                <p>Tiềm năng khám phá con người là vô hạn, và quỹ cộng đồng như một bước đệm giúp những ước mơ bay xa.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img src="assets/img/needy/cancer.jpg" alt>
-                                    <div class="img-cap">
-                                        <span>Donate</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img src="assets/img/needy/refugee.jpg" alt>
-                                    <div class="img-cap">
-                                        <span>Donate</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img src="assets/img/needy/remotechild2.jpg" alt>
-                                    <div class="img-cap">
-                                        <span>Donate</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img src="assets/img/needy/cancer.jpg" alt>
-                                    <div class="img-cap">
-                                        <span>Donate</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img src="assets/img/needy/refugee.jpg" alt>
-                                    <div class="img-cap">
-                                        <span>Donate</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img src="assets/img/needy/remotechild2.jpg" alt>
-                                    <div class="img-cap">
-                                        <span>Donate</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="room-btn pt-70">
-                            <a href="category.html" class="btn btn-light view-btn hero-btn fw-bold">View More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>         
             <div class="watch-area section-padding30">
                 <div class="container">
                     <div class="row align-items-center justify-content-between padding-130">

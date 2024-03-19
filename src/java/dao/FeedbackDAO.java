@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,59 +23,77 @@ public class FeedbackDAO {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    public void addFeedback(Feedback feedback) throws SQLException, ClassNotFoundException {
-        conn = new DonationDBContext().getConnection();
-        try {
-            // Câu lệnh SQL để chèn phản hồi vào cơ sở dữ liệu
-            String sql = "INSERT INTO feedback (content, realTime, projectId, userId,rating) VALUES (?, ?, ?, ?, ?)";
+    public int addFeedback(Feedback feedback) throws SQLException, ClassNotFoundException {
+        int feedbackId = -1; // Giá trị mặc định trong trường hợp không có feedbackId được trả về
 
-            try ( PreparedStatement statement = conn.prepareStatement(sql)) {
-                // Đặt các tham số cho câu lệnh SQL
-                statement.setInt(5, feedback.getStar());
+        conn = new DonationDBContext().getConnection();
+        ResultSet generatedKeys = null;
+        try {
+            String sql = "INSERT INTO feedback (content, realTime, projectId, userId, rating) VALUES (?, ?, ?, ?, ?)";
+            try ( PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, feedback.getContent());
                 statement.setTimestamp(2, new Timestamp(feedback.getRealTime().getTime()));
                 statement.setInt(3, feedback.getProjectId());
                 statement.setInt(4, feedback.getUserId());
+                statement.setInt(5, feedback.getStar());
 
                 // Thực thi câu lệnh SQL
-                statement.executeUpdate();
-            } catch (Exception ex) {
-                Logger.getLogger(FeedbackDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                closeResources(conn, ps, rs);
+                int affectedRows = statement.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new SQLException("Creating feedback failed, no rows affected.");
+                }
+
+                generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    feedbackId = generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating feedback failed, no ID obtained.");
+                }
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(FeedbackDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, ps, rs);
+            if (generatedKeys != null) {
+                generatedKeys.close();
+            }
         }
+
+        return feedbackId;
     }
 
     public void updateFeedback(Feedback feedback) throws SQLException, ClassNotFoundException {
-        conn = new DonationDBContext().getConnection();
+
+        PreparedStatement statement = null;
+
         try {
-            // Câu lệnh SQL để chèn phản hồi vào cơ sở dữ liệu
-            String sql = "UPDATE feedback SET content=?, realTime=?, rating=? WHERE projectId=? AND userId=?";
+            // Get connection from the database context
+            conn = new DonationDBContext().getConnection();
 
-            try ( PreparedStatement statement = conn.prepareStatement(sql)) {
-                // Đặt các tham số cho câu lệnh SQL
-                statement.setInt(5, feedback.getStar());
-                statement.setString(1, feedback.getContent());
-                statement.setTimestamp(2, new Timestamp(feedback.getRealTime().getTime()));
-                statement.setInt(3, feedback.getProjectId());
-                statement.setInt(4, feedback.getUserId());
+            // SQL statement to update feedback
+            String sql = "UPDATE Feedback SET content=?, realTime=?, rating=? WHERE projectId=? AND userId=? AND feedbackId=?";
 
-                // Thực thi câu lệnh SQL
-                statement.executeUpdate();
-            } catch (Exception ex) {
-                Logger.getLogger(FeedbackDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                closeResources(conn, ps, rs);
-            }
-        } catch (Exception ex) {
+            // Prepare the statement
+            statement = conn.prepareStatement(sql);
+
+            // Set parameters for the statement
+            statement.setString(1, feedback.getContent());
+            statement.setTimestamp(2, new Timestamp(feedback.getRealTime().getTime()));
+            statement.setInt(3, feedback.getStar());
+            statement.setInt(4, feedback.getProjectId());
+            statement.setInt(5, feedback.getUserId());
+            statement.setInt(6, feedback.getFeedbackId());
+
+            // Execute the update
+            statement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(FeedbackDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Handle exceptions appropriately
+            throw ex;
         } finally {
-            closeResources(conn, ps, rs);
+            // Close resources in finally block to ensure they are always closed
+            closeResources(conn, statement, null);
         }
     }
 
@@ -85,6 +104,29 @@ public class FeedbackDAO {
             statement.setString(1, newContent);
             statement.setInt(2, feedbackId);
             statement.executeUpdate();
+        }
+    }
+
+    public void deleteFeedbackById(int feedbackId) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        try {
+            conn = new DonationDBContext().getConnection();
+            String sql = "DELETE FROM Feedback WHERE feedbackId = ?";
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, feedbackId);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex; // Re-throw the exception for handling at a higher level
+        } finally {
+            // Close resources
+            if (statement != null) {
+                statement.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
 
@@ -100,7 +142,7 @@ public class FeedbackDAO {
 
             while (rs.next()) {
                 Feedback feedback = new Feedback();
-                feedback.setProjectId(rs.getInt("feedbackId"));
+                feedback.setFeedbackId(rs.getInt("feedbackId"));
                 feedback.setContent(rs.getString("content"));
                 feedback.setRealTime(rs.getTimestamp("realTime"));
                 feedback.setProjectId(rs.getInt("projectId"));

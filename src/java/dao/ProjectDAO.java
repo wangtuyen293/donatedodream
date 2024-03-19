@@ -333,9 +333,6 @@ public class ProjectDAO {
                 int userTypeId = rs.getInt("userTypeId");
                 Users user = new Users(userId, fullName, userName, gender, dateOfBirth, avatar, email, phoneNumber, userStatus, dateCreated, userTypeId);
 
-                int categoryId = rs.getInt("categoryId");
-                String categoryName = rs.getString("categoryName");
-                Category category = new Category(categoryId, categoryName);
 
                 Project project = new Project(rs.getInt("projectId"), rs.getString("projectName"), rs.getBigDecimal("projectTarget"), rs.getBigDecimal("donatedAmountOfMoney"), rs.getString("projectStatus"), rs.getString("projectDescription"), rs.getDate("startDate"), rs.getDate("endDate"), rs.getByte("isApproved"), user);
                 searchProjectResult.add(project);

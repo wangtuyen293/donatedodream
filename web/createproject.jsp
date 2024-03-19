@@ -72,7 +72,7 @@
                                     pageContext.setAttribute("categoriesList", categoriesList);
                                 %>
                                 <div class="form-group">
-                                    <label for="categories">Categories:</label>
+                                    <label for="categories">Danh mục:</label>
                                     <br>
                                     <c:forEach var="category" items="${categoriesList}">
                                         <div class="form-check form-check-inline">
@@ -83,34 +83,34 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="charityOrganizationId">Charity Organization(If have):</label>
+                                    <label for="charityOrganizationId">Tổ chức từ thiện(Nếu có):</label>
                                     <input type="text" class="form-control" id="charityOrganizationName" name="charityOrganizationName">
                                 </div>
                                 <div class="form-group">
-                                    <label for="projectName">Project Name:</label>
+                                    <label for="projectName">Tên dự án:</label>
                                     <input type="text" class="form-control" id="projectName" name="projectName" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="projectTarget">Project Target:</label>
-                                    <input type="number" class="form-control" id="projectTarget" name="projectTarget" required>
+                                    <label for="projectTarget">Mục tiêu gọi vốn(VND):</label>
+                                    <input type="number" class="form-control" id="projectTarget" name="projectTarget" required placeholder="VND">
                                 </div>
                                 <div class="form-group">
-                                    <label for="projectImage">Project Image:</label>
+                                    <label for="projectImage">Ảnh mô tả dự án:</label>
                                     <input type="file" class="form-control" id="projectImage1" name="projectImage1" required>
                                     <input type="file" class="form-control" id="projectImage2" name="projectImage2" required>
                                     <input type="file" class="form-control" id="projectImage3" name="projectImage3" required>
                                     <input type="file" class="form-control" id="projectImage4" name="projectImage4" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="projectDescription">Project Description:</label>
+                                    <label for="projectDescription">Giới thiệu dự án:</label>
                                     <textarea class="form-control" id="projectDescription" name="projectDescription" rows="3" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="startDate">Start Date:</label>
+                                    <label for="startDate">Ngày bắt đầu:</label>
                                     <input type="date" class="form-control" id="startDate" name="startDate" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="endDate">End Date:</label>
+                                    <label for="endDate">Ngày kết thúc:</label>
                                     <input type="date" class="form-control" id="endDate" name="endDate" required>
                                 </div>
 
@@ -119,13 +119,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward1">Reward 1:</label>
-                                            <input type="text" class="form-control" id="reward1" name="reward1">
+                                            <label for="reward1">Mốc quà 1:</label>
+                                            <input type="number" class="form-control" id="reward1" name="reward1">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward1Description">Reward 1 Description:</label>
+                                            <label for="reward1Description">Mô tả:</label>
                                             <textarea class="form-control" id="reward1Description" name="reward1Description" rows="2"></textarea>
                                         </div>
                                     </div>
@@ -133,13 +133,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward2">Reward 2:</label>
-                                            <input type="text" class="form-control" id="reward2" name="reward2">
+                                            <label for="reward2">Mốc quà 2:</label>
+                                            <input type="number" class="form-control" id="reward2" name="reward2">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward2Description">Reward 2 Description:</label>
+                                            <label for="reward2Description">Mô tả:</label>
                                             <textarea class="form-control" id="reward2Description" name="reward2Description" rows="2"></textarea>
                                         </div>
                                     </div>
@@ -147,13 +147,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward3">Reward 3:</label>
-                                            <input type="text" class="form-control" id="reward3" name="reward3">
+                                            <label for="reward3">Mốc quà 3:</label>
+                                            <input type="number" class="form-control" id="reward3" name="reward3">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward3Description">Reward 3 Description:</label>
+                                            <label for="reward3Description">Mô tả:</label>
                                             <textarea class="form-control" id="reward3Description" name="reward3Description" rows="2"></textarea>
                                         </div>
                                     </div>
@@ -161,20 +161,20 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward4">Reward 4:</label>
-                                            <input type="text" class="form-control" id="reward4" name="reward4">
+                                            <label for="reward4">Mốc quà 4:</label>
+                                            <input type="number" class="form-control" id="reward4" name="reward4">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="reward4Description">Reward 4 Description:</label>
+                                            <label for="reward4Description">Mô tả:</label>
                                             <textarea class="form-control" id="reward4Description" name="reward4Description" rows="2"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Kết thúc các ô mốc quà và mô tả -->
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Xác nhận tạo dự án</button>
                             </form>
                         </div>
                     </div>

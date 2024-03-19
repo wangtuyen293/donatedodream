@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Donate Do Dreaming</title>
+        <title>Đăng nhập</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
         <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
@@ -49,7 +49,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-md-6">
                                 <div class="form-wrap bg-white">
-                                    <h2 class="text-center btm-sep pb-3 mb-5">Login</h2>
+                                    <h2 class="text-center btm-sep pb-3 mb-5">Đăng nhập</h2>
                                     <form action="login" method="post">
                                         <p style="color: red; align-content: center;">
                                             <!--${requestScope.error}-->
@@ -58,29 +58,29 @@
                                             <div class="col-12 mb-3">
                                                 <div class="form-group position-relative pe-2">
                                                     <span class="zmdi zmdi-account p-2 d-flex justify-content-center"></span>
-                                                    <input type="text" id="userName" name="userName" class="form-control" placeholder="User Name">
+                                                    <input type="text" id="userName" name="userName" class="form-control" placeholder="Tên đăng nhập">
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group position-relative pe-2">
                                                     <span class="zmdi zmdi-lock p-2 d-flex justify-content-center"></span>
-                                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                                                    <input type="password" id="password" name="password" class="form-control" placeholder="Mật khẩu">
                                                 </div>
                                             </div>
                                             <div class="col-12 my-3 row">
                                                 <div class="col-6 text-start">
                                                     <input type="checkbox" name="remember"/>
-                                                    <span>Remember me</span>
+                                                    <span>Ghi nhớ đăng nhập</span>
                                                 </div>
                                                 <div class="col-6 text-end">
                                                     <a href="forgotpassword.jsp" class="link-dark text-end">
-                                                        <span class="">Forgot password?</span>
+                                                        <span class="">Quên mật khẩu?</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="col-12 my-2 text-center">
                                                 <button type="submit" id="submit" class="btn btn-lg btn-dark">
-                                                    Sign In
+                                                    Đăng nhập
                                                 </button>
                                             </div>
                                         </div>
@@ -90,12 +90,12 @@
                             <div class="col-md-6">
                                 <div class="content text-center">
                                     <div class="border-bottom py-5 mb-5">
-                                        <h5 class="c-black">First time here?</h5>
-                                        <a href="signup.jsp" class="btn btn-primary">Sign up</a>
+                                        <h5 class="c-black">Lần đầu tới đây?</h5>
+                                        <a href="signup.jsp" class="btn btn-primary">Hãy đăng kí</a>
                                     </div>
-                                    <h5 class="c-black mb-4 mt-n1">Or Sign In With</h5>
+                                    <h5 class="c-black mb-4 mt-n1">Hoặc đăng nhập với</h5>
                                     <div class="socials">
-                                        <a href="#" class="zmdi zmdi-facebook"></a>
+                                        
                                         <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/project_donator_3/logingoogle&response_type=code
                                            &client_id=884665707063-d40mpr7r5uqcn707n7uvtjqvj4kggqjf.apps.googleusercontent.com&approval_prompt=force" class="zmdi zmdi-google"></a>
                                     </div>

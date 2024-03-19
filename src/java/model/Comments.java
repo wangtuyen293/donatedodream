@@ -15,6 +15,13 @@ public class Comments implements Serializable {
     private int projectId;
     private int userId;
 
+    public Comments(String content, Date realTime, int projectId, int userId) {
+        this.content = content;
+        this.realTime = realTime;
+        this.projectId = projectId;
+        this.userId = userId;
+    }
+    
     public Comments(int commentId, String content, Date realTime, int projectId, int userId) {
         this.commentId = commentId;
         this.content = content;

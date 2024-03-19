@@ -47,7 +47,7 @@
                 <div class="rounded d-flex justify-content-center">
                     <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
                         <div class="text-center">
-                            <h3 class="text-primary">Create Account</h3>
+                            <h3 class="text-primary">Tạo tài khoản mới</h3>
                         </div>
                         <div class="p-4">
                             <form action="signup" method="post">
@@ -72,10 +72,10 @@
                                     <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
                                 </div>
                                 <div class="d-grid col-12 mx-auto">
-                                    <button type="submit" class="btn btn-primary" >Sign up</button>
+                                    <button type="submit" class="btn btn-primary" >Đăng ký</button>
                                 </div>
-                                <p class="text-center mt-3">Already have an account?
-                                    <a href="login.jsp" class="btn btn-custom">Log in</a>
+                                <p class="text-center mt-3">Bạn đã có tài khoản?
+                                    <a href="login.jsp" class="btn btn-custom">Đăng nhập</a>
                                 </p>
                             </form>
                         </div>

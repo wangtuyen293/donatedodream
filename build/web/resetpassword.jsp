@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Donate Do Dreaming</title>
+        <title>Lấy lại mật khẩu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
         <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
@@ -47,7 +47,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            Change Password
+                            Cập nhật mật khẩu
                         </div>
                         <div class="card-body">
                             <form action="changepassword" method="post">
@@ -55,14 +55,14 @@
                                     <input type="hidden" class="form-control" name="email" value="${email}" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="newPassword">New Password</label>
+                                    <label for="newPassword">Mật khẩu mới</label>
                                     <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new password">
                                 </div>
                                 <div class="form-group">
-                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <label for="confirmPassword">Xác nhận mật khẩu mới</label>
                                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Change Password</button>
+                                <button type="submit" class="btn btn-primary">Xác nhận</button>
                             </form>
                         </div>
                     </div>
