@@ -47,6 +47,72 @@
                 ${sessionScope.warning}
             </p>
         </c:if>
+        <div class="contact">
+            <div class="main-title bg-body-tertiary py-5">
+                <h1 class="text-center fw-medium mt-5">
+                    Contact
+                </h1>
+            </div>
+
+            <div class="main-content container">
+                <div class="contact-wrapper row py-5">
+                    <div class="contact-info col-6">
+                        <div>
+                            <h4>
+                                donationdodreaming@gmail.com
+                            </h4>
+                        </div>
+                        <div>
+                            <p>
+                                Phone: +123 456 789
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <form class="contact-form" action="#">
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label fw-bold">
+                                    Full Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" required>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="email" class="form-label fw-bold">
+                                        Email
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="subject" class="form-label fw-bold">
+                                        Subject
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label fw-bold">
+                                    Message
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea class="form-control" id="message" name="message" placeholder="Message" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <button id="btn-send" class="btn btn-primary" type="submit">
+                                    Send
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="contact-map">
+
+                </div>
+            </div>
+        </div>
         <jsp:include page="./layout/footer.jsp" />
 
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -77,9 +143,105 @@
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+        <!-- ==================== SMTPJS ==================== -->
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+        <!-- ====================SWEET ALERT 2 ==================== -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            // Send Email From Contact Form
+            const form = document.querySelector('.contact-form')
+            const fullName = document.getElementById('fullName')
+            const email = document.getElementById('email')
+            const subject = document.getElementById('subject')
+            const mess = document.getElementById('message')
+
+            function sendEmail() {
+                const bodyMessage = `Full Name: ${fullName.value}<br> Email: ${email.value}<br> Message: ${mess.value}`
+
+                Email.send({
+                    SecureToken: "16646ac4-0a86-461a-b4fe-b42c62e8f2ac",
+                    Host: "smtp.elasticemail.com",
+                    Username: "dangkhoado43@gmail.com",
+                    Password: "4E78CAFE72A98B4EF75EE17CF8876766E412",
+                    To: 'dangkhoado43@gmail.com',
+                    From: "dangkhoado43@gmail.com",
+                    Subject: subject.value,
+                    Body: bodyMessage
+                }).then(
+                        message => {
+                            if (message === "OK") {
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: "Message sent successfully!",
+                                    icon: "success"
+                                });
+                            }
+                        }
+                );
+            }
+
+            function checkInputs() {
+                const items = document.querySelectorAll('.item')
+
+                for (const item of items) {
+                    if (item.value === "") {
+                        item.classList.add("error")
+                        item.parentElement.classList.add("error")
+                    }
+
+                    if (items[1].value !== "") {
+                        checkEmail()
+                    }
+
+                    items[1].addEventListener("keyup", () => {
+                        checkEmail()
+                    })
+
+                    item.addEventListener("keyup", () => {
+                        if (item.value !== "") {
+                            item.classList.remove("error")
+                            item.parentElement.classList.remove("error")
+                        } else {
+                            item.classList.add("error")
+                            item.parentElement.classList.add("error")
+                        }
+                    })
+                }
+            }
+
+            function checkEmail() {
+                const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+                const errorTxtEmail = document.querySelector(".error-txt.email")
+
+                if (!email.value.match(emailRegex)) {
+                    email.classList.add("error")
+                    email.parentElement.classList.add("error")
+
+                    if (email.value !== "") {
+                        errorTxtEmail.innerText = "Enter a valid email address"
+                    } else {
+                        errorTxtEmail.innerText = "Email Address can't be blank"
+                    }
+                } else {
+                    email.classList.remove("error")
+                    email.parentElement.classList.remove("error")
+                }
+            }
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault()
+                checkInputs()
+
+                if (!fullName.classList.contains("error") && !email.classList.contains("error") && !subject.classList.contains("error") && !mess.classList.contains("error")) {
+                    sendEmail()
+                }
+
+                form.reset()
+                return false
+            })
+        </script>
         <script>
             window.dataLayer = window.dataLayer || [];
-
             function gtag() {
                 dataLayer.push(arguments);
             }
